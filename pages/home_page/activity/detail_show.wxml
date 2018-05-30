@@ -1,0 +1,53 @@
+<!-- <view wx:if="{{verifyApplying}}"> -->
+<view wx:if="{{!nocon}}">
+  <view class='d_head'>
+    <!-- <view class='d_tit'>{{info.title}}</view> -->
+    <view class='d_writer'>
+      <view style='display:inline-block;' catchtap='to_Man' data-id="{{info.userView.userId}}">
+        <image src='{{info.userView.photo}}' class='d_w_head'></image>
+        <view class='d_w_info'>{{info.userView.nickname}}
+          <image src='../../images/authentication.png'></image>
+          <text>{{info.createTime}}</text>
+        </view>
+      </view>
+
+      <!-- <button data-userid="{{info.userView.userId}}" wx:if="{{info.userView.userId!=UserInfo.userId}}">关注</button>  -->
+      <view style="display:inline-block;height:70rpx;width:70rpx;float:right;position:relative" catchtap='more_edit' wx:if="{{info.userView.userId==UserInfo.userId}}" data-id="{{item.userUView.userId}}">
+        <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+      </view>
+    </view>
+  </view>
+  <view class='d_container'>
+    <view class='list_con'>
+      <text>{{info.content}}</text>
+      <view class='imgs' wx:if="{{info.images}}">
+        <image mode="aspectFill" src='{{item}}' wx:for="{{info.images}}" bindtap="previewImage"></image>
+        <!-- <image src='../../images/product1.png'></image> -->
+        <!-- <image src='../../images/product1.png'></image> -->
+      </view>
+    </view>
+    <!-- <button catchtap='dianzan' wx:if="{{!info.praiseYn}}">赞 {{info.praiseCount==undefined?0:info.praiseCount}}</button>
+    <button catchtap='dianzan' wx:if="{{info.praiseYn}}">已赞 {{info.praiseCount==undefined?0:info.praiseCount}}</button> -->
+  </view>
+  <!-- <view style='height:30px;width:60px;line-height:30px;text-align:center;border:1px solid #ccc;margin:20px auto' catchtap='f_x'>
+    上首页
+  </view> -->
+  <!-- <view style='height:140px;background:#fce98a;display:flex;text-align:center'>
+    <text style='flex:1;'>
+  {{info.info}}
+</text>
+
+  </view> -->
+  <view class='zhuan_btn'>
+  <view style='position:absolute;top:-77px;left:0;width:360rpx;height:30px;text-align:center;background:#000;color:#fff;font-size:12px;border-radius:20rpx;line-height:17px;padding:10px;'>
+  {{info.info}}
+  <view style='position:absolute;left:50%;border:20rpx solid #000;border-color:#000 transparent transparent transparent;bottom:-20px;transform:translateX(-50%);'></view>
+  </view>
+    <button data-name="shareBtn" plain="true" open-type="share">
+      <text style='font-size:34rpx'>立即转发</text>
+    </button>
+  </view>
+
+
+</view>
+<view wx:if="{{nocon}}" style='text-align:center;padding-top:80rpx;color:#c7c7c7;'>{{nocon}}</view>

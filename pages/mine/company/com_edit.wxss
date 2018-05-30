@@ -1,0 +1,17 @@
+.com_box{
+  height:80rpx;
+line-height:80rpx;
+position:relative;
+background:#fff;
+border-bottom:1px solid #eee;
+padding:0 40rpx;
+}
+.com_box>input{
+  top:0;
+right:43rpx;
+height:80rpx;
+line-height:80rpx;
+position:absolute;
+text-align:right;
+
+}

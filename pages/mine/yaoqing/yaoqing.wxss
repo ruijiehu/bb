@@ -1,0 +1,4 @@
+/* pages/mine/yaoqing/yaoqing.wxss */
+page{
+  height: 100%;
+}

@@ -1,0 +1,98 @@
+
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <form catchsubmit="formSubmit">
+      <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{showTopTips}}</view>
+      <!-- <view class="tips fs-16 pt-18" wx:if="{{ttype==1}}">上传名片增加信用</view> -->
+      <!-- <view class="tips fs-16 pt-18" wx:elif="{{ttype==2}}">上传学位证书毕业证书等增加信用</view> -->
+      <view class="tips  pt-18" wx:elif="{{ttype!=1||ttype!=2}}" style="font-size:28rpx;color:#aaa;">上传营业执照截图完成企业认证</view>
+      <!-- <view class="tips fs-16">名片手机与注册手机号一致可快速通过审核哦</view> -->
+
+      <view class="tips fs-16 red">获得更多推荐与影响力</view>
+      <view class="weui-cells weui-cells_after-title border_t_0 border_b_0">
+        <!-- <view class="weui-cell fs-16">
+          <view class="weui-cell__bd center relative">
+            <input class="weui-input" bindfocus="inputfocus" maxlength='20' name="realName" placeholder="填写姓名" />
+            <view class="line"></view>
+          </view>
+        </view> -->
+        <!--1-17 一下内容新注释 -->
+        <!-- <view class="weui-cell pt-10 fs-16" wx:if="{{!info.phone}}">
+          <view class="weui-cell__bd center relative">
+            <input class="weui-input" placeholder="填写与名片上一致的手机号" name="phone" value="{{phone}}" bindinput="inputPhone" type="number" />
+            <view class="line"></view>
+          </view>
+        </view>
+        <view class="weui-cell pt-10 fs-16"  wx:if="{{!info.phone}}">
+          <view class="weui-cell__bd center relative">
+            <input class="weui-input send-code" placeholder="填写验证码" name="vercode" disabled='{{sendPhone?false:true}}' />
+            <text class="send-code-btn" catchtap="{{sendTxt==0?'getCode':''}}">{{sendTxt>0?sendTxt+"s重新获取":"获取验证码"}}</text>
+            <view class="line"></view>
+          </view>
+        </view> -->
+        <!--1-17一上内容新注释  -->
+        <!-- <view class="weui-cell pt-10 fs-16">
+          <view class="weui-cell__bd center relative">
+            <input class="weui-input" bindfocus="inputfocus" name="company" placeholder='填写公司名称' />
+            <view class="line"></view>
+          </view>
+        </view>
+        <view class="weui-cell pt-10 fs-16">
+          <view class="weui-cell__bd center relative">
+            <input class="weui-input" bindfocus="inputfocus" name="position" placeholder='填写职位' />
+            <view class="line"></view>
+          </view>
+        </view> -->
+          <!--1-17 一下内容新注释 -->
+        <!-- <view class="weui-cell pt-10 fs-16">
+          <view class="weui-cell__bd center relative">
+            <picker bindchange="bindAccountChange" value="{{accountIndex}}" range="{{accounts}}">
+              <view class="weui-select {{accountIndex==0?'placeholder':'accountIndex'}}">{{accounts[accountIndex]}}</view>
+            </picker>
+            <view class="line"></view>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell2">
+          <view class="weui-cell__bd fs-12 gray">
+            请填写与名片相符的姓名,否则不会通过认证
+          </view>
+        </view>
+        <view class="weui-cell weui-cell2" hidden>
+          <view class="weui-cell__bd gray">
+            <text class="fs-16 bold">姓名显示方式</text>
+            <text class="fs-12 gray ml-5">全名显示</text>
+          </view>
+          <view class="weui-cell__ft">
+            <switch checked />
+          </view>
+        </view> -->
+      </view>
+      <!--1-17一上内容新注释  -->
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell weui-cell3">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                  <block wx:for="{{imageList}}" wx:for-item="image">
+                    <view class="weui-uploader__file">
+                      <image mode="aspectFill" class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="chooseImage"></image>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" hidden="{{imageList.length>0}}">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-btn-area">
+        <button class="weui-btn btn-red" type="primary" formType="submit">提交</button>
+      </view>
+    </form>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+<view style='height:100%;overflow:hidden'>
+  <view style='width:90%;height:80%;margin:50rpx auto 0;background:url("../../images/yaoqing.png") center/cover;position:relative;'>
+    <image style='width:400rpx;height:400rpx;position:absolute;bottom:15%;left:50%;transform:translateX(-50%);' data-src="{{image}}" src='{{image}}'></image>
+  </view>
+  <view catchtap='save_pic' data-src="{{image}}" style='width:70%;height:100rpx;margin:0rpx auto;background:#f74131;color:#fff;font-size:34rpx;text-align:center;line-height:100rpx;'>点击保存</view>
+</view>

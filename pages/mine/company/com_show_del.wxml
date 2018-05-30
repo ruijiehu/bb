@@ -1,0 +1,48 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell" style='padding-bottom:40rpx;'>
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title"  >
+                <text wx:if="{{imgArr.length!=0}}" style='float:left'>已选择{{imgArr.length}}张图片</text>
+                <text catchtap='to_cancel' style='float:right'> 取消</text>
+                </view>
+                <!-- <view class="weui-uploader__info">{{imageList.length}}/{{imgCount}}</view> -->
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" style='overflow:hidden'>
+                  <block wx:if="{{showImages!=undefined}}">
+                    <view wx:for="{{showImages}}" style='position:relative;width:200rpx;height:200rpx;border:1rpx solid #ccc;margin-right:13rpx;float:left;margin-bottom:12rpx;'>
+                      <image style='width:200rpx;height:200rpx;border:1rpx solid #ccc' class="{{num!=0?'':'a'}}" catchtap='chooseImg' src='{{item.image}}' data-id="{{item.companyImagesId}}"></image>
+                      <!-- <image class="weui-uploader__remove"   data-index="{{index}}" src="../../images/remove.png"></image>   -->
+                    </view>
+
+                  </block>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+  <view class="btn-area">
+    <view wx:if="{{isAdd}}" hidden='{{imageList.length==imgCount}}'>
+      <view>
+        <button type="primary" catchtap='to_deleteImg'>删除</button>
+      </view>
+    </view>
+  </view>
+  </form>
+
+</view>
+
+
+</view>

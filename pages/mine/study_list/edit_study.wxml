@@ -1,0 +1,49 @@
+<form bindsubmit="formSubmit">
+  <view class="list_tit">
+    编辑教育经历
+  </view>
+  <text class="list_t">教育经历</text>
+  <view class="list_info">
+    <view>
+    <text style='color:#474747;'>学校</text>
+      <input placeholder="学校" placeholder-style="color:#c7c7c7" name="com" value="{{com}}" />
+    </view>
+    <view>
+    <text style='color:#474747;'>专业</text>
+      <input placeholder="专业" placeholder-style="color:#c7c7c7" name="position" value="{{position}}" />
+    </view>
+    <view>
+    <text style='color:#474747;'>学历</text>
+      <input placeholder="学历" placeholder-style="color:#c7c7c7" name="xueli" value="{{xueli}}" />
+    </view>
+    <!-- <view>
+    <input placeholder="开始时间" />
+  </view> -->
+    <!-- <input placeholder="职位" /> -->
+    <!-- <input placeholder="开始时间" /> -->
+    <view class="s_t">开始时间
+      <picker mode="date" value="{{date}}" start="1978-01-01" end="2100-01-01" bindchange="bindDateChange">
+        <view class="picker" style='color:#c7c7c7;'>
+          {{dates}}
+        </view>
+      </picker>
+    </view>
+    <view class="s_e">结束时间
+      <picker mode="date" value="{{date}}" start="1978-01-01" end="至今" bindchange="bindDateChange_end">
+        <view class="picker" style='color:#c7c7c7;'>
+          {{dates_end}}
+        </view>
+      </picker>
+    </view>
+    <!-- <input placeholder="结束时间" /> -->
+  </view>
+  <text class="list_t">经历描述</text>
+  <view class="list_pro">
+    <textarea value="{{worklist}}" name="worklist" bindblur="bindTextAreaBlur" placeholder="简要描述你在校的学习内容/获得成绩等" />
+  </view>
+  <view class="btn_bottom">
+  <button catchtap='del'>删除</button> 
+    <button catchtap='submit' formType="submit" style='display:block;height:80rpx;color:#fff;background:#f74131;line-height:80rpx;'>保存</button>
+     
+  </view>
+</form>

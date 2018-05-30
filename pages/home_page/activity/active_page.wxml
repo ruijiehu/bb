@@ -1,0 +1,63 @@
+<view style='height:100%;width:100%;background:linear-gradient(#fcec97, #fae363);padding-bottom:50rpx;'>
+  <view class='a_banner'>
+    <image lazy-load='true' src='{{activityImg}}'></image>
+  </view>
+  <view class='a_show'>
+    <view style='width:250%;height:120px;'>
+      <view class='a_show_view' style='' wx:for="{{ListAll}}" wx:if="{{index<4}}" catchtap="to_jlDetail" data-id="{{item.questionId}}">
+        <image src='{{item.images[0]}}' lazy-load='true' style='height:80px;width:80px;float:left;border:1px solid #ccc'></image>
+        <view class='a_show_exchange' style=''>
+          <text>{{item.userView.nickname}}:</text>
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+      <view style='width:150rpx;height:80px;border:1px solid #ccc0aa;float:left;margin-top:20px;' catchtap="to_more">
+        <view class='' style='text-align:center;margin-top:20rpx;'>
+          <text style='font-size:24rpx;margin-top:20rpx;border-bottom:1px solid #cebfac;display:inline-block;color:#8c835a;'>查看更多</text>
+          <text style='font-size:24rpx;height:auto;width:auto;display:block;color:#8c835a;'>view more</text>
+
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='a_attend'>
+    <navigator url='/pages/home_page/to_send'>
+      <view catchtap='to_attend'>我要参与</view>
+    </navigator>
+
+  </view>
+  <view class='a_bottom'>
+    <view style='background:#e5e4ea;height:50px;text-align:center;width:570rpx;margin:0 auto 40rpx;padding:20px 0;'>
+      <!-- <text style='display:block;color:#908f95;'>点击下方抽奖，刮开你的红包金额</text> -->
+      <text style='display:block;color:#908f95;'>{{shdaw_info}}</text>
+
+      <!-- <text style='display:block;color:#908f95;'>中奖名额：20</text> -->
+    </view>
+    <view wx:if="{{show_chance}}" catchtap='choujiang' class='cj_btn' style=''>
+      点击抽奖
+    </view>
+    <view wx:if="{{!show_chance}}" class='cj_btn' style='background:#ccc'>
+      点击抽奖
+    </view>
+    <text wx:if="{{show_chance}}" style='text-align:center;display:block;color:#8b5107;'>你已获得一次抽奖机会</text>
+  </view>
+</view>
+<view class='madol' wx:if="{{show_tip}}">
+  <view class='mask'></view>
+  <view class='madol_box'>
+    <view style='text-align:center;font-size:20px;font-weight:bold;'>提示</view>
+    <view style='font-size:30rpx;margin-top:10rpx;line-height:20px;'>{{show_info}}
+      <text style='font-size:12px;color:#aaa;line-height:16px;margin-top:0rpx;display:block;'>
+        如何领奖：请点击放大二维码长按保存或直接搜索微信号waimaobangge添加帮哥出示领奖码领取红包
+      </text>
+    </view>
+    <view style='text-align:center;margin-top:16px;'>
+      <!-- <image style='width:100px;height:100px;' src='../../images/bg_bg.jpg'></image> -->
+      <image style='width:100px;height:100px;' mode="aspectFill" data-src="../../images/bg_bg.jpg" bindtap="previewImage" src="../../images/bg_bg.jpg"></image>
+    </view>
+    <view class='madol_click' style='margin-top:20rpx;'>
+      <!-- <view style='display:inline-block;float:left;'>取消</view> -->
+      <view catchtap='sure_ok'>确定</view>
+    </view>
+  </view>
+</view>

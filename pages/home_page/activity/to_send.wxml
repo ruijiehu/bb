@@ -1,0 +1,63 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <!-- <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd" style="padding-top:20rpx;">
+            <textarea class=" weui-textarea {{isAdd?'':'gray'}}" maxlength="150" disabled="{{!isAdd}}" bindinput="inputTitle" name="title" value="{{info.title}}" style='height: 130rpx' placeholder="请填写标题" />
+            <view class="weui-textarea-counter">{{currentTitleCount}}/150</view>
+          </view>
+        </view>
+      </view> -->
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" name="content" bindinput="inputContent" maxlength="500" value="{{info.content}}" placeholder="请填写活动内容" />
+            <view class="weui-textarea-counter">{{currentContentCount}}/500</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">上传活动照片</view>
+                <view class="weui-uploader__info">{{imageList.length}}/{{imgCount}}</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                  <block wx:for="{{imageList}}" wx:for-item="image">
+                    <view class="weui-uploader__file relative">
+                      <image mode="aspectFill" class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      <image class="weui-uploader__remove" catchtap='remove' wx:if="{{isAdd}}" data-index="{{index}}" src="../../images/remove.png"></image>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{isAdd}}" hidden='{{imageList.length==imgCount}}'>
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+
+      <!-- <checkbox-group bindchange="checkboxChange">
+        <checkbox value='{{isc}}' checked/>同步到首页
+      </checkbox-group> -->
+      <view class="btn-area">
+        <button type="primary" formType="submit">发布</button>
+      </view>
+    </form>
+
+  </view>
+
+
+</view>

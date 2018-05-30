@@ -1,0 +1,122 @@
+<!-- <view wx:if="{{verifyApplying}}"> -->
+<view wx:if="{{!nocon}}">
+  <view class='d_head'>
+    <view class='d_writer'>
+      <image src='{{info.userUView.photo}}' class='d_w_head'></image>
+      <view class='d_w_info'>{{info.userUView.nickname}}
+        <image src='../../images/authentication.png'></image>
+        <text>{{info.createTime}}</text>
+      </view>
+      <view style="display:inline-block;height:70rpx;width:70rpx;float:right;position:relative" catchtap='more_edit' wx:if="{{info.userUView.userId==UserInfo.userId}}" data-id="{{item.userUView.userId}}">
+        <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+      </view>
+    </view>
+  </view>
+  <view class='d_container'>
+    <view class="about">
+      <view class="pro">
+        <text>供应内容供应内容供应内容供应内容供应内容供应内容</text> </view>
+      <view class='pricetag'>
+        <view class='p_tag'>
+          <text style='clolor:#ff6633'>价格100</text>
+          <text>1个起批</text>
+        </view>
+        <view class='p_tag'>
+          <text style='clolor:#ff6633'>价格100</text>
+          <text>1个起批</text>
+        </view>
+        <view class='p_tag'>
+          <text style='clolor:#ff6633'>价格100</text>
+          <text>1个起批</text>
+        </view>
+      </view>
+      <view style='margin-bottom:30rpx;'>物流港口
+        <text style='display:inline-block;width:auto;'>浙江省嘉兴市</text>
+      </view>
+      <view class='imgs' wx:if="{{info.images}}">
+        <image mode="aspectFill" src='{{item}}' wx:for="{{info.images}}"  bindtap="previewImage"></image>
+        <image mode="aspectFill" src='../../images/product1.png'></image>
+        <image mode="aspectFill" src='../../images/product1.png'></image>
+      </view>
+    </view>
+    <view class='list_con'>
+      <text>详情：</text>
+      <view style='margin-top:30rpx;'>
+        曾经供给哪些品牌商 
+        <text> 
+          雅虎雅虎
+        </text>
+      </view>
+      <view style='margin-top:30rpx;'>
+        产品优势
+        <text>
+          雅虎雅虎
+        </text>
+      </view>
+      <button bindtap='saveClick' wx:if="{{!info.favorYn}}" data-value="true">收藏 </button>
+      <button bindtap='saveClick' wx:if="{{info.favorYn}}" data-value="true">已收藏 </button>
+    </view>
+    <view class='d_comment'>
+      <view>{{info.commentCount==undefined?0:info.commentCount}}条评论
+        <text style='float:right;' wx:if="{{info.praiseCount!=0}}">赞  {{info.praiseCount}}</text>
+      </view>
+      <view class='dt' wx:for="{{answerList}}">
+        <view class='con_list'>
+          <view class='ms_t' catchtap='to_person' data-id="{{item.userUView.userId}}">
+            <image src='{{item.userUView.photo}}'></image>
+            <view>
+              <text>{{item.userUView.nickname}}</text>
+              <view class='shenfen'>{{item.userUView.company}} {{item.userUView.position}}
+                <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.verifyYn}}">
+                  <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='ms_con'>
+            <text>{{item.content}}</text>
+          </view>
+          <view class='ms_b'>
+            <text>{{item.createTime}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{answerList.length==0}}" style='height:130rpx;line-height:130rpx;text-align:center;color:#bfbfbf;'>
+        <view>
+          <text style='font-size:26rpx;'>快来发布评论吧</text>
+        </view>
+      </view>
+
+      <view class='bottom_box'>
+        <view class='box_view' catchtap='f_x'>
+          <image src='../../images/tihuan_zhuanfa.png'></image>
+          <text>转发</text>
+        </view>
+        <view class='box_view' bindtap='answerAdd'>
+          <image src='../../images/tihuan_pinlun.png'></image>
+          <text>评论</text>
+        </view>
+        <view class='box_view' catchtap='dianzan'>
+          <image wx:if="{{!info.praiseYn}}" src='../../images/tihuan_zan.png'></image>
+          <image wx:if="{{info.praiseYn}}" src='../../images/tihuan_zan_h.png'></image>
+          <text>点赞</text>
+        </view>
+        <view class='box_view' >
+          <image wx:if="{{!info.praiseYn}}" src='../../images/to_top.png'></image>
+          <image wx:if="{{info.praiseYn}}" src='../../images/to_top.png'></image>
+          <text>置顶</text>
+        </view>
+      </view>
+      <view class='to_write'>
+        <form class="send-message {{sendType==1?'':'send-message1'}}" catchsubmit="answerAdd" report-submit="true">
+          <input class="weui-input sendInput" name="sendInput" hidden="{{sendType==1}}" disabled bindtap='answerAdd' placeholder="说点什么吧" value="{{sendInfo}}" />
+          <button class="mini-btn" type="primary" size="mini" formType="submit">发送</button>
+        </form>
+      </view>
+    </view>
+  </view>
+  </view>
+  <view wx:if="{{nocon}}" style='text-align:center;padding-top:80rpx;color:#c7c7c7;'>{{nocon}}</view>
+  <!-- <view wx:if="{{!verifyApplying}}">
+    <navigator url="/pages/my/verify">该功能只向认证用户开发，请去认证</navigator> 
+</view> -->

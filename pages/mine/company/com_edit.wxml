@@ -1,0 +1,18 @@
+<form bindsubmit="formSubmit">
+ <view style='background:#eee;'>
+  <view class='com_box'>
+    电话： <input name="phone" value="{{phone}}" placeholder='*****'></input>
+  </view>
+  <view class='com_box'>
+    网址 <input name="site" value="{{site}}" placeholder='***.com'></input>
+  </view>
+  <view class='com_box'> 
+    邮箱 <input name="email" value="{{email}}" placeholder='*****@**.**'></input>
+  </view>
+  <view class='com_box' style='margin-top:40rpx;'>
+    公司地址 <input name="place" value="{{place}}" placeholder='***'></input>
+  </view>
+  <!-- <button>确认</button> -->
+</view> 
+  <button style='width:80%;margin-top:80rpx;'  formType="submit">确认</button>
+</form>

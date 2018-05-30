@@ -1,0 +1,270 @@
+<view class='info'>
+  <view class="v_bg">
+    <view class='v_head'>
+      <text class='v_edit' bindtap="to_editMore" data-id="{{info.id}}">编辑</text>
+      <image class='head_img' src='{{info.photo}}'></image>
+      <image class='head_add' wx:if="{{info.id}}" src='../../images/add_flow.png'></image>
+      <view class='message'>
+        <view class='m_name'>{{info.nickname}}
+          <!-- <image src='../../images/authentication.png'></image> -->
+          <image style="{{isAndroid?'vertical-align:16rpx':''}}" src="{{info.verifyYn?'../../images/authentication.png':'../../images/authentication3.png'}}"></image> 
+        </view>
+        <view class='m_com' wx:if="{{info.verifyYn}}">{{info.company}}  {{info.position}}
+          <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{info.verifyYn}}">
+            <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+          </view>
+        </view>
+        <view class='m_bottom'>
+          <!-- <image src='../../images/location.png' style='margin-right:4rpx'></image>嘉兴
+          <image src='../../images/trade-white.png' style='margin-right:4rpx'></image>紧固件
+          <image src='../../images/yxl.png'></image>影响力吗
+          <image src='../../images/question2.png'></image> -->
+          <image src='../../images/location.png' style='margin-right:12rpx' wx:if="{{info.cityView.name}}"></image>
+          <text wx:if="{{info.cityView.name}}">{{info.cityView.name}}</text>
+          <image src='../../images/trade-white.png' style='margin-right:12rpx;margin-left:12rpx' wx:if="{{info.tradeView.name}}"></image>
+          <text wx:if="{{info.tradeView.name}}">{{info.tradeView.name}}</text>
+          <image src='../../images/exp.png' style='margin-right:12rpx;margin-left:12rpx'></image>
+          <text>影响力:{{info.exp}}</text>
+          <!-- <image src="../../images/question2.png" style=';margin-left:12rpx'></image> -->
+        </view>
+
+      </view>
+      <view class='v_con_kind'>
+        <view>
+          <text>{{info.followCount==undefined?0:info.followCount}}</text> 关注数
+        </view>
+        <view>
+          <text>{{info.byFollowCount==undefined?0:info.byFollowCount}}</text> 被关注
+        </view>
+        <view>
+          <text>{{info.commentCount==undefined?0:info.commentCount}}</text> 评论数
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_con'>
+    <!-- <view class="chain"> -->
+    <!-- <view>我的供应链 <image src='../../images/chain_03.png'></image></view> -->
+    <!-- <image src="../../images/addimg.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- </view> -->
+    <!-- <view class="chain my-moment"> -->
+
+    <view  class="weui-cell weui-cell_access" style="padding:0" wx:if="{{info.identityType=='企业主'&&info.verifyYn || info.identityType=='外贸人'&&info.verifyYn}}" bindtap='goGoodsList' hover-class="weui-cell_active">
+      <view class="weui-cell weui-cell_access" style="padding:0" bindtap='goGoodsList' hover-class="weui-cell_active">
+        <view class="weui-cell__bd weui-cell_primary red_block_two relative bold fs-18" style="padding:0">
+          我的供应链
+        </view>
+      </view>
+    </view>
+    <!-- -->
+    <view class="weui-uploader__bd" style="margin-bottom:20rpx" wx:if="{{info.identityType=='企业主'&&info.verifyYn || info.identityType=='外贸人'&&info.verifyYn}}" bindtap='goGoodsList'>
+      <view class="weui-uploader__files" style="width:300%;overflow-x:auto;">
+        <!-- <block>
+          <view class="weui-uploader__file">
+            <image class="weui-uploader__img" catchtap='addGoodsList' src="../../images/addimg.png" data-src="../../images/addimg.png"></image>
+          </view>
+        </block> -->
+        <block wx:for-items="{{allList}}" wx:key="{{index}}">
+          <view class="weui-uploader__file">
+            <image mode="aspectFill" class="weui-uploader__img" src="{{item.images[0]}}"></image>
+          </view>
+        </block>
+        <block >
+          <view class="weui-uploader__file">
+            <image class="weui-uploader__img" catchtap='addGoodsList' src="../../images/addimg.png" data-src="../../images/addimg.png"></image>
+          </view>
+        </block>
+        <!-- <block wx:for-items="{{defaultImgList}}" wx:key="{{index}}" wx:if="{{allList.length==0}}">
+            <view class="weui-uploader__file">
+              <image mode="aspectFill" class="weui-uploader__img" src="{{item}}"></image>
+            </view>
+          </block> -->
+      </view>
+    </view>
+    <!-- 已经认证显示 -->
+    <view wx:if="{{info.verifyYn}}" style="border-top:1px solid #eee;padding-top:20rpx;">
+      <!-- 公司名称 -->
+      <view class="com_name" catchtap='edit_com'>
+        <text style="padding:0">{{dengjixinxi.companyName}}</text>
+        <text>法人：{{dengjixinxi.fName}}</text>
+        <text>注册资本：{{dengjixinxi.registeredCapital}}  </text>
+        <text>注册时间：{{dengjixinxi.registerTime}}</text>
+      </view>
+      <!-- 企业展示 -->
+       <view style="margin-bottom:20rpx;padding:0;border-bottom:1px solid #eee;max-height:670rpx;margin-bottom: 20rpx;padding-bottom:10rpx;">
+       
+        <view class="weui-cell weui-cell_access" style="padding:0" data-id="{{dengjixinxi.companyInfoId}}" bindtap='goShowCompany' hover-class="weui-cell_active">
+         <image style="display:inlin-block;width:30rpx;height:40rpx;position:absolute;top:0;right:0;"  data-id="{{dengjixinxi.companyInfoId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image>  
+          <view class="weui-cell weui-cell_access" style="padding:0" bindtap='goShowCompany' data-id="{{dengjixinxi.companyInfoId}}" hover-class="weui-cell_active">
+            <view class="weui-cell__bd weui-cell_primary red_block_two relative bold fs-18" style="padding:0">
+              企业展示 
+            </view>
+          </view>
+        </view>
+        <view class="zhanshi_img" wx:if="{{showImages!=undefined}}" style='max-height:200rpx;overflow:hidden;'> 
+          <image src='{{item.image}}' wx:for="{{showImages}}"></image>
+       </view>
+      </view> 
+      <!-- 联系方式 -->
+      <view class="lianxi" catchtap='to_edit' data-id="{{dengjixinxi.companyInfoId}}">
+        <view class="weui-cell weui-cell_access" style="padding:0"  hover-class="weui-cell_active">
+         <image style="display:inlin-block;width:30rpx;height:40rpx;position:absolute;top:0;right:0;"  data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> 
+          <view class="weui-cell weui-cell_access" style="padding:0"  hover-class="weui-cell_active">
+            <view class="weui-cell__bd weui-cell_primary relative red_block_two bold fs-18" style="font-size:32rpx;padding:0">
+              联系方式
+               
+            </view>
+          </view>
+        </view>
+        <view class="lianxi_b">
+          <!-- <text>电话：      {{dengjixinxi.phone}}</text>
+          <text>网址：     {{dengjixinxi.netSite}}</text>
+          <text>邮箱：      {{dengjixinxi.email}}</text> -->
+          <view>
+            <text>电话：</text>
+            <text style='float:right;'>{{dengjixinxi.phone==undefined?'暂未填写，点击完善':dengjixinxi.phone}}</text>
+          </view>
+          <view>
+            <text>网址：</text>
+            <text style='float:right;'>{{dengjixinxi.netSite==undefined?'暂未填写，点击完善':dengjixinxi.netSite}}</text>
+          </view>
+          <view>
+            <text>邮箱：</text>
+            <text style='float:right;'>{{dengjixinxi.email==undefined?'暂未填写，点击完善':dengjixinxi.email}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 公司地址 -->
+      <view class="lianxi" catchtap='to_edit' data-id="{{dengjixinxi.companyInfoId}}">
+      
+        <view class="weui-cell weui-cell_access" style="padding:0" wx:if="{{info.identityType=='企业主' || info.identityType=='外贸人'}}"  hover-class="weui-cell_active">
+         <image style="display:inlin-block;width:30rpx;height:40rpx;position:absolute;top:0;right:0;"  data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> 
+          <view class="weui-cell weui-cell_access" style="padding:0"  hover-class="weui-cell_active">
+            <view class="weui-cell__bd weui-cell_primary red_block_two relative bold fs-18" style="padding:0">
+              公司地址 
+            </view>
+          </view>
+        </view>
+        <text style='font-size:26rpx;max-height:126rpx;overflow:hidden;display:block;'>{{dengjixinxi.companyPlace==undefined?'暂未填写，点击完善':dengjixinxi.companyPlace}}</text>
+      </view>
+      <!-- 登记信息 -->
+      <view class=" dengji" >
+        <view class="weui-cell weui-cell_access" style="padding:0"  hover-class="weui-cell_active">
+          <view class="weui-cell weui-cell_access" style="padding:0"  hover-class="weui-cell_active">
+            <view class="weui-cell__bd weui-cell_primary red_block_two relative bold fs-18" style="padding:0">
+              登记信息
+            </view>
+          </view>
+        </view>
+        <view class="lianxi_b">
+          <view>
+            <text>企业类型</text>
+            <text>{{dengjixinxi.companyType}}</text>
+          </view>
+          <view>
+            <text>经营状态</text>
+            <text>{{dengjixinxi.state==1?'开业':'未开业'}}</text>
+          </view>
+          <view>
+            <text>行业</text>
+            <text>{{dengjixinxi.tradeUView.name}}</text>
+          </view>
+          <view>
+            <text>营业期限</text>
+            <text>{{dengjixinxi.startTime}} 至 {{dengjixinxi.endTime}}</text>
+          </view>
+          <view>
+            <text>注册地址</text>
+            <text>{{dengjixinxi.registerPlace}}</text>
+          </view>
+          <view>
+            <text>核准日期</text>
+            <text>{{dengjixinxi.issueDate}}</text>
+          </view>
+          <view>
+            <text>登记机关</text>
+            <text>{{dengjixinxi.djjg}}</text>
+          </view>
+          <view>
+            <text>经营范围</text>
+            <text>{{dengjixinxi.businessScope}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 公司未认证显示 -->
+    <view class='norenzheng' wx:if="{{!info.verifyYn}}">
+      <button catchtap='qurenzhen' style='color:#fff;background:#f74131;margin-top:20rpx;'>去认证</button>
+      <view style='font-size:24rpx;color:#bbb;margin-top:40rpx;'>还未认证，无法展示公司信息</view>
+    </view>
+
+
+    <!-- <view class="myself">
+        <view>自我介绍
+          <image bindtap='to_editSelf' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image>
+        </view>
+        <text>{{info.info==undefined?'暂无介绍':info.info}}</text>
+      </view>  -->
+
+    <!-- 工作经历 -->
+    <!-- <view class="myself">
+        <view>工作经历
+          <image bindtap='to_editwork' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image>
+        </view>
+        <text>{{info.info}}</text>
+      </view>
+      <!-- 教育经历 -->
+    <!-- <view class="myself">
+        <view>教育经历
+          <image bindtap='to_editeduit' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image>
+        </view>
+        <view>
+          <view wx:for="{{edu}}" class="edubox">
+            <view>{{item.school}}  {{item.major}} {{item.education}}</view>
+            <view>{{item.startTime}}-{{item.endTime}}</view>
+            <view >{{item.experience}}</view>
+          </view>
+        </view>
+      </view> -->
+    <!--点评-->
+    <!-- <view class="comment">
+        <view class='c_tit'>有{{info.byCommentCount==undefined?0:info.byCommentCount}}个点评
+          <text catchtap='to_morepinlun' data-id="{{info.userId}}">查看更多 ></text> </view>
+        <view class="person" wx:for="{{dianpin}}">
+          <image src="{{item.userUView.photo}}"></image>
+          <view class="p_right">
+            <view class="p_r_tit">
+              <text>{{item.userUView.nickname}}</text>
+              <text>{{item.userUView.company}}</text>
+              <text>{{item.userUView.position}}</text>
+            </view>
+            <view class="p_r_con">
+              {{item.content}}
+            </view>
+          </view>
+        </view>
+        <view class="invite">邀请他人评价</view>
+      </view> -->
+    <!--关于-->
+    <!-- <view class="about">
+        <view class="abtit">关于TA
+          <image src='../../images/chain_03.png' bindtap="to_editMore"></image>
+        </view>
+        <view class="pro">主营产品
+          <text>{{info.product}}</text> </view>
+        <view class="pro">出口国家
+          <text>{{info.saleRegion}}</text> </view>
+        <view class="pro">从业年限
+          <text>{{info.careerTime}}年</text> </view>
+        <view class="pro">性别
+          <text>{{info.sex==1?'男':'女'}}</text> </view>
+        <view class="pro">兴趣爱好
+          <text>{{info.likes}}</text> </view>
+         <button class='btn_com'>分享名片</button> 
+      </view> -->
+
+  </view>
+</view>

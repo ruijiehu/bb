@@ -1,0 +1,11 @@
+<!-- <view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+  <view style='position:absolute;left:50%;top:40%;margin-top:-20rpx;margin-left:-90rpx;color:#ccc;'>符正在生成中……</view>
+</view> -->
+<!-- 护身符生成 -->
+<view hidden="{{showLoading}}" style='height:100%;overflow:hidden;'>
+   <view style='width:100%;height:100%;margin:0 auto;'>
+  <image  style='width:100%;height:100%;'  src='../../images/fu_born.png'></image>
+  </view> 
+  <view catchtap='to_bornPic' data-src="{{iii}}" style='position:fixed;bottom:10%;left:50%;width:660rpx;height:90rpx;background:#f4c988;color:#81511c;font-size:34rpx;text-align:center;line-height:90rpx;transform:translateX(-50%);border-radius:20rpx;'>去生成符</view>
+</view>

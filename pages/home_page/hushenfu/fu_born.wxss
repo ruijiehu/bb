@@ -1,0 +1,105 @@
+page{height: 100%;}
+/*绑定信息*/
+.layer-bind-info{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0,0);
+}
+
+.layer-dialog{
+  width: 580rpx;
+  height: 640rpx;
+  padding:20rpx;
+  box-sizing: border-box;
+  position: absolute;
+  top:45%;
+  left: 50%;
+  margin-top: -243rpx;
+  margin-left: -290rpx;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.layer-close{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.layer-close image{
+  width:36rpx;
+  height: 36rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.layer-title{
+  text-align: center;
+  font-size: 16rpx;
+}
+.layer-title image{
+  width: 200rpx;
+  height: 87rpx;
+  display:block;
+margin:0 auto;
+
+}
+.layer-content input{
+ display: inline-flex;
+ width: 340rpx;
+ /* padding: 12rpx 0 4rpx 0; */
+ padding-left: 20rpx;
+ vertical-align: middle;
+}
+input.identifying-code{
+  width: 190rpx !important;
+  margin-right: 16rpx;
+}
+.send-code-btn{
+  border:1px solid #f4f4f4;
+  padding: 4rpx 6rpx;
+  border-radius: 20rpx;
+  width: 154rpx;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  font-size: 24rpx;
+  vertical-align: middle;
+}
+.section{
+  border-bottom: 1rpx solid #f4f4f4;
+   padding: 16rpx 0 10rpx 0;  
+  margin: 20rpx;  
+  position: relative;
+}
+.layer-content button[type="primary"]{
+  margin:76rpx 20rpx 0 20rpx;  
+}
+.layer-bind-info .weui-select{
+  height: 50rpx;
+  line-height: 50rpx;
+  min-height: 50rpx;
+  margin-bottom: -10rpx;
+}
+picker{
+  display: inline-block;
+  width: 380rpx;
+  margin-left: 40rpx;
+}
+
+.weui-select{
+  border-right:0;
+}
+
+switch{
+ transform:scale(0.6,0.6);  
+}
+.tuijian_man{
+  height:148px;width:210rpx;background:#fff;float:left;margin-right:10px;text-align:center;padding:0 20rpx;
+}
+.tuijian_man:nth-child(1){
+  margin-left: 40rpx;
+}

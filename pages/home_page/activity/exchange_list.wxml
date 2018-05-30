@@ -1,0 +1,70 @@
+<!-- <view class="page-loading" >
+<!-- wx:if="{{showLoading}}" -->
+ <!-- <view class="weui-loading"></view>
+</view> -->
+<view class='dt weui-tab__content relative' >
+
+  <view wx:for="{{ListAll}}" class="one" data-id="{{item.type}}">
+ 
+
+    <!-- 关注的人的和自己交流 -->
+    <view  catchtap='to_jlDetail' data-id="{{item.questionId}}">
+      <view class='ms_t'>
+        <!-- <button catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userView.userId}}" data-id="{{item.userView.userId}}">更多</button> -->
+        <view style="display:inline-block;height:70rpx;width:70rpx;float:right" catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userView.userId}}" data-id="{{item.userView.userId}}">
+          <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+        </view>
+        <image catchtap='to_man' data-id="{{item.userView.userId}}" src='{{item.userView.photo}}'></image>
+        <view class='user_tit' catchtap='to_man' data-id="{{item.userView.userId}}">
+          <!-- <text>{{item.userView.nickname}}</text>
+          <text>{{item.userView.company}} {{item.userView.positon}}</text> -->
+          <view>
+            <text>{{item.userView.nickname}}</text>
+            <image class="user_tit_id" src="{{item.userView.verifyYn?'../../images/authentication.png':''}}"></image>
+          </view>
+          <view>{{item.userView.company}} {{item.userView.position}}
+            <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userView.positionVerifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='pl_con'>
+        <!-- <view class='con_c' >{{item.title}}</view> -->
+        <view class='ms_con' catchtap='to_jlDetail' data-id="{{item.questionId}}">
+          <!-- <text class='from_w' wx:if="{{item.type==0}}">来自{{item.userUView.newsTypeView.typeName}}类型</text> -->
+          <!-- <image wx:if="{{item.questionUView.images!=undefined}}" mode="center" src='{{item.questionUView.images}}'></image>  -->
+          <view class='ms_con_view' style="">
+            <text>{{item.content}}</text>
+            <!-- <text>{{item.content }}</text> -->
+            <view style='margin-top:20rpx;' wx:if="{{item.images!=''}}">
+              <image wx:for="{{item.images}}" mode="aspectFill" style='width:180rpx;height:180rpx;margin-right:10rpx;' src='{{item}}'></image>
+            </view>
+          </view>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+          <view class="pic_box">
+            <!-- <view style="display:inline-blcok;float:left" ><image src='../../images/zhuanfa.png'></image>{{item.newsUView.shareCount==undefined?'0':item.newsUView.shareCount}}</view> -->
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.questionId}}" data-summary="{{item.content}}" data-imgs="{{item.images}}" data-tit="" data-type="1">
+              <image src='../../images/tihuan_xunhuan.png'></image>{{item.shareCount==undefined?'0':item.shareCount}}</view>
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='to_jlDetail' data-id="{{item.questionId}}">
+              <image src='../../images/tihuan_pinlun.png'></image>{{item.answerCount==undefined?'0':item.answerCount}}</view>
+            <view catchtap='dianzan_jl' data-type="2" data-tid="{{item.questionId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+              <image src="{{item.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.praiseCount==undefined?'0':item.praiseCount}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='coment'>小肚圆：
+      <text>哟吼</text> </view>  -->
+      <view wx:if="{{item.commentUViews.length!=0}}">
+        <view class='coment' wx:for="{{item.commentUViews}}" wx:if="{{index<2}}" wx:for-item="itemName">
+          <text>{{itemName.userUView.nickname}}：</text>
+          <text>{{itemName.content}}</text>
+        </view>
+        <text catchtap='to_jlDetail' data-id="{{item.questionId}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+      </view>
+    </view>
+  
+  </view>
+</view>

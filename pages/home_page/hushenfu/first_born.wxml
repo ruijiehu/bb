@@ -1,0 +1,45 @@
+﻿<!-- 绑定信息 -->
+<view class="layer-bind-info"  >
+  <!-- <view class="layer-bind-info" >   -->
+  <view style='font-size:34rpx;text-align:center;color#000;margin-top:140rpx;font-weight:bold;'>
+    选择基本信息后生成护身符
+  </view>
+  <view class="layer-dialog">
+    <!-- <view class="layer-close" >
+      <image src="../images/close.png"></image>
+    </view> -->
+    <view class="layer-content">
+      <form catchsubmit="bindSubmit">
+        <view class="section fs-16 gray-2">
+          请选择省份
+          <picker bindchange="bindCountryChange" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'-'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 gray-2">
+          请选择城市
+          <picker bindchange="bindcityChange" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after">{{cityList[cityIndex].name?cityList[cityIndex].name:'-'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 gray-2">
+          请选择行业
+          <picker bindchange="bindTradeChange" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'-'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 gray-2">
+          请选择角色
+          <picker bindchange="bindPointChange" value="{{pointIndex}}" range-key="name" range="{{pointList}}">
+            <view class="weui-select weui-select_in-select-after">{{pointList[pointIndex].name?pointList[pointIndex].name:''}}</view>
+          </picker>
+        </view>
+
+        <button type="primary" class="btn-red weui-btn fs-18" formType="submit">点击确定并生成</button>
+
+
+      </form>
+    </view>
+
+  </view>
+</view>
