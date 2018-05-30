@@ -1,0 +1,96 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+    <view class="weui-navbar">
+      <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">{{item}}
+            <view class="weui-badge" style="margin-left: 5px;" wx:if="{{counts[index]>0}}">{{counts[index]}}</view>
+          </view>
+        </view>
+      </block>
+      <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+    <view class="weui-tab__panel">
+      <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+        <view wx:for-items="{{hyList}}" wx:key="{{index}}" class="list-item">
+          <view class="weui-media-box white weui-media-box_appmsg" data-auth="{{item.friendApplyId}}" data-index="{{index}}" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd" bindtap="{{item.sideMenu ? 'hideSideMenu' : 'showUserInfo'}}"
+            data-id="{{item.userToView.userId}}" style="padding-left:146rpx;{{item.styleOffset}} {{item.styleTransition}}">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image mode="aspectFill" class="weui-media-box__thumb" src="{{item.userToView.photo}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title">
+                <text>{{item.userToView.nickname}}</text>
+                <view class="weui-cell__ft" wx:if="{{item.userToView.userId&&item.showBtn}}" hidden="{{userInfo.userId==item.userToView.userId}}">
+                  <button class="btn-red" catchtap="agreeClick" data-index="{{index}}" data-id="{{item.friendApplyId}}" data-nickname="{{item.userToView.nickname}}">同意</button>
+                  <button class="btn-gray" catchtap="refuseClick" data-index="{{index}}" data-id="{{item.friendApplyId}}" data-nickname="{{item.userToView.nickname}}">拒绝</button>
+                </view>
+                <view class="weui-cell__ft red fs-14" wx:if="{{item.acceptYn==true}}">已通过</view>
+                <view class="weui-cell__ft blue fs-14" wx:elif="{{item.acceptYn==false}}">拒绝</view>
+              </view>
+              <view class="weui-media-box__desc">{{item.msg}}</view>
+            </view>
+
+          </view>
+          <view catchtap="removeClick" data-index="{{index}}" data-type="{{item.combineType!=null?true:false}}" data-id="{{item.friendApplyId}}" class="text_center left-touch left-touch-3 left-touch-gray">
+            <text>删除</text>
+          </view>
+
+        </view>
+        <view class="weui-loadmore" wx:if="{{listLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+        <view class="weui-media-box weui-media-box_appmsg news"  wx:for-items="{{allList}}" wx:key="{{index}}" bindtap='showQuestion' data-type="{{item.type}}" data-id="{{item.triggerId}}">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg" catchtap='showInfo' data-id="{{item.triggerUserView.userId}}" data-nickname="{{item.triggerUserView.nickname}}">
+            <image mode="aspectFill" class="weui-media-box__thumb" src="{{item.triggerUserView.photo}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__desc fs-16 message-info">
+              <text class="fs-16 ">{{item.triggerUserView.nickname}}</text>
+              <text class="fs-14" wx:if="{{item.type==0}}"> 回答了你的问题</text>
+              <text class="fs-14" wx:elif="{{item.type==1}}"> 引荐你回答</text>
+               <text class="fs-14" wx:elif="{{item.type==2}}"> 采纳了你的回答</text> 
+              <text class="fs-14" wx:elif="{{item.type==3}}"> 追加了你的回答</text>
+              <text class="fs-14" wx:elif="{{item.type==4}}"> 完善了他的回答</text>
+              <text class="fs-14" wx:elif="{{item.type==10}}"> 给你的动态<text class="green fs-14"> {{item.triggerInfo}}</text> 点了赞</text>
+              <text class="green fs-14" hidden='{{item.type==10}}'> {{item.triggerInfo}}</text>
+            </view>
+            <view class="weui-media-box__desc weui-media-box__info__meta_extra black31 fs-14">
+              {{item.createTime}}
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" wx:if="{{listLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+        <view class="weui-media-box weui-media-box_appmsg news" wx:for-items="{{xtList}}" wx:key="{{index}}">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../images/news-icon.png" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__desc fs-16 message-info">
+              <text class="fs-16">{{item.content}}</text>
+            </view>
+            <view class="weui-media-box__desc weui-media-box__info__meta_extra black31 fs-14">
+              {{item.createTime}}
+            </view>
+          </view>
+
+        </view>
+        <view class="weui-loadmore" wx:if="{{listLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

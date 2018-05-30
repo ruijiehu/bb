@@ -1,0 +1,155 @@
+<!-- <view wx:if="{{verifyApplying}}"> -->
+<!-- wx:if="{{!nocon}}" -->
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view hidden="{{showLoading}}">
+  <view class='d_head'>
+    <!-- <view class='d_tit'>{{info.title}}</view> -->
+    <view class='d_writer'>
+      <view catchtap='to_Man' data-id="{{info.userUView.userId}}" style='display:inline-block'>
+        <image src='{{info.userUView.photo}}' class='d_w_head'></image>
+        <view class='d_w_info'>{{info.userUView.nickname}}
+          <image wx:if="{{info.verifyYn}}" src='../../images/authentication.png'></image>
+          <text>{{info.createTime}}</text>
+        </view>
+      </view>
+
+     
+      <view style="display:inline-block;height:70rpx;width:70rpx;float:right;position:relative" catchtap='more_edit' wx:if="{{info.userUView.userId==UserInfo.userId}}" data-id="{{item.userUView.userId}}">
+        <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+      </view>
+    </view>
+  </view>
+  <view class='d_container'>
+    <view class="about">
+      <view class="pro" wx:if="{{info.country}}">出口国家：
+        <text>{{info.country}}</text> </view>
+      <view class="pro">有效时间：
+        <text>{{info.day}}</text> </view>
+      <view class="pro" wx:if="{{info.price}}">Fob价格：
+        <text>￥{{info.price}}</text> </view>
+      <view class="pro">数量要求：
+        <text>{{info.count}}</text> </view>
+      <view class="pro">付款方式：
+        <text>{{info.payMent}}</text> </view>
+    </view>
+    <view class='list_con'>
+      <text>详情：</text>
+      <text>{{info.msg}}</text>
+      <view class='imgs' wx:if="{{info.images}}">
+        <image lazy-load='true' mode="aspectFill" src='{{item}}' wx:for="{{info.images}}" bindtap="previewImage"></image>
+        <!-- <image src='../../images/product1.png'></image> -->
+        <!-- <image src='../../images/product1.png'></image> -->
+      </view>
+    </view>
+    <view class='shoucang_push' bindtap='saveClick' wx:if="{{!info.favorYn}}" data-value="true">收藏 </view>
+    <view class='shoucang_push' bindtap='saveClick' wx:if="{{info.favorYn}}" data-value="true" style='{{info.favorYn?"color:#fff;background:#f64330;border-color:#f64330;background:#ccc;border:1px solid #ccc;":"color:#f64330;background:#fff"}}'>已收藏 </view>
+    <view class='shoucang_push' style='background:#f64330;border:1px solid #f64330;' catchtap='f_x'>
+      上首页
+    </view>
+  </view>
+
+  <view class='d_comment'>
+    <view>
+      <text>{{info.commentCount==undefined?0:info.commentCount}}条评论</text>
+      <text style='float:right;' wx:if="{{info.praiseCount!=0}}">赞  {{info.praiseCount}}</text>
+    </view>
+    <view class='dt' wx:for="{{answerList}}">
+      <view class='con_list'>
+        <view class='ms_t' catchtap='to_person' data-id="{{item.userUView.userId}}">
+          <image src='{{item.userUView.photo}}'></image>
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <view class='shenfen'>{{item.userUView.company}} {{item.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='ms_con'>
+          <text>{{item.content}}</text>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime==undefined?'刚刚':item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{answerList.length==0}}" style='height:130rpx;line-height:130rpx;text-align:center;color:#bfbfbf;'>
+      <view>
+        
+        <text style='font-size:26rpx;'>快来发布评论吧</text>
+      </view>
+    </view>
+
+    <view class='bottom_box'>
+      <view class='box_view'>
+        <!-- <image src='../../images/tihuan_zhuanfa.png' catchtap='f_x'></image>
+        <text>转发</text> -->
+        <button data-name="shareBtn" plain="true" open-type="share">
+          <image style=' vertical-align: middle;display: inline-block;width:30rpx;height:30rpx;margin-right:10rpx;margin-top:-4rpx;' src='../../images/tihuan_zhuanfa.png'></image>
+          <text style='font-size:24rpx;color:#aaa;'>转发</text>
+        </button>
+      </view>
+      <view class='box_view' bindtap='answerAdd'>
+        <image src='../../images/tihuan_pinlun.png'></image>
+        <text>评论</text>
+      </view>
+      <view class='box_view' catchtap='dianzan'>
+        <image wx:if="{{!info.praiseYn}}" src='../../images/tihuan_zan.png'></image>
+        <image wx:if="{{info.praiseYn}}" src='../../images/tihuan_zan_h.png'></image>
+        <text>点赞</text>
+      </view>
+    </view>
+    <view class='to_write'>
+      <form class="send-message {{sendType==1?'':'send-message1'}}" catchsubmit="answerAdd" report-submit="true">
+        <input class="weui-input sendInput" name="sendInput" hidden="{{sendType==1}}" disabled bindtap='answerAdd' placeholder="说点什么吧" value="{{sendInfo}}" />
+        <button class="mini-btn" type="primary" size="mini" formType="submit">发送</button>
+      </form>
+    </view>
+  </view>
+</view>
+  <view catchtap='to_home' wx:if="{{show_toindex}}" style='width:50px;height:50px;border-radius:50%;position:fixed; right:10%;bottom:15%;background:#e65746;text-align:center;line-height:50px;'>
+    <image src='../../images/go_home.png' style='width:26px;height:26px;vertical-align:middle;'></image>
+  </view>
+
+<!-- 绑定信息 -->
+<view class="layer-bind-info" hidden="{{!showBindInfo}}">
+  <!-- <view class="layer-bind-info" >   -->
+
+  <view class="layer-dialog">
+    <!-- <view class="layer-close" bindtap="closeBind">
+      <image src="../images/close.png"></image>
+    </view> -->
+    <view style='width:100%;height:212rpx;'>
+      <image style='width:100%;height:212rpx;' src='../../images/r_bg.png'></image>
+    </view>
+    <view class="layer-content">
+      <form catchsubmit="bindSubmit">
+        <view class="section fs-16" style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:10rpx;position:relative;'>
+          <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_1.png'></image>
+          <text style='float:left;'>开启城市圈</text>
+          <picker bindchange="bindCountryChange" style='float:left;margin-left:66rpx;' class="gray-2" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'省份'}}</view>
+          </picker>
+          <picker bindchange="bindcityChange" style='float:left' class="gray-2" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after">{{cityList[cityIndex].name?cityList[cityIndex].name:'城市'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 " style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:24rpx;position:relative;'>
+          <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_2.png'></image>
+          开启行业圈
+          <picker bindchange="bindTradeChange" class="gray-2" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'请选择'}}</view>
+          </picker>
+        </view>
+
+        <button type="primary" class="btn-red weui-btn fs-18" formType="submit">确定</button>
+
+
+      </form>
+    </view>
+
+  </view>
+</view>

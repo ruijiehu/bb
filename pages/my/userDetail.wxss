@@ -1,0 +1,58 @@
+.page__hd {
+  padding: 20rpx 30rpx;
+}
+.weui-cells::before,.weui-cells::after{
+  content: unset;
+}
+.weui-cells:first-child .weui-cell::before{
+  content: unset;
+}
+
+.weui-cell_select {
+  padding-left: 30rpx;
+}
+
+.weui-cells{
+  position: relative;
+  padding-right: 30rpx;
+  box-sizing: border-box;
+}
+.weui-cells__title{
+  display: inline-block;
+  width: 200rpx;
+  position: absolute;
+  top: 10rpx;
+  left: 0;
+}
+.weui-cell{
+  text-align: right;
+    padding-left: 200rpx;
+  box-sizing: border-box;
+  padding-right: 0;
+}
+
+label+label {
+  margin-left: 10rpx;
+}
+
+.line {
+  margin: 20rpx 0;
+  display: block;
+  float: left;
+  width: 100%;
+  height: 50rpx;
+  position: relative;
+}
+.line::before{
+  width: 90%;
+  border-top: 8rpx solid #fff;
+  content: '';
+  position: absolute;
+  left: 5%;
+  top: 24rpx;
+  display:inline-block;
+}
+
+.mt{
+  margin-top: 30rpx
+}

@@ -1,0 +1,13 @@
+<view class='s_bg'>
+  <textarea class='s_textarea' bindinput="bindTextAreaBlur" placeholder='输入内容……' value="{{container}}"></textarea>
+  
+  <view class='ms_con'>
+    <!-- <text class='from_w'>来自{{atricletype}}类型</text> -->
+    <!-- <image src='{{imgs}}'></image> -->
+    <view class='ms_con_view'>
+       <!-- <text>{{tit}}</text>  -->
+      <text>{{summary}}</text>
+    </view>
+  </view>
+  <button style="margin-top:30rpx;" bindtap='to_send'>发送</button>
+</view>

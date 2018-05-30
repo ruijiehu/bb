@@ -1,0 +1,137 @@
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTabB==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">动态</view>
+  <view class="swiper-tab-list {{currentTabB==1 ? 'on' : ''}} " data-current="1" bindtap="swichNav">采购</view>
+  <view class="swiper-tab-list {{currentTabB==2 ? 'on' : ''}} " data-current="2" bindtap="swichNav">文章</view>
+  <view class="swiper-tab-list {{currentTabB==3 ? 'on' : ''}} " data-current="3" bindtap="swichNav">分享</view>
+</view>
+<!-- style="height:{{winHeight - 31}}px" -->
+<swiper current="{{currentTabB}}" class="swiper-box" duration="300"  bindchange="bindChange">
+  <!-- 动态部分 -->
+  <swiper-item style="overflow:auto;">
+    <view class='dt'>
+      <view wx:for="{{dongtai}}" bindtap='to_dt' data-id="{{item.questionId}}">
+        <view class='ms_t'>
+          <image src='{{item.userView.photo}}'></image>
+          <view>
+            <text>{{item.userView.nickname}}</text>
+            <view class='position_box'>{{item.userView.company}} {{item.userView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userView.verifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+            </view>
+            </view>
+          </view>
+        </view>
+        <view class='ms_con'>
+          <text>{{item.title}}</text>
+          <text>{{item.content}}</text>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+          <view>
+            <image src='../../images/tihuan_xunhuan.png'></image>{{item.rewardAmount==undefined?0:item.rewardAmount}}
+            <image src='../../images/tihuan_pinlun.png'></image>{{item.answerCount==undefined?0:item.answerCount}}
+            <image src='../../images/tihuan_zan_h.png'></image>{{item.praiseCount==undefined?0:item.praiseCount}}
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{dongtai.length == 0}}">暂无数据</view>
+    </view>
+
+  </swiper-item>
+  <!-- 采购部分 -->
+  <swiper-item style="overflow:auto;">
+    <view class='cg'>
+      <view wx:for="{{caigou}}" bindtap='to_cg' data-id="{{item.purchaseId}}">
+        <view class='cg_t'>
+          {{item.msg}}
+        </view>
+        <view class='cg_b'>
+          <image src='{{item.userUView.photo}}' style='margin-right:14rpx;'></image>{{item.userUView.nickname}}
+          <image src='../../images/名片2.png' style='margin-right:40rpx;width:26rpx;height:26rpx;margin-left:8rpx;'></image> 有效期：{{item.day}}
+          <text>{{item.createTime}}</text>
+        </view>
+      </view>
+      <view wx:if="{{caigou.length == 0}}">暂无数据</view>
+    </view>
+  </swiper-item>
+  <!-- 文章 -->
+  <swiper-item style="overflow:auto;">
+    <view class='wz'>
+      <view class='container' style='padding-bottom:70rpx;' wx:for="{{jingxuan}}" bindtap='to_wz' data-id="{{item.newsId}}">
+        <view class='con_left'>
+          <view class='l_tit'>{{item.title}}</view>
+          <view class='l_con' style='text-align:left'>{{item.summary}}</view>
+          <view class='l_cor' style='overflow:hidden;margin-left:-197rpx;'>
+            <view class='l_time'>{{item.releaseTime}}</view>
+            <view class='l_message'>
+              <view>
+                <image src="../../images/clicks.png"></image>{{item.clicks==undefined?0:item.clicks}}
+              </view>
+              <view>
+                <image src="../../images/tihuan_pinlun.png"></image>{{item.comments==undefined?0:item.comments}}
+              </view>
+              <view>
+                <image src="../../images/tihuan_xunhuan.png"></image>{{item.praiseCount==undefined?0:item.praiseCount}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='con_right'>
+          <image src='{{item.images}}'></image>
+        </view>
+      </view>
+      <view wx:if="{{jingxuan.length == 0}}">暂无数据</view>
+    </view>
+  </swiper-item>
+  <!-- 分享 -->
+  <swiper-item style="overflow:auto;">
+    <view class='pl dt'>
+      <view wx:for="{{fenxiang}}" bindtap='to_fx' data-nick="{{item.userUView.nickname}}" data-con="{{item.content}}" data-id="{{item.shareId}}">
+        <view class='ms_t'>
+          <image src='{{item.userUView.photo}}'></image>
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <view class='position_box'>{{item.userUView.company}} {{item.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.verifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+            </view>
+            </view>
+          </view>
+        </view>
+        <view class='pl_con'>
+          <view class='con_c'>{{item.content}}</view>
+          <!-- type=1 -->
+           <view class='ms_con' wx:if="{{item.type==1}}">
+            <!-- <image wx:if="{{item.questionUView.images }}" src='{{item.questionUView.images }}'></image> -->
+            <view class='ms_con_view'>
+              <text>@{{item.questionUView.userView.nickname}}:{{item.questionUView.content}}</text>
+            </view>
+          </view>
+          <!-- type=2 -->
+          <view class='ms_con' wx:if="{{item.type==2}}" style='min-height:15px;'>
+            <!-- <image wx:if="{{item.purchaseDetailUView.images!=''}}" src='{{item.purchaseDetailUView.images}}'></image> -->
+            <view class='ms_con_view'>
+              <text>@{{item.purchaseDetailUView.userUView.nickname}}:{{item.purchaseDetailUView.msg}}</text>
+            </view>
+          </view>
+          <!-- type=0 -->
+           <view class='ms_con' wx:if="{{item.type==0}}" style='max-height:81px;'>
+            <image src='{{item.newsUView.images}}'></image>
+            <view class='ms_con_view' style="width:70%;max-height:162rpx;overflow:hidden">
+              <text style='font-size:30rpx;width:98%;color:#000;margin-left:3%;line-height:40rpx;'>{{item.newsUView.summary}}</text>
+            </view>
+          </view>
+          <view class='ms_b'>
+            <text>{{item.createTime}}</text>
+            <view>
+              <image src='../../images/tihuan_xunhuan.png'></image>{{item.forwardCount==undefined?'0':item.forwardCount}}
+              <image src='../../images/tihuan_pinlun.png'></image>{{item.commentCount==undefined?'0':item.commentCount}}
+              <image src='../../images/tihuan_zan_h.png'></image>{{item.praiseCount==undefined?'0':item.praiseCount}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{fenxiang.length == 0}}">暂无数据</view>
+    </view>
+  </swiper-item>
+</swiper>

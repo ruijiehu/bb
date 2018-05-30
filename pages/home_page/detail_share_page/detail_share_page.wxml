@@ -1,0 +1,55 @@
+<import src="../../../wxParse/wxParse.wxml" />
+<view>
+  <view class='d_head'>
+    <!-- <view class='d_tit'>{{info.title}}</view> -->
+    <view class='d_writer'>
+      <image src='{{info.images[0]}}' class='d_w_head'></image>
+      <view class='d_w_info'>外贸帮帮
+        <image src='../../images/authentication.png'></image>
+        <text>{{info.releaseTime}}</text>
+      </view>
+      <image class='tocom' bindtap='toShare' data-img="{{info.images}}" data-atrid="{{info.newsId}}" data-type="{{info.newsTypeView.typeName}}" data-tit="{{info.title}}" data-summary="{{info.summary}}" src='../../images/zhuanfa.png'></image>
+    </view>
+    <image lazy-load='true' src='{{info.images[0]}}' class='d_banner'></image>
+    <view class='d_number'>
+      <image src='../../images/comment.png' wx:if="{{info.comments}}"></image>{{info.comments}}
+      <image src='../../images/eye-open.png' wx:if="{{info.clicks}}"></image>{{info.clicks}}
+    </view>
+  </view>
+  <view class='d_container'>
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+    <button bindtap='applaud' wx:if="{{!info.praiseYn}}"  data-value="true">赞 {{info.praiseCount}}</button>
+    <button bindtap='applaud' wx:if="{{info.praiseYn}}"  data-value="true">已赞 {{info.praiseCount}}</button>
+  </view>
+  <view class='d_comment'>
+    <view wx:if="{{info.comments}}">{{info.comments}}条评论</view>
+    <view class='dt'>
+      <view class='con_list' wx:for="{{answerList}}">
+        <view class='ms_t' catchtap='to_person' data-id="{{item.userUView.userId}}">
+          <!-- <image src='../../images/zan.png' class='mst_zan'></image> -->
+          <image src='{{item.userUView.photo}}'></image>
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <text>{{item.userUView.company}} {{item.userUView.position}}</text>
+          </view>
+        </view>
+        <view class='ms_con'>
+          <text>{{item.content}}</text>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+        </view>
+      </view>
+
+    </view>
+     <view class='to_write'>
+      <input placeholder="写评论" bindblur="bindTextAreaBlur" vlaue="{{container}}" />
+      <button bindtap='to_send' class='btn_send'>发送</button>
+      <image bindtap='saveClick' data-value="true" src="{{info.favorYn?'../../images/save31.png':'../../images/save1.png'}}"></image>
+      <image bindtap='toShare' data-img="{{info.images}}" data-atrid="{{info.newsId}}" data-type="{{info.newsTypeView.typeName}}" data-tit="{{info.title}}" data-summary="{{info.summary}}" src='../../images/tihuan_zhuanfa.png'></image>
+    </view> 
+    
+  </view>
+</view>

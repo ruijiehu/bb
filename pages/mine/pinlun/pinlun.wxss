@@ -1,0 +1,102 @@
+.dt .ms_con{
+  margin-top: 30rpx;
+}
+.dt .ms_con text{
+  display: block;
+  text-align: left;
+}
+.dt .ms_con text:nth-child(1){
+  font-size: 32rpx;
+  width: 100%;
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  color:#000;
+}
+.dt .ms_con .notitle{
+  
+}
+.dt .ms_con text:nth-child(2){
+  font-size: 28rpx;
+  line-height: 44rpx;
+  max-height:118rpx;
+overflow:hidden;
+
+}
+.dt .ms_b{
+  margin-top: 32rpx;
+  height: 23rpx;
+}
+.dt .ms_b>text{
+  float: left;
+  font-size: 22rpx;
+  color:#959595;
+}
+.dt .ms_b>view{
+  color:#313131;
+  display: inline-block;
+  float: right;
+  font-size: 16rpx;
+  vertical-align: middle;
+}
+.dt .ms_b>view>image{
+  vertical-align: middle;
+  margin:0 23rpx 0 10rpx;
+  width: 32rpx;
+  height: 32rpx;
+}
+.pl{
+  margin-top: 56rpx;
+  padding:0 40rpx;
+}
+.pl .con_c{
+  text-align: left;
+  font-size: 32rpx;
+  color: #000;
+  margin-top: 38rpx;
+}
+.pl .ms_con{
+  max-height: 90px;
+  /* margin-left: 15rpx; */
+  overflow:hidden;
+background:#f1f2f3;
+padding:20rpx;
+line-height:25px;
+}
+.pl>.ms_con>.from{
+  font-size: 22rpx;
+  color:#959595;
+}
+.pl .ms_con>image{
+  width: 162rpx;
+  height: 162rpx;
+   display: inline-block; 
+  float: left;
+}
+.pl .ms_con>view{
+   display: inline-block; 
+  /* float: right; */
+  /* width: 70%; */
+}
+.pl .ms_b{
+  margin-top:60rpx;
+}
+.pl_con{
+  border-bottom:1rpx solid #eee;
+padding-bottom:40rpx;
+
+}
+.dt .ms_b .pic_box{
+  color:#aaa;
+  display: inline-block;
+  float: right;
+  /* font-size: 16rpx; */
+  vertical-align: middle;
+  font-size: 24rpx;
+}
+.dt .ms_b .pic_box>view>image{
+  vertical-align: middle;
+  margin:0 12rpx 0 10rpx;
+  width: 32rpx;
+  height: 32rpx;
+}

@@ -1,0 +1,102 @@
+.dt,.pl{
+  margin-top: 56rpx;
+   padding:0 40rpx; 
+}
+.dt>view{
+  margin-bottom:60rpx;
+  padding-bottom:40rpx;
+border-bottom:1px solid #eee;
+
+}
+ .ms_t{
+  height: 70rpx;
+  position: relative;
+}
+.ms_t button{
+	position: absolute;
+	right: 10rpx;
+	top: 10rpx;
+	width: 86rpx;
+	font-size: 28rpx;
+	line-height: 40rpx;
+	text-align: center;
+	padding:0;
+	color: #f74131;
+	border:1px solid #f74131;
+}
+.ms_t image{
+  width:70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 27rpx;
+  float: left;
+}
+ .ms_t view{
+  width: 580rpx;
+}
+.ms_t view text{
+  text-align: left;
+    display: block;
+}
+ .ms_t view text:nth-child(1){
+
+  font-size: 32rpx;
+  color:#535353;
+  font-weight: bold;
+  line-height: 40rpx;
+  max-width:276rpx;
+overflow:hidden;
+max-height:42rpx;
+margin-right: 10rpx;
+white-space:nowrap;
+text-overflow:ellipsis;
+}
+ .ms_t view text:nth-child(2){
+  
+  font-size: 22rpx;
+  color:#aaa;
+  line-height: 32rpx;
+}
+ .ms_t .user_tit{
+  width: 580rpx;
+}
+ .ms_t .user_tit text{
+   display: inline-block
+ }
+ .ms_t .user_tit view:nth-child(1){
+
+  font-size:32rpx;
+color:#535353;
+font-weight:bold;
+line-height:40rpx;
+position:relative;
+
+}
+ .ms_t .user_tit view:nth-child(2){
+  
+  font-size: 22rpx;
+  color:#aaa;
+  line-height: 32rpx;
+}
+ .ms_t .user_tit .user_tit_id{
+   width:30rpx;
+height:24rpx;
+border-radius:0;
+position:absolute;
+top:9rpx;
+
+ }
+ .tuichu{
+width:250rpx;
+height:80rpx;
+border:1rpx solid #ccc;
+text-align:center;
+line-height:80rpx;
+position:fixed;
+bottom:50rpx;
+left: 50%;
+transform: translateX(-50%);
+background: #f74131;
+color: #fff;
+border-radius: 40rpx;
+ }

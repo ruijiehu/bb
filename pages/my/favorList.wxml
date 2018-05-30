@@ -1,0 +1,43 @@
+
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTabB==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">精选</view>
+  <view class="swiper-tab-list {{currentTabB==1 ? 'on' : ''}} list2" data-current="1" bindtap="swichNav">采购</view>
+</view>
+
+<swiper current="{{currentTabB}}" class="swiper-box" duration="300" bindchange="bindChange">
+  <!-- 精选 -->
+  <swiper-item>
+    <view class="weui-media-box relative weui-media-box_text pb-15 dt" style='padding:0' wx:for="{{allList}}"  data-id="{{item.newsId}}" wx:key="{{index}}">
+      <view catchtap='showNews' data-id="{{item.newsId}}" class="weui-media-box relative weui-media-box_text pb-15" style='position:relative;padding:20rpx 0rpx;' >
+        <view class="fs-16 weui-media-box__title weui-media-box__title_in-text" style='width:70%;'>
+          <text class="{{item.topYn?'red':''}}">{{item.title}}</text>
+        </view>
+        <view class="weui-media-box__desc fs-13" style='width:70%;'>{{item.summary}}</view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">
+            {{item.releaseTime}}
+          </view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+            <image src="../images/clicks.png" class="commentCount"></image>
+            {{item.clicks==undefined?0:item.clicks}}
+            <image src="../images/tihuan_pinlun.png" style="vertical-align: -6rpx;" class="commentCount"></image> {{item.comments==undefined?0:item.comments}}
+            <image src="../images/tihuan_zan.png" style="vertical-align: -6rpx;" class="commentCount"></image>{{item.shareCount==undefined?0:item.shareCount}}
+          </view>
+        </view>
+        <image class="listimg" mode="aspectFill" src="{{item.images}}"></image>
+      </view>
+    </view>
+
+    <!-- </view> -->
+  </swiper-item>
+  <!-- 采购 -->
+  <swiper-item>
+    <view class='js'>
+      <view wx:for="{{cglist}}" catchtap='to_cgdetail' data-id="{{item.purchaseId}}">
+        <view catchtap='to_cgdetail' style='margin-bottom:10rpx; width:100%;overflow:hidden' data-id="{{item.purchaseId}}">{{item.content}}</view>
+        <text class='cg_b' style='float:left'>有效期：{{item.day}}</text>
+        <text class='cg_b' style='float:right;'>{{item.createTime}}</text>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>

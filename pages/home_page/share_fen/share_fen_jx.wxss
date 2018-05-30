@@ -1,0 +1,130 @@
+.s_bg{
+  padding: 0 40rpx;
+}
+.s_textarea{
+  min-height: 170rpx;
+  font-size: 32rpx;
+  color: #d1d1d4;
+  width:100%;
+border:1px solid #eee;
+border-radius:20rpx;
+
+}
+.ms_con{
+  margin-top: 30rpx;
+  overflow:hidden;
+padding:0 20rpx;
+
+}
+.ms_con .from_w{
+  display:block;
+text-align:left;
+margin-bottom:10rpx;
+font-size: 22rpx;
+color:#959595;
+
+}
+.ms_con .ms_con_view text{
+  display: block;
+  text-align: left;
+}
+.ms_con .ms_con_view text:nth-child(1){
+  font-size: 30rpx;
+  width: 100%;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color:#000;
+  max-height: 74rpx;
+  line-height:36rpx;
+
+}
+.ms_con .ms_con_view text:nth-child(2){
+  font-size:28rpx;
+  line-height:32rpx;
+  max-height:60rpx;
+  margin-top:20rpx;
+  overflow: hidden;
+  color: #535353;
+}
+.ms_con>image{
+  width: 162rpx;
+  height: 162rpx;
+   display: inline-block; 
+  float: left;
+}
+.ms_con>view{
+   display: inline-block; 
+  float: right;
+  width: 70%;
+}
+/*------*/
+.s_bg{
+  padding: 0 40rpx;
+}
+.s_textarea{
+  min-height: 170rpx;
+  font-size: 32rpx;
+  color: #d1d1d4;
+  width:93%;
+border:1px solid #eee;
+border-radius:20rpx;
+padding:20rpx;
+
+}
+.ms_con{
+  margin-top: 30rpx;
+  overflow:hidden;
+
+background:#f1f2f3;
+padding:20rpx;
+
+}
+.ms_con .from_w{
+  display:block;
+text-align:left;
+margin-bottom:10rpx;
+font-size: 22rpx;
+color:#959595;
+
+}
+.ms_con .ms_con_view text{
+  display: block;
+  text-align: left;
+}
+.ms_con .ms_con_view text:nth-child(1){
+  font-size: 30rpx;
+  width: 100%;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color:#000;
+  max-height: 74rpx;
+  line-height:36rpx;
+
+}
+.ms_con .ms_con_view text:nth-child(2){
+  font-size:28rpx;
+  line-height:32rpx;
+  max-height:64rpx;
+  margin-top:20rpx;
+  overflow: hidden;
+  color: #535353;
+  display: inline-block;
+  width: 100%;
+}
+.ms_con>image{
+  width: 162rpx;
+  height: 162rpx;
+   display: inline-block; 
+  float: left;
+}
+.ms_con>view{
+   display: inline-block; 
+  float: left;
+  max-width: 70%;
+  overflow: hidden;
+  padding-top:20rpx;
+margin-left:20rpx;
+
+}

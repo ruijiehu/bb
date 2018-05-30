@@ -1,0 +1,26 @@
+
+<view class="page" >
+  <view class="page__bd" style='padding:0 40rpx;'>
+    <form catchsubmit="formSubmit" catchreset="formReset">
+     
+      <view class="weui-cells border_b_0 border_t_0" >
+        <view class="weui-cell relative" style='box-shadow:0 0 3px rgba(0, 0, 0, 0.2);padding:20rpx;'>
+          <view class="weui-cell__bd full_w">
+            <input value='{{phone_number}}' name="phone_number" bindinput="inputNumber" style='line-height:30px;heigth:30px;font-size:14px;border-bottom:1px solid #eee;padding-bottom:10px;' placeholder='请输入新的手机号'></input>
+            <view style='padding-top:10px;'>
+              <input value='{{phone_check}}' bindinput="inputNumber_check" style='line-height:30px;height:30px;font-size:14px;width:160px;float:left;;' placeholder='请输入短信验证码'></input>
+              <text bindtap='sendBindCode' style='display:inline-block;float:right;width:100px;font-size:14px;height:30px;line-height:30px;color:#3E59BB;'>获取短信验证码</text>
+            </view>
+            
+          </view>
+        </view>
+      </view>
+    <view class="btn-area">
+        <button type="primary" formType="submit">确定</button>
+      </view>
+    </form>
+
+  </view>
+
+
+</view>

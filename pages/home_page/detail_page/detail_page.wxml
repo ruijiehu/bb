@@ -1,0 +1,91 @@
+<import src="../../../wxParse/wxParse.wxml" />
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view hidden="{{showLoading}}">
+  <view class='d_head'>
+    <view class='d_tit'>{{info.title}}</view>
+    <view class='d_writer'>
+      <image src='../../images/jx_head.jpg' class='d_w_head'></image>
+      <view class='d_w_info'>外贸帮帮
+        <image src='../../images/authentication.png'></image>
+        <text>{{info.releaseTime}}  浏览数：{{info.clicks}}</text>
+        
+      </view>
+    </view>
+    <view style='height:400rpx;padding:0 40rpx;margin-top:18rpx;margin-bottom:28rpx;'>
+      <image lazy-load='true' src='{{info.images[0]}}' mode="aspectFill" class='d_banner'></image>
+    </view>
+    
+  </view>
+  <view class='d_container'>
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+    
+    <view class='shoucang_push' bindtap='saveClick' wx:if="{{!info.favorYn}}" data-value="true">收藏 </view> 
+     <view class='shoucang_push' bindtap='saveClick' wx:if="{{info.favorYn}}" data-value="true" style='{{info.favorYn?"color:#fff;background:#f64330;border-color:#f64330;background:#ccc;border:1px solid #ccc;":"color:#f64330;background:#fff"}}'>已收藏 </view> 
+    <view class='shoucang_push' style='background:#f64330;border:1px solid #f64330;' catchtap='toShare' data-img="{{info.images}}" data-atrid="{{info.newsId}}" data-type="{{info.newsTypeView.typeName}}" data-tit="{{info.title}}" data-summary="{{info.summary}}">
+    上首页
+  </view>
+  </view>
+  <view class='d_comment'>
+    <view >
+      <!-- <text wx:if="{{info.comments}}">{{info.comments}}条评论</text> -->
+      <text>{{info.comments==undefined?0:info.comments}}条评论</text>
+      <text style='float:right;' wx:if="{{info.praiseCount!=0}}">赞  {{info.praiseCount}}</text>
+    </view>
+    <view class='dt'>
+      <view class='con_list' wx:for="{{answerList}}">
+        <view class='ms_t' catchtap='to_person' data-id="{{item.userUView.userId}}">
+          <!-- <image src='../../images/zan.png' class='mst_zan'></image> -->
+          <image src='{{item.userUView.photo}}'></image>
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <text>{{item.userUView.company}} {{item.userUView.position}}</text>
+          </view>
+        </view>
+        <view class='ms_con'>
+          <text>{{item.content}}</text>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime==undefined?'刚刚':item.createTime}}</text>
+        </view>
+      </view>
+      <view wx:if="{{answerList.length==0}}" style='height:130rpx;line-height:130rpx;text-align:center;color:#bfbfbf;'>
+        <view>
+          <image src='../../images/noone_icon.png' style='display:inline-block;width:27rpx;height:24rpx;margin-right:10rpx;vertical-align:middle;'></image>
+          <text style='font-size:26rpx;'>快来发布评论吧</text>
+        </view>
+      </view>
+    </view>
+    <view class='bottom_box'>
+      <view class='box_view'  data-img="{{info.images}}" data-atrid="{{info.newsId}}" data-type="{{info.newsTypeView.typeName}}" data-tit="{{info.title}}" data-summary="{{info.summary}}">
+        <!-- <image src='../../images/tihuan_zhuanfa.png' catchtap='toShare'></image>
+        <text>转发</text> -->
+        <button data-name="shareBtn" plain="true" open-type="share"><image style=' vertical-align: middle;display: inline-block;width:30rpx;height:30rpx;margin-right:10rpx;margin-top:-4rpx;' src='../../images/tihuan_zhuanfa.png' ></image><text style='font-size:24rpx;color:#aaa;'>转发</text></button>
+      </view>
+      <view class='box_view' bindtap='answerAdd'>
+        <image src='../../images/tihuan_pinlun.png'></image>
+        <text>评论</text>
+      </view>
+      <view class='box_view' catchtap='applaud'>
+        <image wx:if="{{!info.praiseYn}}" src='../../images/tihuan_zan.png'></image>
+        <image wx:if="{{info.praiseYn}}" src='../../images/tihuan_zan_h.png'></image>
+        <text>点赞</text>
+      </view>
+    </view>
+    <view class='to_write'>
+      <form class="send-message {{sendType==1?'':'send-message1'}}" catchsubmit="answerAdd" report-submit="true">
+        <input class="weui-input sendInput" name="sendInput" hidden="{{sendType==1}}" disabled bindtap='answerAdd' placeholder="说点什么吧" value="{{sendInfo}}" />
+        <button class="mini-btn" type="primary" size="mini" formType="submit">发送</button>
+      </form>
+    </view>
+
+  </view>
+  <!-- 去首页 -->
+  <view catchtap='to_home' wx:if="{{show_toindex}}" style='width:50px;height:50px;border-radius:50%;position:fixed; right:10%;bottom:15%;background:#e65746;text-align:center;line-height:50px;'>
+  <image src='../../images/go_home.png' style='width:26px;height:26px;vertical-align:middle;'></image>
+</view>
+
+</view>

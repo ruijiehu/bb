@@ -1,0 +1,24 @@
+<page class="noscroll">
+<view class='dt'>
+  <view wx:for="{{circleLIST}}"  data-cirid="{{item.circleId}}" data-length="{{circle_length}}" bindtap='toCircle'>
+    <view class='ms_t'>
+      <button catchtap='want_attend' data-cirid="{{item.circleId}}">申请加入</button>
+      <image src='{{item.icon!=undefined?item.icon:"../../images/circle-icon.png"}}'></image>
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='sure_dia' wx:if="{{isShow}}" >
+  <view class='mask'></view>
+  <view class='dialog'>
+    <text>您已成功申请该圈子请耐心等候审核</text>
+    <text>今日还可申请1次</text>
+    <button bindtap='sure_attend'>确认</button>
+  </view>
+  <view class='dialog' wx:if="{{!verifyApplying}}">
+    <navigator style="padding-top:111rpx;text-align:center;" url="/pages/my/verify">该功能只向认证用户开发，请去认证</navigator> 
+  </view>
+</view>
+</page>

@@ -1,0 +1,99 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title">详情</view>
+    <!-- <view class="page__desc">表单输入</view> -->
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+
+    <view class="weui-cells__title">姓名</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入姓名"  maxlength="8" value="{{userInfo.nickname}}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">地区</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">国家/地区</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindCountryChange" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">行业</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <picker bindchange="bindCountryChange" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[countryIndex].name}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">手机号</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入文本" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">从业年限</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入文本" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">主营产品</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入文本" value="{{userInfo.product}}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">公司性质</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入文本" value="{{userInfo.companyNature}}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title">工作性质</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入文本" value="{{userInfo.jobNature}}"/>
+        </view>
+      </view>
+    </view>
+
+
+
+
+
+
+
+
+
+
+
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="save">确定</button>
+    </view>
+  </view>
+</view>

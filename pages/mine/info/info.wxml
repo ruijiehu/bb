@@ -1,0 +1,125 @@
+<view class='info'>
+  <view class='v_head'>
+    <view class="user-info relative" style='background:#fff;'>
+      <image mode="aspectFill" src='{{info.photo}}' class="photo" bindtap="gotoDetail"></image>
+      <view class="user-name">
+        <view class="name fs-18">{{info.nickname}}</view>
+        <image style="{{isAndroid?'vertical-align:16rpx':''}}" src="{{info.verifyYn?'../../images/authentication.png':'../../images/authentication3.png'}}"></image>
+      </view>
+      <view class="user-company fs-12">{{info.company}} {{info.position}}
+        <image src="../../images/v_ico.png" style="margin-left:20rpx;" wx:if="{{info.positionVerifyYn}}"> </image>
+      </view>
+      <view class="tag fs-12">
+        <image src='../../images/exp.png'></image>
+        <text>影响力:{{info.exp}}</text>
+      </view>
+    </view>
+    <view class='goto' bindtap="gotoDetail">
+      <image style="dispaly:inline-block;width:20rpx;height:32rpx;margin-top:20rpx;margin-right:20rpx;" src='../../images/right.png'></image>
+    </view>
+  </view>
+  <view class='v_con'>
+    <view class='v_con_kind'>
+      <view catchtap='to_fabu'>
+        <!-- catchtap='to_fabu' -->
+        <text>{{info.releaseCount==undefined?'0':info.releaseCount}}</text> 发布
+      </view>
+      <view catchtap='to_pinlun'>
+        <!-- catchtap='to_pinlun' -->
+        <text>{{info.commentCount==undefined?'0':info.commentCount}}</text> 评论
+      </view>
+      <view bindtap='to_attend'>
+        <text>{{info.followCount==undefined?'0':info.followCount}}</text> 关注
+      </view>
+      <view bindtap='to_attender'>
+        <text>{{info.byFollowCount==undefined?'0':info.byFollowCount}}</text> 被关注
+      </view>
+    </view>
+    <view class='v_list'>
+      <view style='' bindtap='goGoodsList'>
+        <image src='../../images/my_product.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+        <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;'>我的产品</text>
+      </view>
+      <view style='position:relative' bindtap='goFangke' >
+        <image src='../../images/my_zuji.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+        <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;'>最近访客</text>
+        <view class='point' wx:if="{{showPoint}}"></view>
+      </view>
+      <view style='' bindtap='to_share'>
+        <image src='../../images/my_share.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+        <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;'>我的分享</text>
+      </view>
+      <view style='' bindtap='to_zan'>
+        <image src='../../images/my_zan.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+        <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;'>我的点赞</text>
+      </view>
+      <view style='' bindtap='to_shoucang'>
+        <image src='../../images/my_save.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+        <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;'>我的收藏</text>
+      </view>
+      <view style='' bindtap='to_cardbag'>
+        <image src='../../images/my_card.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+        <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;'>我的名片夹</text>
+      </view>
+      <view style='position:relative'>
+
+        <button class="cs_button" open-type="contact" session-from="weapp">
+          <image src='../../images/my_kefu.png' style='display:block;width:20px;height:20px;margin:0 auto;'></image>
+          <text style='width:100%;height:30px;font-size:12px;text-align:center;line-height:30px;color:#848484;'>客服与合作</text>
+        </button>
+        <!-- <contact-button style="width:100%;height:100%;position:absolute;left:0;top:-11px;" class="contact-button" size="16" session-from="weapp" type="default-light"></contact-button> -->
+
+
+      </view>
+    </view>
+
+  </view>
+  <view style='height:100px;background:#fff;margin-top:10px;margin-bottom:10px;position:relative'>
+
+    <image src='{{image}}' style='width:70px;height:70px;display:inline-block;margin-left:25px;margin-top:14px;'></image>
+    <view style='display:block;width:260px;height:70px;text-align:center;float:right;border-left:1px solid #eee;margin-top:14px;'>
+    
+      <view catchtap='to_setCard' hover-class="none" style='float:right;margin-top:20px;margin-right:56px;width:192px;'>
+      <image src='../../images/1.png' style='display:inline-block;width:40px;height:30px;float:left;'></image>
+        <text style='display:block;width:150px;font-size:10px;color:#929292;text-align:left;margin-left:52px;'> 快速生成个人电子名片，与他人闪电交换名片</text>
+      </view>
+    </view>
+    <image src='../../images/right_s.png' style='display:inline-block;width:19px;height:19px;position:absolute;top:35px;right:13px;'></image>
+  </view>
+</view>
+<!-- 绑定信息 -->
+<!-- 绑定信息 -->
+<!-- <view class="layer-bind-info" hidden="{{!showBindInfo}}">
+
+  <view class="layer-dialog">
+    <view style='width:100%;height:212rpx;'>
+      <image style='width:100%;height:212rpx;' src='../../images/r_bg.png'></image>
+    </view>
+    <view class="layer-content">
+      <form catchsubmit="bindSubmit">
+        <view class="section fs-16" style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:10rpx;position:relative;'>
+          <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_1.png'></image>
+          <text style='float:left;'>开启城市圈</text>
+          <picker bindchange="bindCountryChange" style='float:left;margin-left:66rpx;' class="gray-2" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'省份'}}</view>
+          </picker>
+          <picker bindchange="bindcityChange" style='float:left' class="gray-2" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after">{{cityList[cityIndex].name?cityList[cityIndex].name:'城市'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 " style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:24rpx;position:relative;'>
+          <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_2.png'></image>
+          开启行业圈
+          <picker bindchange="bindTradeChange" class="gray-2" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'请选择'}}</view>
+          </picker>
+        </view>
+
+        <button type="primary" class="btn-red weui-btn fs-18" formType="submit">确定</button>
+
+
+      </form>
+    </view>
+
+  </view>
+</view> -->

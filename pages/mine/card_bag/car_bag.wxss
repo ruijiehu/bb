@@ -1,0 +1,76 @@
+/* pages/mine/card_detail/card_detail_my.wxss */
+page{
+  background: #f1f2f3;
+  height:100%;
+
+}
+.card_big{
+  padding:0 10px;
+  overflow:hidden;
+  margin-bottom: 10px;
+  box-shadow:0 0 6px #cfcfcf;
+
+}
+.card_top{
+  /* height: 95px; */
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 0 10px #eee;
+  padding:15px 0;
+
+}
+.logo{
+
+  height: 50px;
+}
+.logo>image{
+  display: block;
+  width: 50px;
+  height: 50px;
+  float: right;
+  border: 1px solid;
+  margin-right:15px;
+
+}
+.card_box{
+
+}
+.card_box .card_name{
+
+}
+.card_box .card_info{
+  margin-left: 20px;
+}
+.card_box .card_info>image{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid;
+  margin-right:10px;
+
+}
+.tabs{
+  height: 33px;
+  margin-top: 10px;
+} 
+.tabs>view{
+  display: inline-block;
+  float: left;
+  width: 50px;
+  height: 33px;
+  margin-right: 25px;
+  line-height: 33px;
+  text-align: center;
+  font-size: 12px;
+}
+.cur_tab{
+  border-bottom: 2px solid red;
+}
+.ziliao{
+  background:#fff;
+padding:0 20px;
+padding-top:1px;
+margin-top:17px;
+
+}
+

@@ -1,0 +1,13 @@
+{
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "小程序",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "navigationBarBackgroundColor": "#282828",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "外贸帮帮"
+}

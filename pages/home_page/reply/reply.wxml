@@ -1,0 +1,16 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+
+    <form catchsubmit="answerAdd" catchreset="formReset" report-submit="true">   
+            <textarea class="weui-textarea" name="sendInput" placeholder="输入评论内容"  />    <view class="btn-area">
+      <button class="btn-none fs-14" formType="reset">取消</button>
+        <button type="primary" class="btn-red fs-14" formType="submit">发布</button>
+        
+      </view>
+    </form>
+
+  </view>
+</view>

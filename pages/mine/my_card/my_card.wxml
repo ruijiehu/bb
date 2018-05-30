@@ -1,0 +1,111 @@
+<!-- <view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view> -->
+<view class="page">
+  <view class="page__bd" style='padding:0 40rpx;'>
+    <form catchsubmit="formSubmit" catchreset="formReset">
+
+      <view style='box-shadow: 0 0 6rpx rgba(0, 0, 0, 0.2);margin-top:20px;'>
+        <view class="weui-cells border_b_0 border_t_0" style='margin-top:0px;'>
+          <view class="weui-cell relative" style='padding:20rpx;'>
+            <view class="weui-cell__bd full_w" style='border-bottom:1px solid#eee;padding-bottom:10px;'>
+              <view style=''>
+                <text style='float:left;width:80px;font-size:14px;color:#676767;line-height:30px;'>真实姓名</text>
+                <input value='{{realName}}' name="realName" style='line-height:30px;height:30px;font-size:14px;width:160px;float:right;text-align:right;' placeholder='请输入'></input>
+
+              </view>
+
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells border_b_0 border_t_0" style='margin-top:-8px;'>
+          <view class="weui-cell relative" style='padding:20rpx;'>
+            <view class="weui-cell__bd full_w" style='border-bottom:1px solid#eee;padding-bottom:10px;'>
+              <view style=''>
+                <text style='float:left;width:80px;font-size:14px;color:#676767;line-height:30px;'>公司名称</text>
+                <input value='{{company}}' name="company" style='line-height:30px;height:30px;font-size:14px;width:160px;float:right;text-align:right;' placeholder='请输入'></input>
+
+              </view>
+
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells border_b_0 border_t_0" style='margin-top:-8px;'>
+          <view class="weui-cell relative" style='padding:20rpx;'>
+            <view class="weui-cell__bd full_w" style='border-bottom:1px solid#eee;padding-bottom:10px;'>
+              <view style=''>
+                <text style='float:left;width:80px;font-size:14px;color:#676767;line-height:30px;'>职位名称</text>
+                <input value='{{position}}' name="position" style='line-height:30px;height:30px;font-size:14px;width:160px;float:right;text-align:right;' placeholder='请输入'></input>
+
+              </view>
+
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells border_b_0 border_t_0" style='margin-top:-8px;'>
+          <view class="weui-cell relative" style='padding:20rpx;'>
+            <view class="weui-cell__bd full_w" style='border-bottom:1px solid#eee;padding-bottom:10px;'>
+              <view style=''>
+                <text style='float:left;width:80px;font-size:14px;color:#676767;line-height:30px;'>电子邮箱</text>
+                <input value='{{email}}' name="email" style='line-height:30px;height:30px;font-size:14px;width:160px;float:right;text-align:right;' placeholder='请输入'></input>
+
+              </view>
+
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells border_b_0 border_t_0" style='margin-top:-8px;'>
+          <view class="weui-cell relative" style='padding:20rpx;'>
+            <view class="weui-cell__bd full_w" style='border-bottom:1px solid#eee;padding-bottom:10px;'>
+              <view style='padding-top:10px;'>
+                <input value='{{phone_check}}' name="phone_check" style='line-height:30px;height:30px;font-size:14px;width:160px;float:left;;' placeholder='手机号码'></input>
+               <button style='padding:0;background:#fff;font-size:14px;text-align:right;position:static;border:none;box-shadow:none;float:right;' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+
+ 
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell" style='box-shadow:0 0 3px rgba(0, 0, 0, 0.2);'>
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">上传公司logo</view>
+                <!-- <view class="weui-uploader__info">{{imageList.length}}/{{imgCount}}</view> -->
+                <!-- <view class="weui-uploader__info">1</view>  -->
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" wx:if="{{imageList.length!=0}}" style='display:inline-block;'>
+                  <block  >
+                    <view class="weui-uploader__file relative">
+                      <image mode="aspectFill" class="weui-uploader__img" src="{{imageList[0]}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      <!-- <video wx:if="{{videoSrc}}" src="{{videoSrc}}" objectFit="contain" enable-progress-gesture="false" show-center-play-btn="false" show-play-btn="false" style='width:154rpx;height:154rpx;'></video> -->
+                      <image class="weui-uploader__remove" catchtap='remove' wx:if="{{isAdd}}" data-index="{{index}}" src="../../images/remove.png"></image>
+                    </view>
+                  </block>
+
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{isAdd}}" hidden='{{imageList.length==imgCount}}'>
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+
+
+      <view class="btn-area">
+        <button type="primary" formType="submit">确定</button>
+      </view>
+    </form>
+
+  </view>
+
+
+</view>

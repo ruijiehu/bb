@@ -1,0 +1,75 @@
+<view class='b_c'>
+  <view class='c_list'>
+    <!-- <view class='img_box' wx:for="{{joinList}}" bindtap='select_cir' data-cirid='{{item.circleId}}'><image src='../../images/4.png'></image><text>{{item.name}}</text></view>
+    <view class='img_box' bindtap='addcircle'><image src='../../images/addimg2.png'></image></view> -->
+    <view class='ms_t'>
+      <button bindtap='want_attend' style='width:auto;line-height:60rpx;padding:0 10px;background:#f74131;color:#fff;' data-cirid="{{quanziDetail.circleId}}">申请加入</button>
+      <image style='width:70px;height:70px;position:static;' src='{{quanziDetail.icon}}'></image>
+      <view>
+        <text style='display:block;'>{{quanziDetail.name}}</text>
+        <text>成员数量：{{quanziDetail.userCount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='c_info'>
+
+    <!-- <view class='c_tit'>采购信息</view> -->
+    <view style='overflow:hidden;'>
+      <view class='c_info_list'>
+        <view  wx:for="{{cgInfo}}" bindtap='to_cgDetail' data-purid="{{item.purchaseId}}">
+          <view class='ms_t' style='height:auto;'>
+            <view style="display:inline-block;height:70rpx;width:70rpx;float:right" catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">
+              <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+            </view>
+            <image catchtap='to_man' lazy-load='true' data-id="{{item.userUView.userId}}" src='{{item.userUView.photo}}'></image>
+            <view class='user_tit' catchtap='to_man' data-id="{{item.userUView.userId}}">
+              <!-- <text>{{item.userUView.nickname}}</text>
+          <text>{{item.userUView.company}} {{item.userUView.positon}}</text> -->
+              <view>
+                <text>{{item.userUView.nickname}}</text>
+                <image class="user_tit_id" src="{{item.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+              </view>
+              <view>{{item.userUView.company}} {{item.userUView.position}}
+                <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+                  <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+                </view>
+              </view>
+
+            </view>
+          </view>
+          <view class='pl_con'>
+            <!-- <view class='con_c' >{{item.title}}</view> -->
+            <view class='ms_con' catchtap='to_cgDetail' data-id="{{item.purchaseId}}">
+              <view class='ms_con_view' style="width:100%;">
+                <text>[采购信息]  {{item.content}}</text>
+                <view style='margin-top:20rpx;' wx:if="{{item.images!=''}}">
+                  <image mode="aspectFill" lazy-load='true' style='width:180rpx;height:180rpx;margin-right:10rpx;' wx:for="{{item.images}}" src='{{item}}'></image>
+                </view>
+              </view>
+            </view>
+            <view class='ms_b'>
+              <text>{{item.createTime}}</text>
+              <view class="pic_box">
+                <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.purchaseId}}" data-summary="{{item.msg}}" data-imgs="{{item.images}}" data-tit="{{}}" data-type='2'>
+                  <image src='../../images/tihuan_xunhuan.png'></image>{{item.shareCount==undefined?'0':item.shareCount}}</view>
+                <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='to_cgDetail' data-id="{{item.purchaseId}}">
+                  <image src='../../images/tihuan_pinlun.png'></image>{{item.commentCount==undefined?'0':item.commentCount}}</view>
+                <view catchtap='dianzan_cg' data-type="3" data-tid="{{item.purchaseId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+                  <image src="{{item.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.praiseCount==undefined?'0':item.praiseCount}}</view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+      <view wx:if="{{cgInfo.length==0}}" style='height:130rpx;line-height:130rpx;text-align:center;color:#bfbfbf;'>
+        <view>
+          <image src='../../images/noone_icon.png' style='display:inline-block;width:27rpx;height:24rpx;margin-right:10rpx;vertical-align:middle;'></image>
+          <text style='font-size:26rpx;'>该圈暂时无人发布采购</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

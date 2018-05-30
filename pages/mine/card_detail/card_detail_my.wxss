@@ -1,0 +1,343 @@
+/* pages/mine/card_detail/card_detail_my.wxss */
+page{
+  background: #f1f2f3;
+}
+.card_big{
+  padding:0 10px;
+  overflow:hidden;
+}
+.card_top{
+  /* height: 95px; */
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 0 10px #eee;
+  padding:15px 0;
+
+}
+.logo{
+
+  height: 50px;
+}
+.logo>image{
+  display: block;
+  width: 50px;
+  height: 50px;
+  float: right;
+  border: 1px solid;
+  margin-right:15px;
+
+}
+.card_box{
+
+}
+.card_box .card_name{
+
+}
+.card_box .card_info{
+  margin-left: 20px;
+}
+.card_box .card_info>image{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  /* border: 1px solid; */
+  margin-right:10px;
+vertical-align:middle;
+}
+.tabs{
+  height: 33px;
+  margin-top: 10px;
+} 
+.tabs>view{
+  display: inline-block;
+  float: left;
+  width: 50px;
+  height: 33px;
+  margin-right: 25px;
+  line-height: 33px;
+  text-align: center;
+  font-size: 12px;
+  color: #969696;
+}
+.cur_tab{
+  border-bottom: 2px solid red;
+   color: #000;
+  font-weight:bold;
+}
+.ziliao{
+  background:#fff;
+padding:0 20px;
+padding-top:1px;
+margin-top:17px;
+
+}
+
+
+
+.myself{
+  /* min-height: 190rpx; */
+  /* margin-top: 30rpx; */
+  margin-top:23px;
+  /* margin-bottom:40rpx; */
+position:relative;
+
+}
+.myself view{
+  /* height: 36rpx; */
+  line-height: 36rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color:#000;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.myself text{
+  max-height: 360rpx;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  color:#535353;
+}
+.comment .c_tit{
+   height: 36rpx;
+  line-height: 36rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color:#000;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.comment .c_tit text{
+  font-size: 20rpx;
+  color:#b5b5b5;
+  float: right;
+  border:none;
+}
+.person{
+  min-height: 124rpx;
+  margin-top: 28rpx;
+}
+.person image{
+  width:66rpx;
+  height: 66rpx;
+  float: left;
+  border-radius: 50%;
+  margin-right: 28rpx;
+}
+.person .p_right{
+  /* float: right; */
+  overflow: hidden;
+}
+.person .p_right .p_r_tit{
+  height: 44rpx;
+  line-height: 44rpx;
+}
+.person .p_right .p_r_tit text:nth-child(1){
+  font-size: 28rpx;
+  font-weight: bold;
+  color:#535353;
+  margin-right: 14rpx;
+}
+.person .p_right .p_r_tit text:nth-child(2){
+  margin-right: 18rpx;
+}
+.person .p_right .p_r_tit text{
+  font-size: 20rpx;
+  color:#959595;
+}
+.person .p_right .p_r_con{
+  line-height: 38rpx;
+  font-size: 26rpx;
+  color:#535353;
+  max-height: 80rpx;
+  overflow: hidden;
+}
+.btn_com{
+   width:160rpx; 
+  height: 46rpx;
+  background: #f74131;
+  color:#fff;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 46rpx;
+  border-radius: 50rpx;
+  margin-top: 26rpx;
+  /* padding:0 20rpx; */
+}
+.about{
+  /* margin-top: 40rpx; */
+  margin-top: 30px;
+  padding-bottom:80rpx;
+  position: relative;
+}
+.about>text{
+   height: 36rpx;
+  line-height: 36rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color:#000;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.about view{
+  height: 62rpx;
+  line-height: 62rpx;
+  font-size: 24rpx;
+  color:#535353;
+}
+.about view>text{
+ 
+float:right;
+display:block;
+width:380rpx;
+text-align:right;
+margin-left:120rpx;
+color:#c7c7c7;
+margin-right:22rpx;
+
+}
+.about view>view{
+ 
+float:right;
+display:block;
+width:300rpx;
+text-align:right;
+margin-left:120rpx;
+color:#c7c7c7;
+margin-right:22rpx;
+
+}
+.my-moment{
+  background: #fff;
+}
+
+.kefu{
+  position: absolute;
+  right: 30rpx;
+  top: 35rpx;
+  background: rgba(72,194, 61, 0.9);
+  width: 60rpx;
+  height: 60rpx;
+  display: inline-block;
+  text-align: center;
+  border-radius: 90rpx;
+}
+.contact-button{
+  margin-top:15rpx;
+}
+.kefuline{
+  margin: 20rpx 0;
+}
+.authority{
+  font-size: 24rpx;
+  padding-right: 70rpx;
+  float: right;
+  padding-top: 10rpx;
+  color: #999;
+}
+.identityType{
+  /* margin-left: 92rpx; */
+  font-weight: normal;
+  float: right;
+}
+.weui-uploader__file{
+  margin-bottom: 0;
+}
+.weui-uploader__img{
+  /* border-radius: 40rpx; */
+  float: left;
+}
+.about .abtit{
+   height: 36rpx;
+  line-height: 36rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color:#000;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.about .abtit image{
+  width:24rpx;
+height:32rpx;
+float:right;
+}
+.myself .edubox>view{
+  font-size:24rpx;
+  font-weight:normal;
+color:#bbb;
+
+}
+.myself .edubox>view:nth-child(3){
+  max-height:73rpx;
+overflow:hidden;
+margin-top:-8px;
+}
+.invite{
+  width:260rpx;
+background:red;
+color:#fff;
+text-align:center;
+margin:0 auto;
+height:60rpx;
+line-height:60rpx;
+
+}
+.edubox{
+  border-bottom:1px solid #eee;
+
+}
+.myself .zan_wu{
+  height:100%;
+background:#f1f2f3;
+padding:50rpx 0;
+text-align:center;
+font-size:24rpx;
+color:#ccc;
+margin-top:16px;
+
+}
+.red_block::before{
+   content:'';
+  position:absolute;
+  top: 5rpx;
+  left: -39rpx;
+  width: 14rpx;
+  height: 24rpx;
+  background:#f74131;
+}
+.red_block_two::before{
+   content:'';
+  position:absolute;
+  top: 10rpx;
+  left: -39rpx;
+  width: 14rpx;
+  height: 24rpx;
+  background: #f74131;
+}
+.chanpin{
+  background: #fff;
+  /* padding:10px; */
+  overflow: hidden;
+  width:100%;
+  padding-bottom: 40px;
+  position: relative;
+  margin-top:17px;
+
+}
+.zanwu{
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #C1C1C1;
+  font-size: 10px;
+}
+.chanpin>image{
+  display: block;
+  width: 110px;
+  height: 110px;
+  float: left;
+  margin-top:8px;
+margin-left:6px;
+background:#eee;
+
+}

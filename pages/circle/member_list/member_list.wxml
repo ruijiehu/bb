@@ -1,0 +1,18 @@
+<view>
+<view class='dt pl' style='padding-bottom:140rpx;'>
+  <view wx:for="{{cgInfo}}" bindtap='tomember' data-id="{{item.userId}}">
+    <view class='ms_t'>
+      <image src='{{item.photo}}'></image>
+      <view class='user_tit' >
+        <view>
+          <text>{{item.nickname}}</text>
+          <image class="user_tit_id" src="{{item.verifyYn?'../../images/authentication.png':''}}"></image>
+        </view>
+        <view>{{item.company}} {{item.positon}}</view>
+      </view>
+    </view>
+  </view>
+  
+</view>
+<view class='tuichu' catchtap='tuichu_circle'>退出圈子</view>
+</view>

@@ -1,0 +1,132 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+
+<view hidden="{{showLoading}}">
+  <view class='s_head'>
+    <navigator hover-class="none" url='/pages/home_page/search/search'>
+      <view class='searchBox'>
+        <image src='../../images/search.png' class='search_ico'></image>
+        <input class='searchText' disabled style='' placeholder='搜索文章'></input>      
+      </view>
+    </navigator>
+    <view class="nav bc_white">
+    <view bindtap='to_msg' style='display:block;width:20px;height:23px;position:absolute;top:10%;left:27px;'>
+        <image style='width:20px;height:23px;margin-top:-2px;' src='../../images/to_msg.png'></image>
+      </view>
+      <view class="{{selected?'red':'default'}}" bindtap="selected">关注</view>
+      <view class="{{selected1?'red':'default'}}" bindtap="selected1">热门</view>
+      <view bindtap='to_fbV' style='display:block;width:27px;height:21px;position:absolute;top:10%;right:20px;'>
+        <image style='width:24px;height:18px;' src='../../images/fb_video.png'></image>
+      </view>
+    </view>
+    <view class="{{selected?'show':'hidden'}}">
+      <!-- 关注 -->
+      <!-- 如果关注的人有内容显示 -->
+      <view class='' wx:if="{{myimg.length!=0}}">
+      <!-- height:{{my_col1.length==1?scrollH-200:scrollH}}px; -->
+        <scroll-view scroll-y="true" style="margin-top:11px;" >
+          <view style="width:100%">
+            <view class="img_item" style='margin-right:10px;'>
+              <view wx:for="{{my_col1}}" wx:key="id" bindtap='toVideo' data-id="{{item.productId}}" style='position:relative;margin-bottom:10px;background:#fff;padding-bottom:10px;border-radius:6px;box-shadow:0 0 3px #ccc;'>
+                <image lazy-load="true" mode="widthFix" src="{{item.images}}" style="width:100%;margin-bottom:0px;border-radius:6px 6px 0 0;"></image>
+                <image src='../../images/play.png' style='position:absolute;top:10px;right:10px;display:block;width:20px;height:20px;'></image>
+                <view style='min-height:60px; height:auto;text-align:left;display:block;margin-top:-30px;padding:0 10px;'>
+                  <text style='display:block;line-height:20px;font-size:26rpx;min-height:26px;margin-bottom:8px;font-weight:bold;'>{{item.content}}</text>
+                  <view style='overflow:hidden;'>
+                    <image style='display:inline-block;width:20px;height:20px;float:left;border-radius:50%;' src='{{item.userUView.photo}}'></image>
+                    <view style='display:inline-block;width:240rpx;height:20px;float:left;color:#000;font-size:10px;line-height:20px;margin-left:10px;overflow:hidden;text-align:;text-overflow:ellipsis;white-space:nowrap;'>
+                    {{item.userUView.nickname}}<image src="../../images/authentication.png" style='display:inline-block;width:10px;height:7px;margin-left:5px;'></image><text style='float:right'>{{item.clicks}}浏览</text></view>
+                  </view>
+                </view>
+
+              </view>
+            </view>
+            <view class="img_item">
+              <view style='position:relative;margin-bottom:10px;background:#fff;padding-bottom:10px;border-radius:6px;box-shadow:0 0 3px #ccc;' wx:for="{{my_col2}}" wx:key="id" bindtap='toVideo' data-id="{{item.productId}}">
+                <image lazy-load="true" mode="widthFix" src="{{item.images}}" style="width:100%;height:{{item.images.height}}px;border-radius:6px 6px 0 0;"></image>
+                <image src='../../images/play.png' style='position:absolute;top:10px;right:10px;display:block;width:20px;height:20px;'></image>
+                <view style='min-height:60px; height:auto;text-align:left;display:block;margin-top:-30px;padding:0 10px;'>
+                  <text style='display:block;line-height:20px;font-size:26rpx;min-height:26px;margin-bottom:8px;font-weight:bold;'>{{item.content}}</text>
+                  <view style='overflow:hidden;'>
+                    <image style='display:inline-block;width:20px;height:20px;float:left;border-radius:50%;' src='{{item.userUView.photo}}'></image>
+                    
+                    <view style='display:inline-block;width:240rpx;height:20px;float:left;color:#000;font-size:10px;line-height:20px;margin-left:10px;overflow:hidden;text-align:;text-overflow:ellipsis;white-space:nowrap;'>
+                    {{item.userUView.nickname}}<image src="../../images/authentication.png" style='display:inline-block;width:10px;height:7px;margin-left:5px;'></image><text style='float:right'>{{item.clicks}}浏览</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class='remen_no' wx:if="{{myimg.length==0}}">
+        <!-- <image src='../../images/guanzhu.png'></image> -->
+        <!-- <text>你还未关注任何人</text> -->
+        <!-- <text>关注后可在当前页面查看对方供应链动态</text> -->
+        <text style='font-size:20px;color:#aaa;line-height:20px;margin-top:0;'>关注的人还未发布产品</text>
+      </view>
+      <!-- 可能感兴趣的人 -->
+      <view class='dt pl' style='background:#fff;margin-top:0px;overflow:hidden;'>
+        <text style='color:#AFAFAF;font-size:12px;text-align:left;display:block;line-height:40px;margin-bottom:15px;margin-top:15px;'>你可能感兴趣的人</text>
+        <view wx:for="{{persons}}" wx:if="{{index<4}}" bindtap='tomember' data-id="{{item.userId}}">
+          <view class='ms_t'>
+            <!-- <button >关注</button> -->
+            <image src='{{item.photo}}'></image>
+            <view class='user_tit'>
+              <view>
+                <text>{{item.nickname}}</text>
+                <image class="user_tit_id" src="{{item.verifyYn?'../../images/authentication.png':''}}"></image>
+              </view>
+              <view>{{item.company}} {{item.positon}}</view>
+            </view>
+            <view wx:if="{{!p_yn[index]}}" catchtap='clickGuanzhu' data-in="{{index}}" data-id="{{item.userId}}" style='display:inline-block;float:right;margin-right:10px;border:1px solid;width:50px;height:28px;text-align:center;line-height:28px;border-radius:5px;font-size:14px;background:#CB514C;color:#fff'>关注</view>
+            <view wx:if="{{p_yn[index]}}" catchtap='clickGuanzhu' data-in="{{index}}" data-id="{{item.userId}}" style='display:inline-block;float:right;margin-right:10px;border:1px solid;width:50px;height:28px;text-align:center;line-height:28px;border-radius:5px;font-size:14px;background:#fff;color:#CB514C'>已关注</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <view class="{{selected1?'show':'hidden'}}">
+
+      <!-- <scroll-view scroll-y="true" style="height:{{scrollH-65}}px;width:97%;margin:8px 10px 0 5px;" > -->
+      <scroll-view scroll-y="true" style="height:{{scrollH-65}}px;margin-top:11px;" >
+        <view style="width:100%">
+          <view class="img_item" style='margin-right:20rpx;'>
+            <view wx:for="{{col1}}" wx:key="id" bindtap='toVideo' data-id="{{item.productId}}" style='position:relative;margin-bottom:10px;background:#fff;padding-bottom:10px;border-radius:6px;box-shadow:0 0 3px #ccc;'>
+              <image lazy-load="true" mode="widthFix" src="{{item.images}}" style="width:100%;margin-bottom:0px;border-radius:6px 6px 0 0"></image>
+              <image src='../../images/play.png' style='position:absolute;top:10px;right:10px;display:block;width:20px;height:20px;'></image>
+              <view style='min-height:60px; height:auto;text-align:left;display:block;margin-top:-30px;padding:0 10px;'>
+                <text style='display:block;line-height:20px;font-size:26rpx;min-height:26px;margin-bottom:8px;font-weight:bold;'>{{item.content}}</text>
+                <view style='overflow:hidden;'>
+                  <image style='display:inline-block;width:20px;height:20px;float:left;border-radius:50%;' src='{{item.userUView.photo}}'></image>
+                  <view style='display:inline-block;width:240rpx;height:20px;float:left;color:#000;font-size:10px;line-height:20px;margin-left:10px;overflow:hidden;text-align:;text-overflow:ellipsis;white-space:nowrap;'>
+                  {{item.userUView.nickname}}<image src="../../images/authentication.png" style='display:inline-block;width:10px;height:7px;margin-left:5px;'></image><text style='float:right'>{{item.clicks}}浏览</text></view>
+                </view>
+              </view>
+
+            </view>
+          </view>
+          <view class="img_item">
+            <view style='position:relative;margin-bottom:10px;background:#fff;padding-bottom:10px;border-radius:6px;box-shadow:0 0 3px #ccc;' wx:for="{{col2}}" wx:key="id" bindtap='toVideo' data-id="{{item.productId}}">
+              <image lazy-load="true" mode="widthFix" src="{{item.images}}" style="width:100%;height:{{item.images.height}}px;border-radius:6px 6px 0 0"></image>
+              <image src='../../images/play.png' style='position:absolute;top:10px;right:10px;display:block;width:20px;height:20px;'></image>
+              <view style='min-height:60px; height:auto;text-align:left;display:block;margin-top:-30px;padding:0 10px;'>
+                <text style='display:block;line-height:20px;font-size:26rpx;min-height:26px;margin-bottom:8px;font-weight:bold;'>{{item.content}}</text>
+                <view style='overflow:hidden;'>
+                  <image style='display:inline-block;width:20px;height:20px;float:left;border-radius:50%;' src='{{item.userUView.photo}}'></image>
+                  
+                  <view style='display:inline-block;width:240rpx;height:20px;float:left;color:#000;font-size:10px;line-height:20px;margin-left:10px;overflow:hidden;text-align:;text-overflow:ellipsis;white-space:nowrap;'>
+                  {{item.userUView.nickname}}<image src="../../images/authentication.png" style='display:inline-block;width:10px;height:7px;margin-left:5px;'></image>
+                    <text style='float:right'>{{item.clicks}}浏览</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

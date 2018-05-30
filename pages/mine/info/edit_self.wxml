@@ -1,0 +1,4 @@
+<form bindsubmit="formSubmit">
+  <textarea class="txt" bindblur="bindTextAreaBlur" name="self_info" placeholder="请输入内容" value="{{self_info==='undefined'?'':self_info}}" />
+  <button bindtap='sure' formType="submit" style='display:block;width:225px;height:40px;color:#fff;background:#f74131;line-height:40px;'>确定</button>
+</form>

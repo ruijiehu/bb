@@ -1,0 +1,78 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<!-- <view style='height:60px;background:#fafafa;'>
+</view> -->
+<!-- 顶部 -->
+
+
+<view style='height:65px;width:100%;position:relative;'>
+
+  <image style='width:100%;height:100%;position:absolute;top:0;left:0;' src='../../images/list.png'></image>
+  <text style='display:block;position:absolute;top:35%;right:0;background:orange;padding:4px 10px;font-size:12px;border-radius:8px 0 0 8px;color:#000'>已坚持阅读{{readDays==0?1:readDays}}天</text>
+</view> 
+<view class='dt weui-tab__content relative' hidden="{{showLoading}}">
+
+  <view wx:for="{{ListAll}}" class="one" data-id="{{item.type}}" data-index="{{index}}">
+    <!-- 精选 -->
+      <view >
+      <view catchtap='to_detail' class="weui-media-box relative weui-media-box_text pb-15" data-id="{{item.newsId}}">
+        <view class="fs-16 weui-media-box__title weui-media-box__title_in-text">
+          <text class="{{item.topYn?'red':''}}">{{item.title}}</text>
+        </view>
+        <view class="weui-media-box__desc fs-13">{{item.summary}}</view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">
+            {{item.releaseTime}}
+          </view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+            {{item.clicks==undefined?0:item.clicks}}阅读
+          </view>
+        </view>
+        <image class="listimg" mode="aspectFill" src="{{item.images}}"></image>
+      </view>
+    </view>  
+  </view>
+</view>
+
+
+
+<!-- 绑定信息 -->
+<view class="layer-bind-info" hidden="{{!showBindInfo}}">
+ 
+
+  <view class="layer-dialog">
+   
+    <view style='width:100%;height:212rpx;'>
+      <image style='width:100%;height:212rpx;' src='../../images/r_bg.png'></image>
+    </view>
+    <view class="layer-content">
+      <form catchsubmit="bindSubmit">
+      
+        <view class="section fs-16" style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:10rpx;position:relative;'>
+          <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_1.png'></image>
+          <text style='float:left;'>开启城市圈</text>
+          <picker bindchange="bindCountryChange" style='float:left;margin-left:66rpx;' class="gray-2" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'省份'}}</view>
+          </picker>
+          <picker bindchange="bindcityChange" style='float:left' class="gray-2" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after">{{cityList[cityIndex].name?cityList[cityIndex].name:'城市'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 " style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:24rpx;position:relative;'>
+          <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_2.png'></image>
+          开启行业圈
+          <picker bindchange="bindTradeChange" class="gray-2" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'请选择'}}</view>
+          </picker>
+        </view>
+        
+
+        <button type="primary" class="btn-red weui-btn fs-18" formType="submit">确定</button>
+
+
+      </form>
+    </view>
+
+  </view>
+</view>

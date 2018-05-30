@@ -1,0 +1,192 @@
+<view class='info'>
+  <view class="v_bg">
+    <view class='v_head'>
+      <!-- <text class='v_edit' catchtap="guanzhu" data-id="{{info.userId}}">关注</text> -->
+      <!-- <text class='v_edit' catchtap="guanzhu" data-id="{{info.userId}}" wx:if="{{info.followYn}}">取消关注</text> -->
+      <image class='head_img' src='{{info.photo}}'></image>
+      <!-- <image class='head_add' src='../../images/add_flow.png'></image> -->
+      <image class='head_add' catchtap="guanzhu" data-id="{{info.userId}}" src='../../images/add_flow.png' wx:if="{{!info.followYn}}"></image>
+      <image class='head_add' catchtap="guanzhu" data-id="{{info.userId}}" src='../../images/cancel_flow.png' wx:if="{{info.followYn}}"></image>
+      <view class='message'>
+        <view class='m_name'>{{info.nickname}}
+          <!-- <image src='../../images/authentication.png'></image> -->
+          <image style="{{isAndroid?'vertical-align:16rpx':''}}" src="{{info.verifyYn?'../../images/authentication.png':'../../images/authentication3.png'}}"></image>
+        </view>
+        <view class='m_com' >{{info.company}}  {{info.position}}<image style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' src="../../images/v_ico.png" wx:if="{{info.positionVerifyYn}}"></image></view>
+        <view class='m_bottom'>
+          <!-- <image src='../../images/location.png' style='margin-right:4rpx'></image>嘉兴
+          <image src='../../images/trade-white.png' style='margin-right:4rpx'></image>紧固件
+          <image src='../../images/yxl.png'></image>影响力吗
+          <image src='../../images/question2.png'></image> -->
+          <image src='../../images/location.png' style='margin-right:12rpx' wx:if="{{info.cityView.name}}"></image>
+          <text wx:if="{{info.cityView.name}}">{{info.cityView.name}}</text>
+          <image src='../../images/trade-white.png' style='margin-right:12rpx;margin-left:12rpx' wx:if="{{info.tradeView.name}}"></image>
+          <text wx:if="{{info.tradeView.name}}">{{info.tradeView.name}}</text>
+          <image src='../../images/exp.png' style='margin-right:12rpx;margin-left:12rpx'></image>
+          <text>影响力:{{info.exp}}</text>
+          <!-- <image src="../../images/question2.png" style=';margin-left:12rpx'></image> -->
+        </view>
+
+      </view>
+      <view class='v_con_kind'>
+        <view>
+          <text>{{info.followCount==undefined?0:info.followCount}}</text> 关注数
+        </view>
+        <view>
+          <text>{{info.byFollowCount==undefined?0:info.byFollowCount}}</text> 被关注
+        </view>
+        <view>
+          <text>{{info.commentCount==undefined?0:info.commentCount}}</text> 评论数
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_con'>
+    <!-- <view class="chain"> -->
+    <!-- <view>我的供应链 <image src='../../images/chain_03.png'></image></view> -->
+    <!-- <image src="../../images/addimg.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- </view> -->
+    <!-- <view class="chain my-moment"> -->
+
+    <view wx:if="{{info.verifyYn }}">
+      <!-- && allList.length!=0 -->
+      <view class="weui-cell weui-cell_access" wx:if="{{info.verifyYn}}" style="padding:0" bindtap='goGoodsList' hover-class="weui-cell_active">
+        <view class="weui-cell weui-cell_access" style="padding:0" hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary red_block_two relative bold fs-18" style='padding:0;'>
+            TA的产品
+          </view>
+        </view>
+
+      </view>
+      <!-- -->
+      <view class="weui-uploader__bd" style="margin-bottom:20rpx" bindtap='goGoodsList' data-id="{{info.userId}}">
+        <view class="weui-uploader__files">
+          <block wx:for-items="{{allList}}" wx:key="{{index}}">
+            <view class="weui-uploader__file">
+              <image mode="aspectFill" class="weui-uploader__img" src="{{item.images[0]}}"></image>
+            </view>
+          </block>
+        </view>
+        <!-- <view wx:if="{{!myinfo.verifyYn}}" style='font-weight:normal;font-size:24rpx;' class="not_renzhen">你还未认证，认证后可查看
+          <button catchtap='to_tzRenzheng'>马上认证</button>
+        </view> -->
+      </view>
+    </view>
+
+
+    <view class="myself" wx:if="{{info.info!=undefined}}">
+      <view class='red_block'>TA的自我介绍
+        <!-- <image bindtap='to_editSelf' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+      </view>
+      <text>{{info.info==undefined?'暂无介绍':info.info}}</text>
+    </view>
+
+    <!-- 工作经历 -->
+    <view wx:if="{{worklist.length!=0}}">
+      <view class="myself" wx:if="{{info.verifyYn}}">
+        <view class='red_block' style='margin-bottom:14px;'>工作经历
+          <!-- <image bindtap='to_editwork' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+        </view>
+        <view wx:if="{{myinfo.verifyYn}}">
+          <view wx:for="{{worklist}}" class="edubox" class="edubox">
+            <view style='margin-bottom:14rpx;font-weight:bold;color:#535353;font-size:28rpx;'>{{item.type==1?item.company:''}} {{item.type==1?item.position:''}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.verifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+              </view>
+            </view>
+            <view>{{item.type==1?item.startTime:''}} 至 {{item.type==1?item.endTime:''}}</view>
+            <view>{{item.type==1?item.experience:''}}</view>
+          </view>
+        </view>
+        <view wx:if="{{!myinfo.verifyYn}}" style='font-weight:normal;font-size:24rpx;' class="not_renzhen">你还未认证，认证后可查看
+          <button catchtap='to_tzRenzheng'>马上认证</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 教育经历 -->
+    <!-- <view wx:if="{{edu.length!=0}}">
+    <view class="myself" wx:if="{{info.verifyYn}}">
+      <view class='red_block'>教育经历
+        <!-- <image bindtap='to_editeduit' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+    <!-- </view >
+      <view wx:if="{{myinfo.verifyYn}}">
+        <view wx:for="{{edu}}" class="edubox" >
+          <view>{{item.type==0?item.school:''}} {{item.type==0?item.major:''}} {{item.type==0?item.education:''}} <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;'  wx:if="{{item.verifyYn}}">
+            <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+          </view></view>
+          <view>{{item.type==0?item.startTime:''}}-{{item.type==0?item.endTime:''}}</view>
+          <view>{{item.type==0?item.experience:''}}</view>
+        </view>
+      </view>
+      <view wx:if="{{!myinfo.verifyYn}}" style='font-weight:normal;font-size:24rpx;' class="not_renzhen">你还未认证，认证后可查看
+        <button catchtap='to_tzRenzheng'>马上认证</button>
+      </view>
+    </view>
+    </view>  -->
+
+    <!--点评-->
+    <!-- <view class="comment" wx:if="{{info.verifyYn}}">
+      <view class='c_tit'>有{{info.byCommentCount==undefined?0:info.byCommentCount}}个点评
+        <text catchtap='to_morepinlun' data-id="{{info.userId}}">查看更多 ></text> </view>
+      <view class="person" wx:for="{{dianpin}}">
+        <image src="{{item.userUView.photo}}"></image>
+        <view class="p_right">
+          <view class="p_r_tit">
+            <text>{{item.userUView.nickname}}</text>
+            <text>{{item.userUView.company}}</text>
+            <text>{{item.userUView.position}}</text>
+          </view>
+          <view class="p_r_con">
+            {{item.content}}
+          </view>
+        </view>
+      </view> -->
+    <!-- <view class="invite">他人评价</view> -->
+    <!-- </view> -->
+    <!--关于-->
+    <view class="about">
+      <view class="abtit red_block">关于TA
+        <!-- <image src='../../images/chain_03.png'></image> -->
+      </view>
+      <view class="pro">主营产品
+        <!-- <view>{{info.product==undefined?'暂无':info.product}}</view> </view>
+      <view class="pro">出口国家
+        <view>{{info.saleRegion==undefined?'暂无':info.saleRegion}}</view> </view>
+      <view class="pro">从业年限
+        <view>{{info.careerTime==undefined?'暂无':info.careerTime +'年'}}</view> </view>
+      <view class="pro">性别
+        <view>{{info.sex==1?'男':info.sex==0?'女':'未填'}}</view> </view>
+      <view class="pro">兴趣爱好
+        <view>{{info.likes==undefined?'暂无':info.likes}}</view> </view> -->
+         <!-- <view {{info.product==undefined?'待完善':info.product}}</view> </view> -->
+        <view wx:if="{{info.product==undefined}}">待完善</view><view wx:if="{{info.product!=undefined}}" style='color:#535353;'>{{info.product}}</view> </view>
+      <view class="pro">出口国家
+        <!-- <view>{{info.saleRegion==undefined?'待完善':info.saleRegion}}</view> </view> -->
+         <view wx:if="{{info.saleRegion==undefined}}">待完善</view><view wx:if="{{info.saleRegion!=undefined}}" style='color:#535353;'>{{info.saleRegion}}</view> </view>
+      <view class="pro">从业年限
+        <!-- <view>{{info.careerTime==undefined?'待完善':info.careerTime}}</view> </view> -->
+        <view wx:if="{{info.careerTime==undefined}}">待完善</view><view wx:if="{{info.careerTime!=undefined}}" style='color:#535353;'>{{info.careerTime}}</view> </view>
+      <view class="pro">性别
+        <view style='color:#535353;'>{{info.sex==1?'男':'女'}}</view> </view>
+      <view class="pro">兴趣爱好
+        <!-- <view>{{info.likes==undefined?'待完善':info.likes}}</view> </view> -->
+        <view wx:if="{{info.likes==undefined}}">待完善</view><view wx:if="{{info.likes!=undefined}}" style='color:#535353;'>{{info.likes}}</view> </view>
+    </view>
+
+  </view>
+</view>
+<!-- <view class='sure_dia' wx:if="{{!verifyApplying}}">
+  <view class='mask'></view>
+  <!-- <view class='dialog'>
+    <text>您已成功申请该圈子请耐心等候审核</text>
+    <text>今日还可申请1次</text>
+    <button bindtap='sure_attend'>确认</button>
+  </view> -->
+<!-- <view class='dialog' >
+    <navigator style="padding-top:111rpx;text-align:center;" url="/pages/my/verify">该功能只向认证用户开发，请去认证</navigator> 
+  </view> -->
+<!-- </view> -->

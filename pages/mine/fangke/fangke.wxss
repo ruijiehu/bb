@@ -1,0 +1,54 @@
+/* pages/mine/fangke/fangke.wxss */
+page{
+  background: #eee;
+  height:100%;
+}
+.top{
+  height: 35px;
+  line-height: 35px;
+  padding-left: 10px;
+}
+.top>text{
+  color: #A2A2A2;
+  font-size: 12px;
+}
+.sec{
+  background: #fff;
+  padding: 0 10px 20px 10px;
+  /* padding-bottom: 10px; */
+  margin-bottom: 5px;
+}
+.sec_day{
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  height: 46px;
+  line-height: 46px;
+}
+.sec_man{
+  overflow: hidden;
+  margin-top:20px;
+}
+.sec_info{
+  font-size: 12px;
+}
+.sec_info_top{
+font-size: 12px;
+}
+.sec_info_top>image:nth-child(2){
+  display: inline-block;
+  width: 14px;
+  height: 12px;
+  margin-left:5px;
+vertical-align: middle;
+}
+.sec_info_top>image:nth-child(5){
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left:5px;
+vertical-align: middle;
+}
+.sec_info_bottom{
+  color: #CECECE;
+  font-size: 10px;
+}

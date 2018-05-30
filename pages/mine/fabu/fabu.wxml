@@ -1,0 +1,40 @@
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTabB==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">交流</view>
+   <view class="swiper-tab-list {{currentTabB==1 ? 'on' : ''}} list2" data-current="1" bindtap="swichNav">采购</view> 
+</view>
+
+<swiper current="{{currentTabB}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <!-- 交流 -->
+  <swiper-item>
+    <view  class='dt' wx:for="{{sharelist}}">
+      <view bindtap='to_detail' class="weui-media-box relative weui-media-box_text pb-15" data-id="{{item.questionId}}" wx:key="{{index}}">
+        <view class="fs-16 weui-media-box__title weui-media-box__title_in-text">
+          <text class="{{item.topYn?'red':''}}">{{item.title}}</text>
+        </view>
+        <view class="weui-media-box__desc ">{{item.content}}</view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta" style='font-size:24rpx;'>
+            <!-- <text class="listTag">{{item.newsTypeView.typeName}}</text>  -->
+            {{item.createTime}}
+          </view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra" style='font-size:24rpx;'>
+            <image src="../../images/clicks.png" class="commentCount" style='vertical-align:-4px'></image>
+            {{item.clicks==undefined?0:item.clicks}}
+            <image src="../../images/tihuan_pinlun.png" style="vertical-align: -4px;" class="commentCount"></image> {{item.answerCount==undefined?0:item.answerCount}}
+            <image src="../../images/tihuan_xunhuan.png" style="vertical-align: -6rpx;" class="commentCount" ></image>{{item.shareCount==undefined?0:item.shareCount}}
+          </view>
+        </view>
+       
+      </view>
+
+    </view>
+  </swiper-item>
+  <!-- 采购 -->
+   <swiper-item>
+    <view class='js'>
+      <view wx:for="{{cglist}}" catchtap='to_cgdetail' data-id="{{item.purchaseId}}">
+        <view catchtap='to_cgdetail' style='margin-bottom:10rpx; width:90%;' data-id="{{item.purchaseId}}">{{item.content}}</view> <text class='cg_b' style='float:left'>有效期：{{item.day}}</text><text class='cg_b' style='margin-right:80rpx;float:right;'>{{item.releaseTime}}</text> 
+      </view>
+    </view>
+  </swiper-item> 
+</swiper>

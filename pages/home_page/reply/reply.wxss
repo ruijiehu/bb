@@ -1,0 +1,53 @@
+page{
+  background: #fff;
+}
+.btn-area{
+  /* position: fixed; */
+  bottom: 0;
+  left:0;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  /* left: 50%; */
+  /* width: 260rpx; */
+  /* margin-left: -130rpx; */
+  z-index: 9;
+  padding: 20rpx 0; 
+  display: inline-block
+}
+.btn-area button{
+  width: 160rpx;
+  display: inline-block;
+}
+.btn-area .btn-none{
+  margin-left: 40rpx;
+  background: #fff;
+  color: #a7936e;
+}
+.btn-none::after,.btn-none::before{
+  content: unset;
+}
+
+/* 评论 */
+form{
+  background: #fff;
+  padding: 30rpx;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 420rpx;
+}
+.inUser{
+  margin-top: 30rpx;
+}
+textarea{
+  padding: 20rpx;
+  border: 1px solid #f7f7f7;
+  box-sizing: border-box;
+  height: 300rpx;
+}
+.btn-area{
+  /* position: fixed; */
+  bottom: 0rpx;
+  left: 0;
+}

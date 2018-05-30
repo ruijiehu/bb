@@ -1,0 +1,68 @@
+.l_bg{
+	padding:0 40rpx;
+}
+.l_search{
+	height: 60rpx;
+	width: 670rpx;
+	margin-bottom: 56rpx;
+}
+.l_search>input{
+	height: 100%;
+	width: 90%;
+	line-height: 60rpx;
+	background: #f3f2f2;
+	text-indent: 2em;
+	font-size: 26rpx;
+	padding-left:40rpx;
+
+}
+.l_select{
+font-size: 26rpx;
+color: #313131;	
+}
+.l_list{}
+.l_list .list_item{
+	height: 156rpx;
+	border-bottom: 1px solid #eee;
+  padding-top:20rpx;
+
+}
+.list_item .i_tit{
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 80rpx;
+	line-height: 80rpx;
+	font-size: 34rpx;
+	color: #000;
+  display: block;
+}
+.list_item .i_bottom{
+font-size: 22rpx;
+	color: #535353;
+}
+.i_bottom>text:nth-child(3){
+	float: right;
+}
+.list_item .i_bottom>view, .list_item .i_bottom>text{
+	display: inline-block;
+}
+.list_item .i_bottom .person{
+	font-size: 22rpx;
+	color: #535353;
+	margin-right: 30rpx;
+}
+.list_item .i_bottom .person>image{
+	display: inline-block;
+	width: 42rpx;
+	height: 42rpx;
+	border-radius: 50%;
+	vertical-align:middle;
+margin-right:10rpx;
+}
+.list_item .i_bottom .person>image:nth-child(2){
+	border-radius: 0;
+	width: 28rpx;
+	height: 20rpx;
+}

@@ -1,0 +1,51 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-tab__panel relative">
+        <view class="weui-tab__content relative">
+          <view class="weui-media-box weui-media-box_text pb-8" wx:for-items="{{allList}}" wx:key="{{index}}" bindtap='toVideo' data-id="{{item.productId}}">
+            <view class="shadow" style='padding-top:16px;'>
+              <view class="weui-media-box__title weui-media-box__title_in-text fs-16 bold">
+              <image src="{{item.images}}" style='width:65px;height:65px;float:left;margin-right:40rpx'></image>
+                <text style='display:inline-block;height:42px;font-size:15px;line-height:21px;float:left;width:500rpx;white-space:normal;overflow:hidden;font-weight:normal;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;'>{{item.content}}</text>
+                <text style='display:inline-block;float:left;font-size:14px;color:#9E9E9E'>{{item.createTime}}</text>
+                <text style='display:inline-block;float:left;font-size:14px;color:#9E9E9E;margin-left:14px;'>阅读量{{item.clicks}}</text>
+              </view>
+
+              
+              <!-- <view class="weui-media-box__info" wx:if="{{userId==userInfo.userId}}">
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+                  <view class="editimg" data-id="{{item.productId}}" data-index="{{index}}" bindtap='remove'>
+                    <image src="../images/remove3.png"></image>
+                  </view>
+                </view>
+              </view> -->
+            </view>
+          </view>
+
+          <!-- 无数据 -->
+          <view class="weui-loadmore weui-loadmore_line" wx:if="{{allList.length==0}}" hidden="{{showLoading}}">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+          </view>
+          <!-- 加载等待 -->
+          <view class="weui-loadmore" wx:if="{{listLoading}}">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+          </view>
+
+
+        </view>
+      </view>
+    </view>
+    <!-- <view class="btn-area" wx:if="{{userId==userInfo.userId}}">
+        <button type="primary" class="btn-red fs-16" bindtap='addGoodsList'><image src="../images/add3.png"></image>发货源</button>
+      </view> -->
+  </view>
+</view>
+
+<!-- <view wx:for-items="{{allList}}">
+  <video src='{{item.video}}' objectFit="fill"></video>
+</view> -->

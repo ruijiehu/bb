@@ -1,0 +1,93 @@
+<view>
+  <view class='card_big'>
+    <view bindtap='changeCard' data-id="{{info.userId}}" style='color:#5779BA;font-size:12px;height:40px;line-height:40px;text-align:right;'>编辑名片</view>
+    <view class='card_top'>
+      <view class='logo'>
+        <image src='{{info.logo}}' mode='aspectFill'></image>
+      </view>
+      <view class='card_box'>
+        <view class='card_name card_info'>
+          <text style='color:#000;font-size:20px;'>{{info.nickname}}</text>
+          <text style='color:#696969;font-size:14px;margin-left:10px;'>{{info.position}}</text>
+        </view>
+        <view class='card_com card_info'>
+          <image src='../../images/company.png'></image>
+          <text style='font-size:12px;color:#959595;'>{{info.company}}</text>
+        </view>
+        <view class='card_phone card_info'>
+          <image src='../../images/phone.png'></image>
+          <text style='font-size:12px;color:#5460AC;'>{{info.phone}}</text>
+        </view>
+        <view class='card_email card_info'>
+          <image src='../../images/email.png'></image>
+          <text style='font-size:12px;color:#959595;'>{{info.email}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='tabs'>
+      <view class='{{tab_show1==true?"cur_tab":""}}' catchtap='changeShow1'>我的资料</view>
+      <view class='{{tab_show2==true?"cur_tab":""}}' catchtap='changeShow2'>我的产品</view>
+    </view>
+    <view class='ziliao' wx:if="{{tab_show1}}">
+      <view class="myself">
+        <view bindtap='to_editSelf' data-id="{{info.userId}}" data-info="{{info.info}}" data-nick="{{info.nickname}}" class='red_block'>个人介绍
+        <text data-id="{{info.userId}}" data-info="{{info.info}}" style='float:right;color:#5779BA'>编辑</text>
+          <!-- <image data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+        </view>
+        <text wx:if="{{info.info}}">{{info.info}}</text>
+        <view catchtap='to_editSelf' data-id="{{info.userId}}" class="zan_wu" wx:if="{{!info.info}}">暂无个人介绍，点击添加</view>
+      </view>
+
+      <!-- 工作经历 -->
+      <view class="myself" bindtap='torenzhen' data-id="{{info.userId}}" data-info="{{info.info}}">
+        <view class='red_block'>工作经历
+        <text data-id="{{info.userId}}" data-info="{{info.info}}" style='float:right;color:#5779BA'>编辑</text>
+          <!-- <image data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+        </view>
+        <view style='margin-top:26rpx;'>
+          <view wx:for="{{worklist}}" class="edubox" class="edubox" data-company="{{item.company}}" data-position="{{item.position}}" data-id="{{item.userInfoId}}">
+
+            <view style='margin-bottom:14rpx;font-weight:bold;color:#535353;font-size:28rpx;'>{{item.type==1?item.company:''}} {{item.type==1?item.position:''}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.verifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+              </view>
+            </view>
+            <view>{{item.type==1?item.startTime:''}} 至 {{item.type==1?item.endTime:''}}</view>
+            <view>{{item.type==1?item.experience:''}}</view>
+          </view>
+        </view>
+        <view catchtap='to_addwork' data-id="{{info.userId}}" class="zan_wu" wx:if="{{worklist.length==0}}">暂无工作经历，点击添加</view>
+      </view>
+      <!--关于-->
+      <view class="about">
+        <view class="abtit red_block" bindtap="to_editMore" data-id="{{info.id}}">更多
+          <!-- <image src='../../images/chain_03.png'></image> -->
+          <text style='font-size:12px;'>编辑</text>
+        </view>
+        <view class="pro">主营产品
+          <view wx:if="{{info.product==undefined}}">待完善</view>
+          <view wx:if="{{info.product!=undefined}}" style='color:#535353;'>{{info.product}}</view>
+        </view>
+        <view class="pro">出口国家
+          <view wx:if="{{info.saleRegion==undefined}}">待完善</view>
+          <view wx:if="{{info.saleRegion!=undefined}}" style='color:#535353;'>{{info.saleRegion}}</view>
+        </view>
+        <view class="pro">从业年限
+          <view wx:if="{{info.careerTime==undefined}}">待完善</view>
+          <view wx:if="{{info.careerTime!=undefined}}" style='color:#535353;'>{{info.careerTime}}</view>
+        </view>
+        <view class="pro">性别
+          <view style='color:#535353;'>{{info.sex==1?'男':'女'}}</view>
+        </view>
+        <view class="pro">兴趣爱好
+          <view wx:if="{{info.likes==undefined}}">待完善</view>
+          <view wx:if="{{info.likes!=undefined}}" style='color:#535353;'>{{info.likes}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='chanpin' wx:if="{{tab_show2}}">
+      <image mode="aspectFill" wx:for='{{allList}}' src='{{item.images}}'></image>
+      <text class='zanwu'>——暂无更多——</text>
+    </view>
+  </view>
+</view>

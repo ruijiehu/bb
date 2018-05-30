@@ -1,0 +1,207 @@
+.page__bd {
+  padding-bottom: 140rpx;
+}
+.weui-navbar{
+  position: fixed;
+}
+.weui-tab__panel {
+
+  padding-top: 0;
+}
+
+.weui-media-box{
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  
+}
+.weui-uploader__bd{
+  margin: 0 0 40rpx 0;
+}
+.weui-uploader__img{
+  width:180rpx;
+  height:180rpx;
+}
+.shadow{
+
+
+
+}
+.proImg{
+  border-radius: 20rpx;
+}
+.weui-media-box:before {
+  left: 0;
+  border-top: 0;
+  background: #f7f7f7;
+  margin: 0 30rpx;
+}
+
+/* .weui-media-box__title_in-text{
+  white-space: normal;
+} */
+
+.weui-media-box__title image {
+  width: 60rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+  vertical-align: text-bottom;
+}
+
+.weui-media-box__desc {
+   -webkit-line-clamp: 1; 
+  font-size: 24rpx;
+}
+
+.weui-media-box__info {
+  font-size: 22rpx;
+  color: #bbb;
+  border-top: 1px solid #f7f7f7;
+}
+
+.weui-media-box__info__meta {
+  position: relative;
+  padding-left: 42rpx;
+}
+
+.editimg{
+  width: 62rpx;
+  height: 72rpx;
+  display: inline-block;
+}
+.editimg image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+}
+
+
+.weui-media-box__info__meta_extra {
+  float: right;
+  padding-left: 0;
+  border-left: 0;
+}
+
+.ad-banner{
+  width: 100%;
+  background: #fff;
+  margin-top: 20rpx;
+  padding-bottom: 40rpx;
+  position: relative;
+  text-align: center;
+}
+.ad-banner-close{
+  position: absolute;
+  right: 20rpx;
+  top: 10px;
+  width: 40rpx;
+  height: 40rpx;
+}
+.ad-banner-close image{
+  width:20rpx;
+  height:20rpx;
+  margin: 10rpx;
+}
+.ad-banner__minImg{
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 26rpx;
+  margin-bottom: 16rpx;
+}
+
+.recommend{
+  padding: 30rpx 0;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.recommend-title{
+  font-size:28rpx;
+  margin-bottom: 30rpx;
+  margin-left: 40rpx;
+}
+.recommend-scroll{
+  white-space:nowrap;
+}
+.recommend-card-close{
+  position: absolute;
+  right: 10rpx;
+  top: 0px;
+  width: 40rpx;
+  height: 40rpx;
+}
+.recommend-card{
+  position: relative;
+  width: 256rpx;
+  height: 256rpx;
+  background: #fff;
+  border:1px solid #f4f4f4;
+  text-align: center;
+  padding: 10rpx;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.recommend-card+.recommend-card{
+  margin-left:10rpx; 
+}
+.recommend-card:first-child{
+  margin-left: 26rpx;
+}
+.recommend-card:last-child{
+  margin-right: 26rpx;
+}
+.recommend-card-close image{
+  width:20rpx;
+  height:20rpx;
+  margin: 10rpx;
+}
+.recommend-card__photo{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.referrer{
+  color: #005bab;
+  margin-right: 10rpx;
+}
+
+.proImg{
+  height: 316rpx;
+  width: 100%;  
+}
+.weui-flex__item{
+  
+}
+
+.value{
+  color: #f74131;
+}
+.tagViews{
+  padding: 6rpx 20rpx;
+  border: 1px solid #f74131;
+  color: #f74131;
+  border-radius: 30rpx;
+  margin-left: 20rpx;
+}
+
+.btn-area{
+  position: fixed;
+  bottom: 0rpx;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 20rpx 0;
+}
+.btn-area button{
+  width: 260rpx;
+  text-indent: 30rpx;
+}
+.btn-area image{
+  width: 32rpx;
+  height: 32rpx;
+  left: 50rpx;
+  top: 50%;
+  margin-top: -16rpx;
+  position: absolute;
+}

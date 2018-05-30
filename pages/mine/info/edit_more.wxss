@@ -1,0 +1,50 @@
+.about{
+  /*margin-top: 70rpx;*/
+  background:#fff;
+padding:0 40rpx;
+/*padding-bottom:80rpx;*/
+padding-top:40rpx;
+margin-bottom:17rpx;
+
+
+}
+.about .abtit{
+  height: 36rpx;
+  line-height: 36rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color:#000;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.about .abtit image{
+  width:24rpx;
+  height:32rpx;
+  float:right;
+}
+.about .pro{
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  color:#535353;
+  border-bottom: 1px solid #ccc;
+}
+.about .pro input{
+  float:right;
+display:block;
+width:380rpx;
+/*text-align:left;*/
+margin-left:120rpx;
+color:#535353;
+height:90rpx;
+line-height:90rpx;
+text-align:right;
+margin-right:20rpx;
+
+}
+.btn_com{
+  margin-top:40rpx;
+width:600rpx;
+background:#fff;
+
+}

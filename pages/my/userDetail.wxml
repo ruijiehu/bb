@@ -1,0 +1,141 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page pb-30" hidden="{{showLoading}}" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <!-- <view class="page__hd"> -->
+  <!-- <view class="page__title" bindtap="goEdit">详情</view> -->
+  <!-- <view class="page__desc">表单输入</view> -->
+  <!-- </view> -->
+  <form class="page__bd" catchsubmit="formSubmit">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{showTopTips}}</view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">姓名</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" disabled='{{info.verifyYn}}' placeholder="请输入姓名" maxlength="20" name="nickname" value="{{info.nickname}}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" hidden>
+      <view class="weui-cells__title" hidden>邮箱</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入邮箱" name="email" value="{{info.email}}" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">地区</view>
+      <view class="weui-cell weui-cell_select">
+        <!-- <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">国家/地区</view>
+        </view> -->
+        <view class="weui-cell__bd">
+          <picker bindchange="bindCountryChange" style="width:49%;display:inline-block;" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'-'}}</view>
+          </picker>
+          <picker bindchange="bindcityChange" style="width:49%;margin-left:2%;display:inline-block;" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after border_right_0">{{cityList[cityIndex].name?cityList[cityIndex].name:'-'}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">行业</view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__bd">
+          <picker bindchange="bindTradeChange" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after border_right_0">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'-'}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+<view wx:if="{{info.identityType=='外贸人'}}">
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">主营产品</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入主营产品" name="product" value="{{info.product}}" />
+        </view>
+      </view>
+    </view>
+
+    <!-- <view class="line"></view> -->
+
+
+    <view class="weui-cells weui-cells_after-title mt">
+      <view class="weui-cells__title">性别</view>
+      <view class="weui-cell weui-cell_input border_t_0">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="点击选择性别" bindtap='choiseSex' disabled wx:if="{{info.sex==1}}" value="男" />
+          <input class="weui-input" placeholder="点击选择性别" bindtap='choiseSex' disabled wx:elif="{{info.sex==2}}" value="女" />
+          <input class="weui-input" placeholder="点击选择性别" bindtap='choiseSex' disabled wx:else value="未知" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">感情状况</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="点击选择感情状况" bindtap="choiseMaritalStatus" disabled wx:if="{{info.maritalStatus==1}}" value="未婚" />
+          <input class="weui-input" placeholder="点击选择感情状况" bindtap="choiseMaritalStatus" disabled wx:elif="{{info.maritalStatus==2}}" value="已婚" />
+          <input class="weui-input" placeholder="点击选择感情状况" bindtap="choiseMaritalStatus" disabled wx:else value="未知" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title" hidden>
+      <view class="weui-cells__title">生日</view>
+      <view class="weui-cell ">
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{info.birthday}}" start="1917-01-01" bindchange="bindDateChange">
+            <view class="picker">
+              {{info.birthday}}
+            </view>
+            <view class="picker" wx:if="{{!info.birthday}}">
+              请选择日期
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">从业年限</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="点击选择从业年限" name="careerTime" value="{{info.careerTime}}" type="number" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">出口国家</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入出口国家" name="saleRegion" value="{{info.saleRegion}}" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells__title">兴趣爱好</view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入兴趣爱好" name="likes" value="{{info.likes}}" />
+        </view>
+      </view>
+    </view>
+</view>
+
+
+    <view class="weui-btn-area">
+      <button class="weui-btn btn-red" type="primary" formType="submit">保存</button>
+    </view>
+  </form>
+</view>

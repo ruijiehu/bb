@@ -1,0 +1,33 @@
+<view class='pl dt'>
+  <view class='pl_con' wx:for="{{pinlunlist}}" data-id="{{}}">
+    <view class='con_c'>{{item.content}}</view>
+    <!-- 评论精选的 -->
+    <view class='ms_con' wx:if="{{item.newsUView}}" catchtap='to_news' data-id="{{item.newsUView.newsId}}">
+      <image mode="aspectFill" src='{{item.newsUView.images}}'></image>
+      <view style='float:left;margin-left:3%;width:70%;'>
+        <text style='white-space: nowrap;overflow: hidden;text-overflow: ellipsis;'>{{item.newsUView.title}}</text>
+        <text style='line-height:38rpx;'>{{item.newsUView.summary}}</text>
+      </view>
+    </view>
+    <!-- 评论采购的 -->
+    <view class='ms_con' wx:if="{{item.purchaseDetailUView}}" catchtap='to_pur' data-id="{{item.purchaseDetailUView.purchaseId}}">
+      <view>
+        <text class='notitle'>@{{item.userUView.nickname}}:{{item.purchaseDetailUView.msg}}</text>
+      </view>
+    </view>
+    <!-- 评论交流的 -->
+    <view class='ms_con' wx:if="{{item.questionUView}}" catchtap='to_jl' data-id="{{item.questionUView.questionId}}">
+      <view>
+
+        <text class='notitle'>@{{item.userUView.nickname}}:{{item.questionUView.content}}</text>
+      </view>
+    </view>
+    <!-- 评论分享的 -->
+    <view class='ms_con' wx:if="{{item.shareListUView}}" catchtap='to_fx_detail' data-id="{{item.shareListUView.shareId}}" data-con="{{item.shareListUView.content}}" data-nick="{{item.shareListUView.userUView.nickname}}">
+      <view>
+        <text class='notitle'>@{{item.userUView.nickname}}:{{item.shareListUView.content}}</text>
+      </view>
+    </view>
+  
+  </view>
+</view>

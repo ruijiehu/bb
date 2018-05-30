@@ -1,0 +1,31 @@
+<view class='searchBox'>
+  <image src='../../images/search.png' class='search_ico'></image>
+  <input class='searchText' focus="true" style='' placeholder='搜索文章' value='' bindconfirm="bindconfirm"></input>
+</view>
+<view wx:for="{{listAll}}" style='padding:0 40rpx;'>
+  <view wx:if="listAll.length>0">
+    <view catchtap='to_detail' class="weui-media-box relative weui-media-box_text pb-15" data-id="{{item.newsId}}">
+      <view class="fs-16 weui-media-box__title weui-media-box__title_in-text">
+        <text class="{{item.topYn?'red':''}}">{{item.title}}</text>
+      </view>
+      <view class="weui-media-box__desc fs-13">{{item.summary}}</view>
+      <view class="weui-media-box__info">
+        <view class="weui-media-box__info__meta">
+          <!-- <text class="listTag">{{item.newsUView.newsTypeView.typeName}}</text> -->
+          {{item.releaseTime}}
+        </view>
+        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+          <image src="../../images/clicks.png" class="commentCount"></image>
+          {{item.clicks==undefined?0:item.clicks}}
+          <image src="../../images/tihuan_pinlun.png" style="vertical-align: -6rpx;" class="commentCount"></image> {{item.comments==undefined?0:item.comments}}
+          <image src="../../images/tihuan_zhuanfa.png" style="vertical-align: -6rpx;" class="commentCount"></image>{{item.shareCount==undefined?0:item.shareCount}}
+        </view>
+      </view>
+      <image class="listimg" lazy-load='true' mode="aspectFill" src="{{item.images}}"></image>
+    </view>
+  </view>
+
+</view>
+  <view wx:if="{{listAll.length==0}}" style='padding:0 40rpx;text-align:center;padding-top:50rpx;color:#ccc;'>
+    暂无数据
+  </view>

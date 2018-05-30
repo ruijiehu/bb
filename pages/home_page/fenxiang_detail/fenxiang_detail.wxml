@@ -1,0 +1,115 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view  wx:if="{{!nocon}}" hidden="{{showLoading}}">
+  <view class='d_head'>
+    <view class='d_tit'></view>
+    <view class='d_writer'>
+    <view catchtap='to_Man' data-id="{{fx_con.userUView.userId}}" style='display:inline-block'>
+      <image src='{{fx_con.userUView.photo}}' class='d_w_head'></image>
+      <view class='d_w_info'>{{fx_con.userUView.nickname}}
+        <image wx:if="{{fx_con.userUView.verifyYn}}" src='../../images/authentication.png'></image>
+        <text>{{fx_con.createTime}}</text>
+      </view>
+      </view>
+       
+       <view style="display:inline-block;height:70rpx;width:70rpx;float:right;position:relative" catchtap='more_edit' wx:if="{{fx_con.userUView.userId==UserInfo.userId}}"  data-id="{{item.userUView.userId}}">
+        <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+      </view>
+    </view>
+  </view>
+  <view class='d_container'>
+    <view class="about">
+    {{con}}
+    </view>
+    <view class='list_con'>
+      <view class='pl_con' wx:if="{{fx_con.newsUView}}"  data-id="{{fx_con.newsUView.newsId}}" catchtap='to_jx'>
+          <!-- <view class='con_c'>不错的文章</view> -->
+          <view class='ms_con' style='height:162rpx;padding:20rpx;background:#f1f2f3;'>
+            <!-- <text class='from_w'>来自精选类型</text> -->
+            <image mode="aspectFill" src='{{fx_con.newsUView.images}}'></image>
+            <view class='ms_con_view'>
+              <text style="max-height:100rpx;display:inline-block;overflow:hidden;">{{fx_con.newsUView.title}}</text>
+      
+              <text style="height:58rpx;overflow:hidden;display:inline-block;">{{fx_con.newsUView.summary}}</text>
+            </view>
+          </view>
+        </view>
+      <view wx:if="{{fx_con.purchaseDetailUView}}" data-id="{{fx_con.purchaseDetailUView.purchaseId}}" catchtap='to_cg'>
+          <view>@{{nick}}：{{fx_con.purchaseDetailUView.msg}}</view>
+      </view>
+      <view wx:if="{{fx_con.questionUView}}" data-id="{{fx_con.questionUView.questionId}}" catchtap='to_jl'>
+          <view>@{{nick}}：{{fx_con.questionUView.content}}</view>
+      </view>
+    </view>
+    
+  </view>
+  <view style='height:30px;width:60px;line-height:30px;text-align:center;border:1px solid #f64330;margin:20px auto;font-size:12px;border-radius:10rpx;font-size:12px;color:#aaa;background:#f64330;color:#fff;' catchtap='f_x'>
+    上首页
+  </view>
+  <view class='d_comment'>
+    <view>{{fx_con.commentCount==undefined?0:fx_con.commentCount}}条评论 <text style='float:right;' wx:if="{{fx_con.praiseCount!=undefined}}">赞  {{fx_con.praiseCount}}</text></view>
+    <view class='dt' wx:for="{{answerList}}">
+      <view class='con_list'>
+        <view class='ms_t' catchtap='to_person' data-id="{{item.userUView.userId}}">
+          <!-- <image src='../../images/zan.png' class='mst_zan'></image> -->
+          <image src='{{item.userUView.photo}}'></image>
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <view class='postion_ico'>{{item.userUView.company}} {{item.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;'  wx:if="{{item.userUView.positionVerifyYn}}">
+            <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+          </view>
+            </view>
+          </view>
+        </view>
+        <view class='ms_con'>
+          <text>{{item.content}}</text>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{answerList.length==0}}" style='height:130rpx;line-height:130rpx;text-align:center;color:#bfbfbf;'>
+        <view>
+          <!-- <image src='../../images/noone_icon.png' style='display:inline-block;width:27rpx;height:24rpx;margin-right:10rpx;vertical-align:middle;'></image> -->
+          <text style='font-size:26rpx;'>快来发布评论吧</text>
+        </view>
+      </view>
+       <view class='bottom_box'>
+      <view class='box_view' >
+        <!-- <image src='../../images/tihuan_zhuanfa.png' catchtap='f_x'></image>
+        <text>转发</text> -->
+        <button data-name="shareBtn" plain="true" open-type="share"><image style=' vertical-align: middle;display: inline-block;width:30rpx;height:30rpx;margin-right:10rpx;margin-top:-4rpx;' src='../../images/tihuan_zhuanfa.png' ></image><text style='font-size:24rpx;color:#aaa;'>转发</text></button>
+      </view>
+      <view class='box_view' bindtap='answerAdd'>
+        <image src='../../images/tihuan_pinlun.png'></image>
+        <text>评论</text>
+      </view>
+      <view class='box_view' catchtap='dianzan'>
+        <image wx:if="{{!fx_con.praiseYn}}" src='../../images/tihuan_zan.png'></image>
+        <image wx:if="{{fx_con.praiseYn}}" src='../../images/tihuan_zan_h.png'></image>
+        <text>点赞</text>
+      </view>
+    </view>
+    <view class='to_write'>
+      <form class="send-message {{sendType==1?'':'send-message1'}}" catchsubmit="answerAdd" report-submit="true">
+      <view class="choise-icon" hidden="{{sendType!=1}}">
+        <!-- <image mode="aspectFill" src="../images/send.png" hidden="{{sendType==1}}"></image> -->
+        <image src="../images/close.png" hidden="{{sendType!=1}}" bindtap="resetComment"></image>
+      </view>
+      <input class="weui-input sendInput" name="sendInput" hidden="{{sendType==1}}" disabled bindtap='answerAdd' placeholder="说点什么吧" value="{{sendInfo}}" />
+      <input class="weui-input" name="commentInput" hidden="{{sendType!=1}}" placeholder="回复：{{subAnswer.userView.nickname}}" value="{{commentInfo}}" />
+      <button class="mini-btn" type="primary" size="mini" formType="submit">发送</button>
+    </form>
+    </view> 
+  </view>
+</view>
+<view wx:if="{{nocon}}" style='text-align:center;padding-top:80rpx;color:#c7c7c7;'>{{nocon}}</view>
+<!-- <view wx:if="{{!verifyApplying}}">
+    <navigator url="/pages/my/verify">该功能只向认证用户开发，请去认证</navigator> 
+  </view> -->
+    <view catchtap='to_home' wx:if="{{show_toindex}}" style='width:50px;height:50px;border-radius:50%;position:fixed; right:10%;bottom:15%;background:#e65746;text-align:center;line-height:50px;'>
+  <image src='../../images/go_home.png' style='width:26px;height:26px;vertical-align:middle;'></image>
+</view>

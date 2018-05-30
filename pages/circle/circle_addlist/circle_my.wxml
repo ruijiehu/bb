@@ -1,0 +1,16 @@
+<page class="noscroll">
+<view class='dt'>
+  <view wx:for="{{joinList}}" bindtap='to_member'  data-cirID="{{item.circleId}}"  >
+    <view class='ms_t'>
+      <!-- <button   data-cirID="{{item.circleId}}">查看成员</button> -->
+      <text style='float:right;font-size:26px;color:#ccc;'>></text>
+      <image src='{{item.icon!=undefined?item.icon:"../../images/circle-icon.png"}}'></image>
+      <view>
+        <text>{{item.name}}</text>
+        <text>成员数量：{{item.userCount}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view bindtap='addcircle' style='position:absolute;bottom:10px;left:40%;color:#5483DB;'>查看所有圈子</view>
+</page>

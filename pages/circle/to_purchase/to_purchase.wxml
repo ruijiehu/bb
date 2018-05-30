@@ -1,0 +1,91 @@
+<view class='p_b'>
+  
+
+  <view class="page" hidden="{{showLoading}}">
+    <view class="page__bd">
+      <form catchsubmit="formSubmit" catchreset="formReset">
+        
+        <view class="weui-cells border_b_0 border_t_0">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea class="weui-textarea" name="content" bindinput="inputContent" maxlength="500" value="{{info.content}}" placeholder="请填写详情" />
+              <view class="weui-textarea-counter">{{currentContentCount}}/500</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells border_b_0 border_t_0">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                  <view class="weui-uploader__title">上传图片</view>
+                  <view class="weui-uploader__info">{{imageList.length}}/{{imgCount}}</view>
+                </view>
+                <view class="weui-uploader__bd">
+                  <view class="weui-uploader__files">
+                    <block wx:for="{{imageList}}" wx:for-item="image">
+                      <view class="weui-uploader__file relative">
+                        <image mode="aspectFill" class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                        <image class="weui-uploader__remove" catchtap='remove' wx:if="{{isAdd}}" data-index="{{index}}" src="../../images/remove.png"></image>
+                      </view>
+                    </block>
+                  </view>
+                  <view class="weui-uploader__input-box" wx:if="{{isAdd}}" hidden='{{imageList.length==imgCount}}'>
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+
+
+
+
+
+
+        <view class='p_time pading'>
+          <view class='pic_tit' style="display:inline-block"><text style='color:red'>*</text>有效期</view>
+          
+          <picker mode="selector" range="{{timearray}}" value="{{timeIndex}}" bindchange="bindPickerChange">
+            <text>{{timearray[timeIndex]}}</text>
+          </picker>
+        </view>
+        <view class='p_number pading'>
+          <view class='pic_tit'><text style='color:red'>*</text>数量要求</view>
+          <input placeholder='请输入采购数量和单位' placeholder-style="color:#c9c9c9" name="number" value="{{info.number}}"></input>
+        </view>
+        <view class='p_number pading'>
+          <view class='pic_tit'>出口国家</view>
+          <input placeholder='请输入出口国家' name="country" placeholder-style="color:#c9c9c9" value="{{info.country}}"></input>
+        </view>
+        <view class='p_number pading'>
+          <text class='pic_tit'>Fob价格</text>
+          <input placeholder='请输入价格' name="price" placeholder-style="color:#c9c9c9" value="{{info.price}}"></input>
+        </view>
+        <view class='p_time pading'>
+          <text class='pic_tit'>付款方式</text>
+          <picker bindchange="bindPicker" value="{{p_index}}" range="{{payarray}}">
+            <view class="picker">
+              {{payarray[p_index]}}
+            </view>
+          </picker>
+        </view>
+        
+        
+         <checkbox-group bindchange="checkboxChange" style="margin-top:12rpx"> 
+          <checkbox  value='{{isc}}' checked />同步到首页
+         </checkbox-group> 
+        <view class="btn-area">
+          <button type="primary" formType="submit">发布</button>
+        </view>
+
+
+      </form>
+    </view>
+  </view>
+
+
+</view>

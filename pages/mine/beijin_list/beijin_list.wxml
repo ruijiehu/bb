@@ -1,0 +1,66 @@
+<view class='info'>
+  <view class='v_con'>
+
+
+
+
+
+    <!-- 工作经历 -->
+    <view class="myself" wx:if="{{worklist.length!=0}}">
+      <view style='margin-bottom:28rpx;'>工作经历
+        <!-- <image bindtap='to_editwork' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+        <text style="float:right;" bindtap='to_editwork' data-id="{{info.userId}}" data-info="{{info.info}}">添加</text>
+      </view>
+      <view>
+        <view wx:for="{{worklist}}" class="edubox" class="edubox">
+          <view style='margin-bottom:14rpx;font-weight:bold;color:#535353;'>{{item.type==1?item.company:''}} {{item.type==1?item.position:''}}
+            <text catchtap='torenzhen' data-id="{{item.userInfoId}}" style="margin-left:40rpx;text-decoration:underline;color:#F74131;font-weight:noraml" wx:if="{{!item.verifyYn}}">我要认证</text>
+            <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.verifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+            </view>
+            <!-- <view style="margin-left:88rpx;display:inline-block;" wx:if="{{item.verifyYn}}"><image src="../../iamges/v_ico.png" style="display:inline;" ></image></view> -->
+            <text style="float:right;" catchtap='bianji_work' data-company="{{item.company}}" data-position="{{item.position}}" data-id="{{item.userInfoId}}" data-t="{{item.startTime}}" data-e="{{item.endTime}}" data-isok='{{item.verifyYn}}' data-ex="{{item.experience}}">编辑</text>
+          </view>
+          <view>{{item.type==1?item.startTime:''}} 至 {{item.type==1?item.endTime:''}}</view>
+          <view>{{item.type==1?item.experience:''}}</view>
+        </view>
+        <!-- <view wx:if="{{worklist.length==0}}" style="margin-top:40rpx;text-align:center;font-weight:normal;font-size:24rpx;color:#bbb;">添加工作经历并认证</view> -->
+      </view>
+    </view>
+    <!-- 没有工作经历-->
+    <view wx:if="{{worklist.length==0}}">
+      <view style='text-align:center;padding-top:296rpx;'>
+        <image src='../../images/no_worklistverify.png' style='width:200rpx;height:200rpx;margin:40rpx auto 10rpx;'></image>
+        <view style='color:#D7D7D7;font-size:36rpx;text-align:center;margin:0rpx auto;'>你还未添加工作经历认证</view>
+      </view>
+      <view style='color:#fff;font-size:24rpx;text-align:center;margin:20px auto;width:270rpx;height:70rpx;background:#CB514C;line-height:70rpx;border-radius:20rpx;' bindtap='to_editwork' data-id="{{info.userId}}">去添加</view>
+      <view style='color:#FF8E24;text-align:center;font-size:24rpx;'>添加履历并认证后可增加信任度</view>
+      <view style='color:#FF8E24;text-align:center;font-size:24rpx;'>帮助赢得更多真实人脉和客户</view>
+    </view>
+
+
+    <!-- 教育经历 -->
+    <!-- <view class="myself">
+      <view style='margin-bottom:28rpx;'>教育经历 -->
+    <!-- <image bindtap='to_editeduit' data-id="{{info.userId}}" data-info="{{info.info}}" src='../../images/chain_03.png'></image> -->
+    <!-- <text style="float:right;" bindtap='to_editeduit' data-id="{{info.userId}}" data-info="{{info.info}}" >添加</text>
+      </view>
+      <view>
+        <view wx:for="{{edu}}"  class="edubox" >
+          <view style='margin-bottom:14rpx;font-weight:bold;color:#535353;'>{{item.type==0?item.school:''}} {{item.type==0?item.major:''}} {{item.type==0?item.education:''}} <text data-id="{{item.userInfoId}}" style="margin-left:88rpx;" wx:if="{{!item.verifyYn}}" catchtap='torenzhen_edu' style="text-decoration:underline;color:#F74131;margin-left:40rpx;font-weight:mormal;">我要认证</text> -->
+    <!-- <text style="margin-left:88rpx;" wx:if="{{item.verifyYn}}">已认证</text> -->
+    <!-- <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;'  wx:if="{{item.verifyYn}}">
+            <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+          </view> -->
+    <!-- <view style="margin-left:88rpx;display:inline-block;width:40rpx;height:40rpx;" wx:if="{{item.verifyYn}}"><image style="display:inline;" src="../../images/v_ico.png"></image></view> -->
+    <!-- <text style="float:right;"  catchtap='bianji'  catchtap='bianji_edu' data-education="{{item.education}}"  data-school="{{item.school}}" data-major="{{item.major}}" data-id="{{item.userInfoId}}" >编辑</text></view>
+          <view>{{item.type==0?item.startTime:''}}  至  {{item.type==0?item.endTime:''}}</view>
+          <view>{{item.type==0?item.experience:''}}</view>
+        </view>
+         <view wx:if="{{edu.length==0}}" style="margin-top:20rpx;">添加工作经历并认证</view> 
+      </view>
+    </view>
+   -->
+
+  </view>
+</view>

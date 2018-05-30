@@ -1,0 +1,19 @@
+<view class='p_b'>
+  <view class='p_tit rel_positon'>
+    <input bindblur="bindTextAreaBlur" maxlength="30"  placeholder="*输入标题" />
+    <view class="weui-textarea-counter">33/150</view>
+  </view>
+  <view class='p_con rel_positon'>
+    <textarea bindblur="bindTextAreaBlur" maxlength="500"  placeholder="*输入内容" />
+    <view class="weui-textarea-counter">33/150</view>
+  </view>
+  <view class='p_pic pading'>
+    <view class='pic_tit'>上传图片 <text>0/3</text></view>
+    <view>
+      <image src='{{pciUrl}}' wx:if="{{pciUrl}}"></image>
+      <image src='../../images/addimg.png' bindtap='up_pic'></image>
+      
+    </view>
+  </view>
+  <view class='fabu' bindtap='to_fabu'><button>发布</button></view>
+</view>

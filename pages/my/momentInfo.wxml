@@ -1,0 +1,84 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page pb-40" hidden="{{showLoading}}" wx:if="{{info.momentId}}">
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access border_b_0 border_t_0">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text pb-8">
+          <view class="createInfo relative">
+            <image mode="aspectFill" src="{{info.userView.photo?info.userView.photo:'../images/user.png'}}"></image>
+            <text class='fs-14'>{{info.userView.nickname}}</text>
+            <text class='fs-11'>{{info.createTime}}</text>
+          </view>
+          <view class="weui-uploader__bd" wx:if="{{info.images.length>0}}">
+                <view class="weui-uploader__files">
+                  <block wx:for="{{info.images}}" wx:for-item="image">
+                    <view class="weui-uploader__file">
+                      <image mode="aspectFill" class="weui-uploader__img" mode="aspectFill" src="{{image}}" data-idnex="{{index}}" data-src="{{image}}" bindtap="previewImage"></image>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{isAdd}}">
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+         
+          <view class="weui-media-box__desc black fs-14">
+            {{info.title}}
+          </view>
+          <view class="weui-media-box__info">
+            <text class="right fs-11">{{info.comments}}</text>
+            <image class="right" src="../images/comment.png"></image>
+            <text class="right fs-11">{{info.praiseCount}}</text>
+            <image class="right" src="../images/like.png"></image>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="weui-panel weui-panel_access border_t_0">
+      <view class="weui-panel__hd fs-16 black border_b_0 relative">{{answerCount}}个回答
+
+      </view>
+      <view class="weui-panel__bd">
+        <view wx:for-items="{{answerList}}" wx:key="{{index}}" class="weui-media-box weui-media-box_appmsg relative" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image mode="aspectFill" class="weui-media-box__thumb absolute" src="{{item.userView.photo}}" bindtap="showUser" data-id="{{item.userView.userId}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title answer-title">
+              <text class="bold max-name fs-13">{{item.userView.nickname}} </text>
+              <text class="fs-13">{{item.userView.city}} {{item.userView.tradeView.name}} </text>
+            </view>
+            <view class="weui-media-box__desc black31 fs-13">{{item.createTime}}</view>
+            <view class="weui-media-box__desc black2 m_5 fs-14" style='padding-top:24rpx;padding-bottom:10rpx'>{{item.content}}</view>
+  
+             <view class="comment fs-11 gray-1" data-index="{{index}}" bindtap="startComment" >
+             <!-- wx:if="{{(userInfo.userId==info.userView.userId)||(userInfo.userId==item.userView.userId)}}" -->
+              <image src="../images/comment.png" />回复</view>
+            <view class="reply" wx:if="{{item.momentSubCommentViews.length>0}}" wx:for-items="{{item.momentSubCommentViews}}" wx:for-item="answerItem" wx:key="{{index2}}">
+              <text class="black">{{answerItem.userView.nickname}}：</text> {{answerItem.content}}</view>
+           
+          </view>
+          <view class="adopt-btn-area">
+            <image wx:if="{{(userInfo.userId!=info.userView.userId)||(userInfo.userId==item.userView.userId)}}" hidden="{{!item.acceptYn}}" data-id="{{item.answerId}}" class="adopt-btn {{item.acceptYn==1?'adopt':''}}" src="{{item.acceptYn==1?'../images/adopted.png':''}}"></image>
+            <image catchtap="{{info.status==0?'acceptClick':''}}" wx:else hidden="{{info.status==1&&item.acceptYn!=1}}" data-id="{{item.answerId}}" data-nickname="{{item.userView.nickname}}" class="adopt-btn {{item.acceptYn==1?'adopt':''}}" src="{{item.acceptYn==1?'../images/adopted.png':'../images/adopt2.png'}}"></image>
+
+          </view>
+
+        </view>
+      </view>
+    </view>
+
+    <form class="send-message {{sendType==1?'':'send-message1'}}" catchsubmit="answerAdd" report-submit="true">
+      <view class="choise-icon" hidden="{{sendType!=1}}">
+        <!-- <image mode="aspectFill" src="../images/send.png" hidden="{{sendType==1}}"></image> -->
+        <image src="../images/close.png" hidden="{{sendType!=1}}" bindtap="resetComment"></image>
+      </view>
+      <input class="weui-input sendInput" name="sendInput" hidden="{{sendType==1}}" placeholder="说点什么吧" value="{{sendInfo}}" />
+      <input class="weui-input" name="commentInput" hidden="{{sendType!=1}}" placeholder="回复：{{subAnswer.userView.nickname}}" value="{{commentInfo}}" />
+      <button class="mini-btn" type="primary" size="mini" formType="submit">发送</button>
+    </form>
+  </view>
+</view>

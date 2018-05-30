@@ -1,0 +1,32 @@
+<view style='height:100%;'>
+<view catchtap='to_mycard' style='color:#5779BA;font-size:12px;height:40px;line-height:40px;text-align:right;padding:0 10px;'>我的名片</view>
+  <view class='card_big' wx:for="{{cardList}}" catchtap='to_otherCard' data-cardid="{{item.cardId}}" data-manid="{{item.cardUserId}}">
+    <view class='card_top'>
+      <view class='logo'>
+        <image src='{{item.logo}}' mode='aspectFill'></image>
+      </view>
+      <view class='card_box'>
+        <view class='card_name card_info'>
+          <text style='color:#000;font-size:20px;'>{{item.realname}}</text>
+          <text style='color:#696969;font-size:14ppx;'>{{item.position}}</text>
+        </view>
+        <view class='card_com card_info'>
+          <image></image>
+          <text style='font-size:12px;color:#959595;'>{{item.company}}</text>
+        </view>
+        <view class='card_phone card_info'>
+          <image></image>
+          <text style='font-size:12px;color:#5460AC;'>{{item.phone}}</text>
+        </view>
+        <view class='card_email card_info'>
+          <image></image>
+          <text style='font-size:12px;color:#959595;'>{{item.email}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view wx:if="{{cardList.length==0}}" style='text-align:center;background:#fff;padding:40px 0;color:#ccc;'>
+    名片夹内暂无名片
+  </view>
+</view>

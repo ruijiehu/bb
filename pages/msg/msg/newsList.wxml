@@ -1,0 +1,122 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+    <view class="weui-navbar">
+      <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+        <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">{{item}}
+            <view class="weui-badge" style="margin-left: 5px;" wx:if="{{counts[index]>0}}">{{counts[index]}}</view>
+          </view>
+        </view>
+      </block>
+      <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+    <view class="weui-tab__panel">
+      <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+        <view class="weui-media-box weui-media-box_appmsg news" wx:for-items="{{allList}}" wx:key="{{index}}" wx:if="{{item.type==5}}" data-type="{{item.type}}" data-id="{{item.triggerId}}" bindtap='to_man' data-manid="{{item.triggerUserView.userId}}">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg" data-id="{{item.triggerUserView.userId}}" data-nickname="{{item.triggerUserView.nickname}}">
+            <image mode="aspectFill" class="weui-media-box__thumb" src="{{item.triggerUserView.photo}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__desc fs-16 message-info" style='margin-top:40rpx;'>
+              <text class="green fs-14" hidden='{{item.type==10}}'> {{item.triggerInfo}}</text>
+            </view>
+            <view class="weui-media-box__desc weui-media-box__info__meta_extra black31 fs-14">
+              {{item.createTime}}
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" wx:if="{{listLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+
+        <view class="weui-media-box weui-media-box_appmsg news" wx:for-items="{{allList}}" wx:if="{{item.type!=5}}" wx:key="{{index}}" data-type="{{item.type}}" data-id="{{item.triggerId}}">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg" data-id="{{item.triggerUserView.userId}}" data-nickname="{{item.triggerUserView.nickname}}">
+            <image mode="aspectFill" class="weui-media-box__thumb" src="{{item.triggerUserView.photo}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" catchtap='to_detail' data-id="{{item.triggerId}}" data-ttype="{{item.type}}">
+            <view class="weui-media-box__desc fs-16 message-info" style='margin-top:20px;padding-right:90rpx;'>
+              
+              <text class="fs-14" wx:if="{{item.type==9}}" data-id="{{item.triggerId}}">{{item.triggerUserView.nickname}} 评论了你的交流</text>
+              <text class="fs-14" wx:if="{{item.type==7}}" data-id="{{item.triggerId}}">{{item.triggerUserView.nickname}} 评论了你的采购</text>
+              <text class="fs-14" wx:if="{{item.type==6}}" data-id="{{item.triggerId}}">{{item.triggerUserView.nickname}} 评论了你的分享</text>
+              <text class="fs-14" wx:if="{{item.type==10}}" data-id="{{item.triggerId}}">{{item.triggerUserView.nickname}} 分享了你的交流</text>
+              <text class="fs-14" wx:if="{{item.type==11}}" data-id="{{item.triggerId}}">{{item.triggerUserView.nickname}} 分享了你的采购</text>
+              <text class="green fs-14"> {{item.triggerInfo}}</text>
+            </view>
+            <view class="weui-media-box__desc weui-media-box__info__meta_extra black31 fs-14">
+              {{item.createTime}}
+            </view>
+          </view>
+        </view>
+        <view class="weui-loadmore" wx:if="{{listLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+        <view class="weui-media-box weui-media-box_appmsg news" wx:for-items="{{xtList}}" wx:key="{{index}}">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../../images/news-icon.png" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__desc fs-16 message-info" style='margin-top:40rpx;'>
+
+              <text class="fs-16">{{item.content}}</text>
+            </view>
+            <view class="weui-media-box__desc weui-media-box__info__meta_extra black31 fs-14">
+              {{item.createTime}}
+            </view>
+          </view>
+
+        </view>
+        <view class="weui-loadmore" wx:if="{{listLoading}}">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 绑定信息 -->
+<!-- 绑定信息 -->
+<!-- <view class="layer-bind-info" hidden="{{!showBindInfo}}">
+  
+  <view class="layer-dialog">
+    <view style='width:100%;height:212rpx;'>
+      <image style='width:100%;height:212rpx;'  src='../../images/r_bg.png'></image>
+    </view>
+    <view class="layer-content">
+      <form catchsubmit="bindSubmit">
+        <view class="section fs-16" style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:10rpx;position:relative;'>
+        <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_1.png'></image>
+           <text style='float:left;'>开启城市圈</text>
+           <picker bindchange="bindCountryChange" style='float:left;margin-left:66rpx;' class="gray-2" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'省份'}}</view>
+          </picker>
+          <picker bindchange="bindcityChange" style='float:left' class="gray-2" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after">{{cityList[cityIndex].name?cityList[cityIndex].name:'城市'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 " style='color:#8b8b8b;padding:16rpx 60rpx 10rpx 60rpx;padding-right:24rpx;position:relative;'>
+        <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_2.png'></image>
+          开启行业圈
+          <picker bindchange="bindTradeChange" class="gray-2" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'请选择'}}</view>
+          </picker>
+        </view>
+
+        <button type="primary" class="btn-red weui-btn fs-18" formType="submit">确定</button>
+
+
+      </form>
+    </view>
+
+  </view>
+</view> -->

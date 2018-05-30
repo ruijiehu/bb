@@ -1,0 +1,40 @@
+<view class='info'>
+  
+  <view class='v_con'>
+    <!-- <view class="chain"> -->
+    <!-- <view>我的供应链 <image src='../../images/chain_03.png'></image></view> -->
+    <!-- <image src="../../images/addimg.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- <image src="../../images/product1.png"></image> -->
+    <!-- </view> -->
+    <!-- <view class="chain my-moment"> -->
+
+
+   
+
+
+
+      <!--点评-->
+      <view class="comment">
+        <!-- <view class='c_tit'>有{{info.byCommentCount==undefined?0:info.byCommentCount}}个点评
+          <text catchtap='to_morepinlun' data-id="{{info.userId}}">查看更多 ></text> </view> -->
+        <view class="person" wx:for="{{dianpin}}">
+          <image src="{{item.userUView.photo}}"></image>
+          <view class="p_right">
+            <view class="p_r_tit">
+              <text>{{item.userUView.nickname}}</text>
+              <text>{{item.userUView.company}}</text>
+              <text>{{item.userUView.position}}</text>
+            </view>
+            <view class="p_r_con">
+              {{item.content}}
+            </view>
+          </view>
+        </view>
+
+      </view>
+   
+
+    </view>
+  </view>

@@ -1,0 +1,43 @@
+<view class="about">
+  <view class="abtit">更多资料
+  </view>
+  <view class="ab_t">
+    <view class="pro">姓名
+      <!--<text>海鲜食品</text>-->
+      <input value="海鲜食品" />
+    </view>
+    <view class="pro">地区
+      <!--<text>日本。韩国</text>-->
+      <input value="浙江嘉兴" />
+    </view>
+    <view class="pro">行业
+      <!--<text>5年</text>-->
+      <input value="五金" />
+    </view>
+  </view>
+  </view>
+  <view class="about">
+  <view class="ab_b">
+    <view class="pro">主营产品
+      <!--<text>海鲜食品</text>-->
+      <input value="五金配件" />
+    </view>
+    <view class="pro">出口国家
+      <!--<text>日本。韩国</text>-->
+      <input value="美国" />
+    </view>
+    <view class="pro">从业年限
+      <!--<text>5年</text>-->
+      <input value="5年" />
+    </view>
+    <view class="pro">性别
+      <!--<text>女</text>-->
+      <input value="女" />
+    </view>
+    <view class="pro">兴趣爱好
+      <!--<text>电子经济,旅游</text>-->
+      <input value="旅游" />
+    </view>
+  </view>
+</view>
+ <button class='btn_com'>确定</button>

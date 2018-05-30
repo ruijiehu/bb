@@ -1,0 +1,94 @@
+page{
+  background: #fff;
+}
+.weui-cells{
+  margin: 15rpx 0;
+  display:inline-block;
+width:100%;
+background: unset;
+padding:0 20rpx;
+box-sizing: border-box;
+}
+.weui-cell{
+  padding:28rpx 30rpx 18rpx 30rpx;
+  background: #fff;
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  box-shadow: 0px 4rpx 18rpx rgba(0, 0, 0, 0.1);
+  border-radius: 10rpx;
+}
+.tag-list{
+  width: 100%;
+  margin-bottom: 30rpx;
+}
+textarea{
+  height: 128rpx !important;
+}
+.tag-choise{
+  width: auto;
+  color: #01bdcb;
+  border: 1px solid #01bdcb;
+  display: inline-block;
+  text-align: center;
+  padding: 4px 20rpx;
+  vertical-align: middle;
+  margin: 30rpx 15rpx 0 15rpx;
+}
+/* .tag-choise+.tag-choise{
+  margin-left: 30rpx;
+} */
+.btn-area{
+  margin-top: 80rpx;
+}
+.btn-area button{
+    z-index: 1;
+    width: 220rpx;
+    font-size: 32rpx;
+    border-radius: 100rpx;
+}
+.btn-area button+button{
+  margin-top: 40rpx;
+}
+.weui-uploader__hd{
+  padding-bottom: 10rpx;
+}
+.weui-uploader__bd{
+  padding-top: 20rpx;
+}
+.weui-uploader__remove{
+  position: absolute;
+  right: -10rpx;
+  top: -10rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+.weui-flex text{
+  padding-top: 4rpx;
+}
+
+.number-input{
+  width: 55%;
+  border:1px solid #ddd;
+  display: inline-block;
+}
+
+.remove-icon{
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: -20rpx;
+  top: 0;
+  transform: translateY(50%)
+}
+.remove-icon image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.addimg2{
+  width: 32rpx;
+  height: 32rpx;
+  transform: translateY(10rpx)
+}
+.addimg2+text{
+  padding-left: 20rpx;
+}

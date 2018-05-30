@@ -1,0 +1,72 @@
+<view class='info'>
+  <view class="v_bg">
+    <view class='v_head'>
+      <text class='v_edit' catchtap='guanzhu' data-id="{{userInfo.userId}}">关注</text>
+      <image class='head_img' src='../../images/user.png'></image>
+      <image class='head_add' src='../../images/add_attend_03.png'></image>
+      <view class='message'>
+        <view class='m_name'>{{userInfo.nickname}}
+          <image src='../../images/authentication.png'></image>
+        </view>
+        <text class='m_com'>{{userInfo.company}}   {{userInfo.position}}</text>
+        <view class='m_bottom'>
+          <image src='../../images/yxl.png' style='margin-right:4rpx'></image>嘉兴
+          <image src='../../images/yxl.png' style='margin-right:4rpx'></image>嘉兴
+          <image src='../../images/question2.png'></image>
+        </view>
+
+      </view>
+      <view class='v_con_kind'>
+        <view>
+          <text>{{userInfo.recommendSuccessCount}}</text> 引荐数
+        </view>
+        <view>
+          <text>{{userInfo.answerCount}}</text> 回答数
+        </view>
+        <view>
+          <text>{{userInfo.acceptAnswerPercent}}</text> 采纳率
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='v_con'>
+    <view class="chain" wx:if="{{userInfo.identityType=='外贸人'}}">
+      <view>TA的供应链 </view>
+       <image src="../../images/addimg.png"></image> 
+    </view>
+    <view class="myself">
+      <view>TA的自我介绍</view>
+      <text>{{userInfo.info==undefined?'暂无介绍':userInfo.info}}</text>
+    </view>
+    <!--点评-->
+    <view class="comment">
+      <view class='c_tit'>有1个点评 <text>查看更多 ></text> </view>
+      <view class="person">
+        <image src="../../images/4.png"></image>
+        <view class="p_right">
+          <view class="p_r_tit">
+            <text>李先生</text>
+            <text>浙江英创供应链有限公司</text>
+            <text>外贸业务员</text>
+          </view>
+          <view class="p_r_con">
+            职员职员职员职员
+          </view>
+        </view>
+      </view>
+      
+      
+    </view>
+<!--关于-->
+    <view class="about">
+      <text>更多资料</text> 
+      <view class="pro">主营产品<text>{{userInfo.product}}</text> </view>
+      <view class="pro">出口国家<text>{{userInfo.saleRegion}}</text> </view>
+      <view class="pro">从业年限<text>{{userInfo.careerTime}}年</text> </view>
+      <view class="pro">性别<text>{{userInfo.sex==1?'男':'女'}}</text> </view>
+      <view class="pro">兴趣爱好<text>{{userInfo.likes}}</text> </view>
+      <button class='btn_com'>分享名片</button>
+    </view>
+    
+  </view>
+</view>

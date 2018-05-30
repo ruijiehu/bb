@@ -1,0 +1,78 @@
+<view class='pl dt'>
+  <view class='pl_con' wx:for="{{shareLIST}}">
+    <!-- 分享精选 -->
+    <view wx:if="{{item.type==0}}" catchtap='to_fx_detail' data-id="{{item.shareId}}" data-con="{{item.content}}">
+      <view class='con_c'>{{item.content}}</view>
+      <view class='ms_con' catchtap='todetail' style='height:auto;overflow:hidden' data-id="{{item.newsUView.newsId}}">
+        <!-- <text style='font-size: 22rpx;color:#959595;'>来自{{item.newsUView.newsTypeView.typeName}}类型</text> -->
+        <image mode="aspectFill" src='{{item.newsUView.images}}'></image>
+        <view>
+          <text style='line-height:38rpx;'>{{item.newsUView.title}}</text>
+          <text>{{item.newsUView.summary}}</text>
+        </view>
+      </view>
+      <view class='ms_b'>
+        <text>{{item.createTime}}</text>
+        <view class="pic_box">
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src='../../images/tihuan_xunhuan.png'></image>{{item.newsUView.shareCount==undefined?'0':item.newsUView.shareCount}}</view>
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src='../../images/tihuan_pinlun.png'></image>{{item.newsUView.commentCount==undefined?'0':item.newsUView.commentCount}}</view>
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src="{{item.newsUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.newsUView.praiseCount==undefined?'0':item.newsUView.praiseCount}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 分享的采购 -->
+    <view wx:elif="{{item.type==2}}" catchtap='to_fx_detail' data-id="{{item.shareId}}" data-con="{{item.content}}" data-nick="{{item.purchaseDetailUView.userUView.nickname}}">
+      <view class='con_c'>{{item.content}}</view>
+      <view class='ms_con' style='max-height:160rpx;height:auto;min-height:52rpx;' catchtap='todetail_cg' data-id="{{item.purchaseDetailUView.purchaseId}}">
+        <!-- <text style='font-size: 22rpx;color:#959595;'>来自{{item.newsUView.newsTypeView.typeName}}类型</text> -->
+        <!-- <image src='{{item.purchaseDetailUView.images}}'></image> -->
+        <view style="float:left;width:auto">
+          <!-- <text>{{item.purchaseDetailUView.title}}</text> -->
+          <text>[采购信息]：{{item.purchaseDetailUView.msg}}</text>
+        </view>
+      </view>
+      <view class='ms_b'>
+        <text>{{item.createTime}}</text>
+        <view class="pic_box">
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src='../../images/tihuan_xunhuan.png'></image>{{item.purchaseDetailUView.shareCount==undefined?'0':item.purchaseDetailUView.shareCount}}</view>
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src='../../images/tihuan_pinlun.png'></image>{{item.purchaseDetailUView.commentCount==undefined?'0':item.purchaseDetailUView.commentCount}}</view>
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src="{{item.purchaseDetailUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.purchaseDetailUView.praiseCount==undefined?'0':item.purchaseDetailUView.praiseCount}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 分享的交流 -->
+    <view wx:elif="{{item.type==1}}" catchtap='to_fx_detail' data-id="{{item.shareId}}" data-con="{{item.content}}" data-nick="{{item.questionUView.userView.nickname}}">
+      <view class='con_c'>{{item.content}}</view>
+      <view class='ms_con' style='height:auto;min-height:52rpx;overflow:hidden' catchtap='todetail_jl' data-id="{{item.questionUView.questionId}}">
+        <!-- <text style='font-size: 22rpx;color:#959595;'>来自{{item.newsUView.newsTypeView.typeName}}类型</text> -->
+        <!-- <image src='{{item.questionUView.images}}'></image> -->
+        <view style="float:left;width:auto">
+          <!-- <text>{{item.questionUView.title}}</text> -->
+          <text>@{{item.questionUView.userView.nickname}}：{{item.questionUView.content}}</text>
+        </view>
+      </view>
+      <view class='ms_b'>
+        <text>{{item.createTime}}</text>
+        <view class="pic_box">
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src='../../images/tihuan_xunhuan.png'></image>{{item.questionUView.shareCount==undefined?'0':item.questionUView.shareCount}}</view>
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src='../../images/tihuan_pinlun.png'></image>{{item.questionUView.commentCount==undefined?'0':item.questionUView.commentCount}}</view>
+          <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+            <image src="{{item.questionUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.questionUView.praiseCount==undefined?'0':item.questionUView.praiseCount}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 无数据 -->
+  <view class="weui-loadmore weui-loadmore_line" wx:if="{{shareLIST.length==0}}" hidden="{{showLoading}}">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+  </view>
+  
+</view>

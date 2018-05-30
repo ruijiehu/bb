@@ -1,0 +1,120 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd">
+    <form catchsubmit="formSubmit" catchreset="formRemove">
+      <view class="weui-cells inputContent border_b_0 border_t_0">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <textarea class="weui-input" maxlength="30" bindinput="inputContent" name="content" value="{{info.content}}" placeholder="请简单的介绍产品"></textarea>
+            <view class="weui-textarea-counter fs-11">{{currentContentCount}}/30</view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells border_b_0 border_t_0 relative" wx:for-items="{{info.productPriceViews}}" wx:key="{{index}}">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+
+            <view class="weui-flex pb-10 pt-10">
+              <view class="weui-flex__item bold fs-16">起订量</view>
+              <view class="remove-icon">
+                <image src="../images/remove.png" bindtap='removePriceView' hidden="{{info.productPriceViews.length<2}}" data-index="{{index}}"></image>
+              </view>
+            </view>
+            <view class="weui-flex pb-10 pt-10" style='padding-left:20rpx;'>
+              <view class="weui-flex__item">
+                <text class="left">购买数量</text>
+              </view>
+              <view class="weui-flex__item">
+              <text class="left pr-10" style='margin-right:-8rpx;'>≥</text>
+                <input class="number-input left" name="{{'startCount_'+index}}" bindinput="inputCount" data-index="{{index}}" type="number" value="{{item.startCount}}" />
+                
+              </view>
+            </view>
+
+            <view class="weui-flex pb-10 pt-10 relative">
+              <view class="weui-flex__item">
+                <text class="left">产品单价</text>
+              </view>
+              <view class="weui-flex__item">
+               <text class="left {{isAndroid?'pr-10':'pr-3'}}">￥</text>
+                <input class="number-input left" name="{{'price_'+index}}" bindinput="inputPrice" data-index="{{index}}" type="digit" value="{{item.price}}" />
+               
+              </view>
+            </view>
+            <view class="weui-flex pb-10 pt-10 relative">
+              <view class="weui-flex__item">
+                <text class="left">数量单位</text>
+              </view>
+              <view class="weui-flex__item">
+               <text class="left pr-10" style='color:#fff'>≥</text>
+                <input class="number-input left" name="{{'unit_'+index}}" bindinput="inputUnit" data-index="{{index}}" value="{{item.unit}}" />
+               
+              </view>
+            </view>
+
+
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <view class="center  {{info.productPriceViews.length<3?'':'gray'}}">
+             
+                <image src='../images/addimg2.png' class="addimg2" bindtap="{{info.productPriceViews.length<3?'addPriceView':''}}" />
+                <text class="fs-14" bindtap="{{info.productPriceViews.length<3?'addPriceView':''}}">继续添加价格区间</text>
+              
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">上传图片</view>
+                <view class="weui-uploader__info fs-11">{{imageList.length}}/{{imgCount}}</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                  <block wx:for="{{imageList}}" wx:for-item="image">
+                    <view class="weui-uploader__file relative">
+                      <image mode="aspectFill" class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      <image class="weui-uploader__remove" catchtap='remove' data-index="{{index}}" src="../images/remove.png"></image>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" hidden='{{imageList.length==imgCount}}'>
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="weui-cells border_b_0 border_t_0" bindtap="choiseTag">
+        <view class="weui-cell">
+          <view class="weui-cell__bd full_w">标签
+            <view class="right fs-11 pt-5" style="display: inline-block;vertical-align:middle; color:#B2B2B2;">{{info.tagViews.length}}/3</view>
+            <view class="tag-list" hidden="{{info.tagViews.length==0}}">
+              <text class="tag-choise fs-11" wx:for-items="{{info.tagViews}}" wx:key="{{index}}">{{item.tagName}}</text>
+            </view>
+          </view>
+        </view>
+      </view> -->
+
+
+      <view class="btn-area">
+        <button type="primary" class="btn-red" formType="submit">发布</button>
+      </view>
+    </form>
+
+  </view>
+
+
+</view>

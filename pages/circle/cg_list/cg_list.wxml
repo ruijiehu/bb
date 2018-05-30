@@ -1,0 +1,16 @@
+<view class='l_bg'>
+  <!-- <view class='l_search'> <input placeholder='搜索圈子'></input></view> -->
+  <!-- <view class='l_select'> 发布时间<picker></picker> </view> -->
+  <view class='l_list'>
+    <view class='list_item' wx:for="{{cgInfo}}" data-purid="{{item.purchaseId}}" bindtap='tocgDetail'>
+      <text class='i_tit'>{{item.content}}</text>
+      <view class='i_bottom'>
+        <view class='person'>
+          <image src='{{item.userUView.photo}}'></image>{{item.userUView.nickname}} <image src='../../images/authentication.png'></image>
+        </view>
+        <text>有效期： {{item.day}}</text>
+        <text>{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+</view>

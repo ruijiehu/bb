@@ -1,0 +1,127 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": false,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.1",
+	"appid": "wxb213b66d98321b8b",
+	"projectname": "%E5%A4%96%E8%B4%B8%E5%B8%AE%E5%B8%AE",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "detail",
+					"pathName": "pages/dynamic/info",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "精选",
+					"pathName": "pages/culling/info",
+					"query": "newsId=7"
+				},
+				{
+					"id": 2,
+					"name": "足迹编辑",
+					"pathName": "pages/connection/friendList",
+					"query": "momentId=181"
+				},
+				{
+					"id": 3,
+					"name": "userInfo",
+					"pathName": "pages/my/userInfo",
+					"query": "userId=1"
+				},
+				{
+					"id": 4,
+					"name": "my",
+					"pathName": "pages/my/verify",
+					"query": "momentId=159"
+				},
+				{
+					"id": 5,
+					"name": "圈子",
+					"pathName": "pages/connection/detail",
+					"query": "circleId=266"
+				},
+				{
+					"id": 6,
+					"name": "产品",
+					"pathName": "pages/my/setGoods",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "com",
+					"pathName": "pages/mine/detail/detail_com",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "jx",
+					"pathName": "pages/home_page/detail_page/detail_page",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "sc",
+					"pathName": "pages/my/favorList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "111",
+					"pathName": "pages/home_page/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "chanpin",
+					"pathName": "pages/my/goodsList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "7888778",
+					"pathName": "pages/mine/my_card/my_card",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "card_my_de",
+					"pathName": "pages/mine/card_detail/card_detail_my",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "jlkjlkj ",
+					"pathName": "pages/home_page/send_jl/send_video",
+					"query": ""
+				}
+			]
+		}
+	}
+}

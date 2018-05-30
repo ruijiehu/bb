@@ -1,0 +1,109 @@
+<!-- <view wx:if="{{verifyApplying}}"> -->
+<!-- wx:if="{{!nocon}}" -->
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view hidden="{{showLoading}}">
+
+  <view class='d_container'>
+    <view class="about">
+      <!-- <view style='width:100%;min-height:225px;height:{{scrollH}}px'> -->
+          <video src="{{info.video}}"   objectFit="cover" autoplay="true" style='width:100%;height:{{hhh}}px;z-index:100' show-fullscreen-btn="true"></video>  
+      <!-- </view> -->
+         <!-- <image mode="widthFix" src="{{info.images[0]}}" style='display:block;width:100%;z-index:-1;'></image>  -->
+      <view style='padding:10px 40rpx;color:#181818;font-size:15px;line-height:21px;height:auto;font-weight:bold;'>{{info.content}}</view>
+    </view>
+  </view>
+
+  <view class='d_head'>
+    <!-- <view class='d_tit'>{{info.title}}</view> -->
+    <view class='d_writer' style='position:relative'>
+      <view catchtap='to_Man' data-id="{{info.userUView.userId}}" style='display:inline-block;width:100%;'>
+        <image src='{{info.userUView.photo}}' class='d_w_head'></image>
+        <view class='d_w_info'>{{info.userUView.nickname}}
+          <image wx:if="{{info.verifyYn}}" src='../../images/authentication.png'></image>
+          <text>{{info.userUView.company}} {{info.userUView.position}}</text>
+        </view>
+        <view wx:if="{{info.userUView.userId!=UserInfo.userId && !info.followYn}}" catchtap='clickGuanzhu' data-id="{{info.userUView.userId}}" style='display:inline-block;float:right;border:1px solid;width:50px;height:28px;text-align:center;line-height:28px;border-radius:5px;font-size:14px;background:#CB514C;color:#fff;'>关注</view>
+        <view wx:if="{{info.userUView.userId!=UserInfo.userId && info.followYn}}" catchtap='clickGuanzhu' data-id="{{info.userUView.userId}}" style='display:inline-block;float:right;border:1px solid;width:60px;height:28px;text-align:center;line-height:28px;border-radius:5px;font-size:14px;background:#fff;color:#CB514C;'>已关注</view>
+      </view>
+
+      <!-- <button catchtap='guanzhuren' wx:if="{{info.userUView.userId!=UserInfo.userId}}" data-id="{{info.userUView.userId}}">关注</button>  -->
+      <view style="display:inline-block;height:70rpx;width:70rpx;float:right;position:absolute;top:-4px;right:22px;z-index:100;" catchtap='more_edit' wx:if="{{info.userUView.userId==UserInfo.userId}}" data-id="{{item.userUView.userId}}">
+        <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:9px;top:9px;margin-right:0;"></image>
+      </view>
+    </view>
+  </view>
+  <view class='d_head' style='padding:10px;padding-bottom:5px;'>
+    <view style='margin-right:10px;width:10%;display:inline-block;'>标签</view>
+    <view style='width:80%;display:inline-block;'>
+      <view wx:for="{{info.tagUViews}}" style='display:inline-block;padding:4px 8px;border:1px solid #eee;border-radius:6px;margin-right:9px;margin-bottom:8px;color:#ccc;'>{{item.tagName}}</view>
+      <view wx:if="{{info.tagUViews.length==0}}" style='display:inline-block;padding:4px 8px;border:1px solid #eee;border-radius:6px;margin-right:9px;margin-bottom:8px;color:#ccc;'>暂无标签</view>
+    </view>
+  </view>
+  <view class='d_comment'>
+    <view>
+      <text>{{info.commentCount==undefined?0:info.commentCount}}条评论</text>
+      <text style='float:right;'>赞  {{info.praiseCount}}</text>
+    </view>
+    <view class='dt' wx:for="{{answerList}}">
+      <view class='con_list'>
+        <view class='ms_t' catchtap='to_person' data-id="{{item.userUView.userId}}">
+          <!-- <image src='../../images/zan.png' class='mst_zan'></image> -->
+          <image src='{{item.userUView.photo}}'></image>
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <view class='shenfen'>{{item.userUView.company}} {{item.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='ms_con'>
+          <text>{{item.content}}</text>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime==undefined?'刚刚':item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{answerList.length==0}}" style='height:130rpx;line-height:130rpx;text-align:center;color:#bfbfbf;'>
+      <view>
+        <!-- <image src='../../images/noone_icon.png' style='display:inline-block;width:27rpx;height:24rpx;margin-right:10rpx;vertical-align:middle;'></image> -->
+        <text style='font-size:26rpx;'>快来发布评论吧</text>
+      </view>
+    </view>
+
+    <view class='bottom_box'>
+      <!-- <view class='box_view'> -->
+      <!-- <button data-name="shareBtn" plain="true" open-type="share">
+          <image style=' vertical-align: middle;display: inline-block;width:30rpx;height:30rpx;margin-right:10rpx;margin-top:-4rpx;' src='../../images/tihuan_zhuanfa.png'></image>
+          <text style='font-size:24rpx;color:#aaa;'>转发</text>
+        </button> -->
+      <!-- </view> -->
+      <view class='box_view' bindtap='answerAdd'>
+        <image src='../../images/tihuan_pinlun.png'></image>
+        <text>评论</text>
+      </view>
+      <view class='box_view' catchtap='dianzan'>
+        <image wx:if="{{!info.praiseYn}}" src='../../images/tihuan_zan.png'></image>
+        <image wx:if="{{info.praiseYn}}" src='../../images/tihuan_zan_h.png'></image>
+        <text>点赞</text>
+      </view>
+      <view class='box_view' catchtap='lineMe'>
+        <image src='../../images/phone_07.png'></image>
+        <text>联系TA</text>
+      </view>
+    </view>
+    <view class='to_write'>
+      <form class="send-message {{sendType==1?'':'send-message1'}}" catchsubmit="answerAdd" report-submit="true">
+        <input class="weui-input sendInput" name="sendInput" hidden="{{sendType==1}}" disabled bindtap='answerAdd' placeholder="说点什么吧" value="{{sendInfo}}" />
+        <button class="mini-btn" type="primary" size="mini" formType="submit">发送</button>
+      </form>
+    </view>
+  </view>
+</view>
+<view catchtap='to_home' wx:if="{{show_toindex}}" style='width:50px;height:50px;border-radius:50%;position:fixed; right:10%;bottom:15%;background:#e65746;text-align:center;line-height:50px;'>
+  <image src='../../images/go_home.png' style='width:26px;height:26px;vertical-align:middle;'></image>
+</view>

@@ -1,0 +1,231 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<view class="page" hidden="{{showLoading}}">
+  <view class="page__bd" style='padding:0 40rpx;'>
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell" style='box-shadow:0 0 3px rgba(0, 0, 0, 0.2);'>
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" name="content" bindinput="inputContent" maxlength="500" value="{{info.content}}" placeholder="写下交流 / 采购..." />
+            <view class="weui-textarea-counter">{{currentContentCount}}/500</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell" style='box-shadow:0 0 3px rgba(0, 0, 0, 0.2);'>
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">添加图片</view>
+                <view class="weui-uploader__info">{{imageList.length}}/{{imgCount}}</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files">
+                  <block wx:for="{{imageList}}" wx:for-item="image">
+                    <view class="weui-uploader__file relative">
+                      <image mode="aspectFill" class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      <image class="weui-uploader__remove" catchtap='remove' wx:if="{{isAdd}}" data-index="{{index}}" src="../../images/remove.png"></image>
+                    </view>
+                  </block>
+                </view>
+                <view class="weui-uploader__input-box" wx:if="{{isAdd}}" hidden='{{imageList.length==imgCount}}'>
+                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells border_b_0 border_t_0">
+        <view class="weui-cell relative" style='box-shadow:0 0 3px rgba(0, 0, 0, 0.2);padding:20rpx;'>
+          <view class="weui-cell__bd full_w">选择发布类型
+            <radio-group class="radio-group" bindchange="sendChange" style="margin-top:40rpx;">
+              <label class="radio">
+                <radio value="1" checked="checked" />交流
+              </label>
+              <label class="radio">
+                <radio value="2" checked="" />采购
+              </label>
+            </radio-group>
+
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells border_b_0 border_t_0" hidden>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">悬赏金额
+            <view class="price-list">
+              <text class="price-choise fs-11" wx:for-items="{{priceList}}" wx:key="{{index}}">{{item}}元</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <!--发布采购-->
+      <view wx:if="{{which_type==2}}" style='padding:0 20rpx;'>
+        <view class='p_time pading'>
+          <view class='pic_tit' style="display:inline-block">
+            <text style='color:red'>*</text>有效期</view>
+          
+          <picker mode="selector" range="{{timearray}}" value="{{timeIndex}}" bindchange="bindPickerChange">
+            <text>{{timearray[timeIndex]}}</text>
+          </picker>
+        </view>
+        <view class='p_number pading'>
+          <view class='pic_tit'>
+            <text style='color:red'>*</text>数量要求</view>
+          <input placeholder='请输入采购数量和单位' placeholder-style="color:#c9c9c9" name="number" value="{{info.number}}"></input>
+        </view>
+        <view class='p_number pading'>
+          <text class='pic_tit'>Fob价格</text>
+          <input placeholder='请输入价格' name="price" placeholder-style="color:#c9c9c9" value="{{info.price}}"></input>
+        </view>
+        <view class='p_time pading'>
+          <view class='pic_tit'>
+            <text style='color:red'>*</text>付款方式</view>
+          <picker bindchange="bindPicker" value="{{p_index}}" range="{{payarray}}">
+            <view class="picker">
+              {{payarray[p_index]}}
+            </view>
+          </picker>
+        </view>
+        <view class='p_number pading'>
+          <view class='pic_tit'>出口国家</view>
+          <input placeholder='请输入出口国家' name="country" placeholder-style="color:#c9c9c9" value="{{info.country}}"></input>
+        </view>
+      </view>
+      <!-- 发布供应 -->
+      <view wx:if="{{which_type==3}}">
+
+        <view class="weui-cells border_b_0 border_t_0 relative" wx:for-items="{{info.productPriceViews}}" wx:key="{{index}}">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+
+              <view class="weui-flex pb-10 pt-10">
+                <view class="weui-flex__item bold fs-16">fob价格</view>
+                <view class="remove-icon">
+                  <image src="../../images/remove.png" bindtap='removePriceView' hidden="{{info.productPriceViews.length<2}}" data-index="{{index}}"></image>
+                </view>
+              </view>
+              <view class="weui-flex pb-10 pt-10" style='padding-left:20rpx;margin-bottom:-7px;'>
+                <view class="weui-flex__item">
+                  <text class="left">起订量</text>
+                </view>
+                <view class="weui-flex__item">
+                  <text class="left pr-10" style='margin-right:-8rpx;'>大于等于</text>
+                  <input class="number-input right" name="{{'startCount_'+index}}" bindinput="inputCount" data-index="{{index}}" type="number" value="{{item.startCount}}" />
+
+                </view>
+              </view>
+
+              <view class="weui-flex pb-10 pt-10 relative">
+                <view class="weui-flex__item">
+                  <text class="left">产品单价</text>
+                </view>
+                <view class="weui-flex__item">
+
+                  <input class="number-input right" style='margin-right:-18rpx;' name="{{'price_'+index}}" bindinput="inputPrice" data-index="{{index}}" type="digit" value="{{item.price}}" />
+                  <text class="right {{isAndroid?'pr-10':'pr-3'}}">￥</text>
+                </view>
+              </view>
+              <view class="weui-flex pb-10 pt-10 relative">
+                <view class="weui-flex__item">
+                  <text class="left">数量单位</text>
+                </view>
+                <view class="weui-flex__item">
+                  <text class="left pr-10" style='color:#fff'>≥</text>
+                  <input class="number-input right" style='margin-right:-18rpx;' name="{{'unit_'+index}}" bindinput="inputUnit" data-index="{{index}}" value="{{item.unit}}" />
+
+                </view>
+              </view>
+
+
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells border_b_0 border_t_0">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <view class="center  {{info.productPriceViews.length<3?'':'gray'}}">
+
+                <image src='../images/addimg2.png' class="addimg2" bindtap="{{info.productPriceViews.length<3?'addPriceView':''}}" />
+                <text class="fs-14" bindtap="{{info.productPriceViews.length<3?'addPriceView':''}}">继续添加价格区间</text>
+
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells inputContent border_b_0 border_t_0">
+          <view style='margin-bottom:14rpx;'>曾供给哪些品牌商:</view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <textarea class="weui-input" maxlength="30" bindinput="inputContent" name="brand" value="{{info.brand}}" placeholder=""></textarea>
+              <!-- <view class="weui-textarea-counter fs-11">{{currentContentCount}}/30</view> -->
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells inputContent border_b_0 border_t_0">
+          <view style='margin-bottom:14rpx;'>产品优势:</view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__bd">
+              <textarea class="weui-input" maxlength="30" bindinput="inputContent" name="productAdvantage" value="{{info.productAdvantage}}" placeholder=""></textarea>
+              <!-- <view class="weui-textarea-counter fs-11">{{currentContentCount}}/30</view> -->
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells border_b_0 border_t_0">
+          <view class="weui-cell weui-cell_input">
+
+            <view style='float:left;margin-right:60rpx;width:144rpx;'>物流港口</view>
+            <view style='max-width:270rpx;min-width:80px;float:right;'>
+              <picker bindchange="bindCountryChange" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+                <view class="weui-select weui-select_in-select-after" style='border:none;font-size:24rpx;padding-right:0;text-align:center;'>{{provinceList[countryIndex].name?provinceList[countryIndex].name:'-'}}</view>
+              </picker>
+            </view>
+            <view style='max-width:270rpx;min-width:80px;float:right;'>
+              <picker bindchange="bindcityChange" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+                <view class="weui-select weui-select_in-select-after" style='border:none;font-size:24rpx;padding-right:0;text-align:center;'>{{cityList[cityIndex].name?cityList[cityIndex].name:'-'}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells border_b_0 border_t_0" hidden="{{which_type==1||which_type==3}}">
+        <!-- hidden="{{which_type==1}}" -->
+        <view class="weui-cell relative" style='box-shadow:0 0 3px rgba(0, 0, 0, 0.2);padding:20rpx;'>
+          <view class="weui-cell__bd full_w">同时发布到圈子
+            <view class="weui-loadmore weui-loadmore_line" wx:if="{{circleList.length==0}}">
+              <view class="weui-loadmore__tips">您还没有加入圈子</view>
+            </view>
+            <radio-group class="radio-group" bindchange="radioChange" style="margin-top:40rpx;">
+              <label class="radio" wx:for="{{items}}">
+                <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+              </label>
+            </radio-group>
+
+          </view>
+        </view>
+      </view>
+
+<!-- 
+      <view wx:if="{{which_type==4}}">
+        <view class="container">
+          <video src="{{videoSrc}}"></video>
+          <button bindtap="bindButtonTap">获取视频</button>
+        </view>
+      </view> -->
+
+
+      <view class="btn-area">
+        <button type="primary" formType="submit">发布</button>
+      </view>
+    </form>
+
+  </view>
+
+
+</view>

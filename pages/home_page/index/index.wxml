@@ -1,0 +1,458 @@
+<view class="page-loading" wx:if="{{showLoading}}">
+  <view class="weui-loading"></view>
+</view>
+<!-- <view style='height:60px;background:#fafafa;'>
+</view> -->
+<!-- 顶部 -->
+<view style="padding:10px 40rpx;background:#fff;position:relative;">
+<navigator url='/pages/circle/circle_addlist/circle_my' hover-class="none" style='width:260px;display:inline-block;'>
+  <view class='addBox'>我加入的圈子 <view>></view></view>
+</navigator>
+  <button catchtap='to_send' class="index_send">发布</button>
+</view>
+
+<!-- 今日推荐 -->
+<view class='n_tuijian'>
+  <view class='n_tit'>每日头条，开始第{{readDays==0?readDays+1:readDays}}天的阅读吧</view>
+  <view class='n_con'>
+    <view class='n_one'>
+      <image src='{{newsList[0].images}}'></image>
+      <text>{{newsList[0].title}}</text>
+    </view>
+    <view class='n_two'>
+      <view><text></text><text>{{newsList[1].title}}</text></view>
+      <view><text></text><text>{{newsList[2].title}}</text></view>
+    </view>
+  </view>
+  <view class='n_all' bindtap='to_all'>查看全部</view>
+</view>
+
+
+<!-- wx:if="{{isOpen}}" -->
+<view style='width:100%;height:204rpx;' catchtap='to_active' wx:if="{{isOpen}}">
+  <image src='{{activityImg}}' lazy-load='true' style='width:100%;height:100%;'></image>
+</view>
+<view class='dt weui-tab__content relative' hidden="{{showLoading}}">
+
+  <view wx:for="{{ListAll}}" class="one" wx:if="{{item.type!=0}}" data-id="{{item.type}}" data-index="{{index}}">
+    <!-- 对别人分享的分享 -->
+    <view wx:if="{{item.type==4}}">
+      <view class='ms_t'>
+        <!-- <button catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">更多</button> -->
+        <view style="display:inline-block;height:70rpx;width:70rpx;float:right" catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">
+          <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+        </view>
+        <image catchtap='to_man' data-id="{{item.userUView.userId}}" src='{{item.userUView.photo}}'></image>
+        <view class='user_tit' catchtap='to_man' data-id="{{item.userUView.userId}}">
+          <!-- <text>{{item.userUView.nickname}}</text>
+          <text>{{item.userUView.company}} {{item.userUView.positon}}</text> -->
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <image class="user_tit_id" src="{{item.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+          </view>
+          <view>{{item.userUView.company}} {{item.userUView.positon}}
+            <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+            </view>
+          </view>
+
+        </view>
+      </view>
+      <view class='pl_con' catchtap='to_fx_detail' data-id="{{item.fowardShareIndexUView.shareListUView.shareId}}" data-con="{{item.fowardShareIndexUView.content}}" data-nick="{{item.fowardShareIndexUView.shareListUView.userUView.nickname}}">
+        <view class='con_c'>{{item.fowardShareIndexUView.content}}
+        </view>
+        <view class='ms_con' style="background:#f1f2f3;padding:20rpx;border:1rpx solid #eee;border-radius:3px;">
+          <!-- 如果转发的是采购 -->
+          <view class='ms_con_view' style="width:100%;" wx:if="{{item.fowardShareIndexUView.shareListUView.purchaseDetailUView!=undefined}}">
+            <text>@{{item.fowardShareIndexUView.shareListUView.purchaseDetailUView.userUView.nickname}}：[采购信息]{{item.fowardShareIndexUView.shareListUView.purchaseDetailUView.msg}}</text>
+            <view style='margin-top:20rpx;' wx:if="{{item.fowardShareIndexUView.shareListUView.purchaseUView.images!=''}}">
+              <image mode="aspectFill" style='width:180rpx;height:180rpx;margin-right:10rpx;' wx:for="{{item.fowardShareIndexUView.shareListUView.purchaseUView.images}}" src='{{item}}'></image>
+            </view>
+          </view>
+          <!-- 如果转发的是交流 -->
+          <view class='ms_con_view' style="width:100%;" wx:if="{{item.fowardShareIndexUView.shareListUView.questionUView!=undefined}}">
+            <text>@{{item.fowardShareIndexUView.shareListUView.questionUView.userView.nickname}}：{{item.fowardShareIndexUView.shareListUView.questionUView.content}}</text>
+            <!-- <text>{{item.type===2?item.purchaseDetailUView.msg:item.type===0?item.newsUView.summary:item.questionUView.content }}</text> -->
+            <view style='margin-top:20rpx;' wx:if="{{item.fowardShareIndexUView.shareListUView.questionUView.images!=''}}">
+              <image mode="aspectFill" style='width:180rpx;height:180rpx;margin-right:10rpx;' wx:for="{{item.fowardShareIndexUView.shareListUView.questionUView.images}}" src='{{item}}'></image>
+            </view>
+          </view>
+          <!-- 如果转发的是精选 -->
+          <view wx:if="{{item.fowardShareIndexUView.shareListUView.newsUView!=undefined}}">
+          <image mode="aspectFill" src='{{item.fowardShareIndexUView.shareListUView.newsUView.images }}' style='width:162rpx;height:162rpx;float:left;'></image>
+            <view class='ms_con_view' style='width:70%;float:right;'>
+              <text>{{item.fowardShareIndexUView.shareListUView.newsUView.title}}</text>
+              <text>{{item.fowardShareIndexUView.shareListUView.newsUView.summary}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+          <view class="pic_box">
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.purchaseDetailUView.purchaseId}}" data-summary="{{item.purchaseDetailUView.msg}}" data-imgs="{{item.purchaseDetailUView.images}}" data-tit="{{}}" data-type='2'>
+              <image src='../../images/tihuan_xunhuan.png'></image>{{item.fowardShareIndexUView.shareListUView.shareCount==undefined?'0':item.fowardShareIndexUView.shareListUView.shareCount}}</view>
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='to_cgDetail' data-id="{{item.purchaseDetailUView.purchaseId}}">
+              <image src='../../images/tihuan_pinlun.png'></image>{{item.fowardShareIndexUView.shareListUView.commentCount==undefined?'0':item.fowardShareIndexUView.shareListUView.commentCount}}</view>
+            <view catchtap='dianzan' data-type="4" data-tid="{{item.fowardShareIndexUView.shareListUView.shareId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+              <image src="{{item.fowardShareIndexUView.shareListUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.fowardShareIndexUView.shareListUView.praiseCount==undefined?'0':item.fowardShareIndexUView.shareListUView.praiseCount}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='coment'>小肚圆：
+      <text>哟吼</text> </view>  -->
+      <view wx:if="{{item.fowardShareIndexUView.shareListUView.commentUViews.length!=0}}">
+        <view class='coment' wx:for="{{item.fowardShareIndexUView.shareListUView.commentUViews}}" wx:if="{{index<2}}" wx:for-item="itemName">
+          <text>{{itemName.userUView.nickname}}：</text>
+          <text>{{itemName.content}}</text>
+        </view>
+        <!-- <text catchtap='to_jlDetail' data-id="{{item.questionUView.questionId}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text> -->
+        <text catchtap='to_fx_detail' data-id="{{item.fowardShareIndexUView.shareListUView.shareId}}" data-con="{{item.fowardShareIndexUView.content}}" data-nick="{{item.fowardShareIndexUView.shareListUView.userUView.nickname}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+      </view>
+    </view>
+
+    <!-- 关注的人的和自己交流 -->
+    <view wx:elif="{{item.type==3}}" catchtap='to_jlDetail' data-id="{{item.questionUView.questionId}}">
+      <view class='ms_t'>
+        <!-- <button catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userView.userId}}" data-id="{{item.userView.userId}}">更多</button> -->
+        <view style="display:inline-block;height:70rpx;width:70rpx;float:right" catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">
+          <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+        </view>
+        <image catchtap='to_man' lazy-load='true' data-id="{{item.userUView.userId}}" src='{{item.userUView.photo}}'></image>
+        <view class='user_tit' catchtap='to_man' data-id="{{item.userUView.userId}}">
+          <!-- <text>{{item.userView.nickname}}</text>
+          <text>{{item.userView.company}} {{item.userView.positon}}</text> -->
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <image class="user_tit_id" src="{{item.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+          </view>
+          <view>{{item.userUView.company}} {{item.userUView.position}}
+            <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='pl_con'>
+        <!-- <view class='con_c' >{{item.title}}</view> -->
+        <view class='ms_con' catchtap='to_jlDetail' data-id="{{item.questionUView.questionId}}">
+          <!-- <text class='from_w' wx:if="{{item.type==0}}">来自{{item.userUView.newsTypeView.typeName}}类型</text> -->
+          <!-- <image wx:if="{{item.questionUView.images!=undefined}}" mode="center" src='{{item.questionUView.images}}'></image>  -->
+          <view class='ms_con_view' style="">
+            <text>{{item.questionUView.content}}</text>
+            <!-- <text>{{item.content }}</text> -->
+            <view style='margin-top:20rpx;' wx:if="{{item.questionUView.images!=''}}">
+              <image wx:for="{{item.questionUView.images}}" lazy-load='true' mode="aspectFill" style='width:180rpx;height:180rpx;margin-right:10rpx;' src='{{item}}'></image>
+            </view>
+          </view>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+          <view class="pic_box">
+            <!-- <view style="display:inline-blcok;float:left" ><image src='../../images/zhuanfa.png'></image>{{item.newsUView.shareCount==undefined?'0':item.newsUView.shareCount}}</view> -->
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.questionUView.questionId}}" data-summary="{{item.questionUView.content}}" data-imgs="{{item.questionUView.images}}" data-tit="" data-type="1">
+              <image src='../../images/tihuan_xunhuan.png'></image>{{item.questionUView.shareCount==undefined?'0':item.questionUView.shareCount}}</view>
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='to_jlDetail' data-id="{{item.questionUView.questionId}}">
+              <image src='../../images/tihuan_pinlun.png'></image>{{item.questionUView.answerCount==undefined?'0':item.questionUView.answerCount}}</view>
+            <view catchtap='dianzan_jl' data-type="2" data-tid="{{item.questionUView.questionId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+              <image src="{{item.questionUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.questionUView.praiseCount==undefined?'0':item.questionUView.praiseCount}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='coment'>小肚圆：
+      <text>哟吼</text> </view>  -->
+      <view wx:if="{{item.questionUView.commentUViews.length!=0}}">
+        <view class='coment' wx:for="{{item.questionUView.commentUViews}}" wx:if="{{index<2}}" wx:for-item="itemName">
+          <text>{{itemName.userUView.nickname}}：</text>
+          <text>{{itemName.content}}</text>
+        </view>
+        <text catchtap='to_jlDetail' data-id="{{item.questionUView.questionId}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+      </view>
+    </view>
+
+    <!--加入提醒去认证-->
+     <view wx:elif="{{item.t==2}}" style='text-align:center;margin-bottom:10px;' >
+      <view class='ms_t' catchtap='to_verify' style='text-align:center;backdrop-filter:;background:#1890ff;height:34px;line-height:34px;display:inline-block;width:230px;margin:0 auto;color:#fff;font-size:14px;border-radius:10px;'>
+        添加公司和职位，获得更多人脉
+      </view>
+    </view> 
+
+    <!-- 关注的人的和自己的采购 -->
+    <view wx:elif="{{item.type==2}}" catchtap='to_cgDetail' data-id="{{item.purchaseDetailUView.purchaseId}}">
+      <view class='ms_t'>
+        <!-- <button catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">更多</button> -->
+        <view style="display:inline-block;height:70rpx;width:70rpx;float:right" catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">
+          <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+        </view>
+        <image catchtap='to_man' lazy-load='true' data-id="{{item.userUView.userId}}" src='{{item.userUView.photo}}'></image>
+        <view class='user_tit' catchtap='to_man' data-id="{{item.userUView.userId}}">
+          <!-- <text>{{item.userUView.nickname}}</text>
+          <text>{{item.userUView.company}} {{item.userUView.positon}}</text> -->
+          <view>
+            <text>{{item.userUView.nickname}}</text>
+            <image class="user_tit_id" src="{{item.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+          </view>
+          <view>{{item.userUView.company}} {{item.userUView.position}}
+            <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+              <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+            </view>
+          </view>
+
+        </view>
+      </view>
+      <view class='pl_con'>
+        <!-- <view class='con_c' >{{item.title}}</view> -->
+        <view class='ms_con' catchtap='to_cgDetail' data-id="{{item.purchaseDetailUView.purchaseId}}">
+          <!-- <text class='from_w' wx:if="{{item.type==0}}">来自{{item.newsUView.newsTypeView.typeName}}类型</text> -->
+          <!-- <image wx:if="{{item.images!=''}}" src='{{item.images}}'></image> -->
+          <view class='ms_con_view' style="width:100%;">
+            <text>[采购信息]  {{item.purchaseDetailUView.msg}}</text>
+            <!-- <text>{{item.msg }}</text> -->
+            <view style='margin-top:20rpx;' wx:if="{{item.purchaseDetailUView.images!=''}}">
+              <image mode="aspectFill" lazy-load='true' style='width:180rpx;height:180rpx;margin-right:10rpx;' wx:for="{{item.purchaseDetailUView.images}}" src='{{item}}'></image>
+            </view>
+          </view>
+        </view>
+        <view class='ms_b'>
+          <text>{{item.createTime}}</text>
+          <view class="pic_box">
+            <!-- <view style="display:inline-blcok;float:left" ><image src='../../images/zhuanfa.png'></image>{{item.newsUView.shareCount==undefined?'0':item.newsUView.shareCount}}</view> -->
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.purchaseDetailUView.purchaseId}}" data-summary="{{item.purchaseDetailUView.msg}}" data-imgs="{{item.purchaseDetailUView.images}}" data-tit="{{}}" data-type='2'>
+              <image src='../../images/tihuan_xunhuan.png'></image>{{item.purchaseDetailUView.shareCount==undefined?'0':item.purchaseDetailUView.shareCount}}</view>
+            <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='to_cgDetail' data-id="{{item.purchaseDetailUView.purchaseId}}">
+              <image src='../../images/tihuan_pinlun.png'></image>{{item.purchaseDetailUView.commentCount==undefined?'0':item.purchaseDetailUView.commentCount}}</view>
+            <view catchtap='dianzan_cg' data-type="3" data-tid="{{item.purchaseDetailUView.purchaseId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+              <image src="{{item.purchaseDetailUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.purchaseDetailUView.praiseCount==undefined?'0':item.purchaseDetailUView.praiseCount}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- 评论  -->
+      <view wx:if="{{item.purchaseDetailUView.commentUViews.length!=0}}">
+        <view class='coment' wx:for="{{item.purchaseDetailUView.commentUViews}}" wx:if="{{index<2}}" wx:for-item="itemName">
+          <text>{{itemName.userUView.nickname}}：</text>
+          <text>{{itemName.content}}</text>
+        </view>
+        <text catchtap='to_cgDetail' data-id="{{item.purchaseDetailUView.purchaseId}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+      </view>
+
+    </view>
+    <!-- 关注的人的和自己的分享 -->
+    <view wx:elif="{{item.type==1}}">
+      <!--00000000000000000000-->
+      <!--精选-->
+      <view wx:if="{{item.shareListUView.type==0}}">
+        <view class='ms_t'>
+          <view style="display:inline-block;height:70rpx;width:70rpx;float:right" wx:if="{{selfInfo.userId!=item.shareListUView.userUView.userId}}" data-id="{{item.shareListUView.userUView.userId}}" catchtap='more_edit'>
+            <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+          </view>
+          <image catchtap='to_man' data-id="{{item.shareListUView.userUView.userId}}" src='{{item.shareListUView.userUView.photo}}'></image>
+          <view class='user_tit' catchtap='to_man' data-id="{{item.shareListUView.userUView.userId}}">
+            <!-- <text>{{item.userUView.nickname}}</text>
+          <text>{{item.userUView.company}} {{item.userUView.positon}}</text> -->
+            <view>
+              <text>{{item.shareListUView.userUView.nickname}}</text>
+              <image class="user_tit_id" src="{{item.shareListUView.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+            </view>
+            <view>{{item.shareListUView.userUView.company}} {{item.shareListUView.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='pl_con' catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="">
+          <view class='con_c'>{{item.shareListUView.content}}</view>
+          <view class='ms_con' catchtap='to_detail' data-id="{{item.shareListUView.newsUView.newsId}}" style="background:#f1f2f3;padding:20rpx;border:1rpx solid #eee;border-radius:3px;">
+            <!-- <text class='from_w' wx:if="{{item.type==0}}">来自{{item.newsUView.newsTypeView.typeName}}类型</text> -->
+            <image mode="aspectFill" lazy-load='true' src='{{item.shareListUView.newsUView.images }}'></image>
+            <view class='ms_con_view' style='width:70%;'>
+              <text>{{item.shareListUView.newsUView.title}}</text>
+              <text>{{item.shareListUView.newsUView.summary}}</text>
+            </view>
+          </view>
+          <view class='ms_b'>
+            <text>{{item.createTime}}</text>
+            <view class="pic_box">
+              <!-- <view style="display:inline-blcok;float:left" ><image src='../../images/zhuanfa.png'></image>{{item.newsUView.shareCount==undefined?'0':item.newsUView.shareCount}}</view> -->
+              <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='zhuanfa_jx' data-id="{{item.shareListUView.newsUView.newsId}}" data-summary="{{item.shareListUView.newsUView.summary}}" data-imgs="{{item.shareListUView.newsUView.images}}" data-tit="{{item.shareListUView.newsUView.title}}"
+                data-type="4">
+                <image src='../../images/tihuan_xunhuan.png'></image>{{item.shareListUView.forwardCount==undefined?'0':item.shareListUView.forwardCount}}</view>
+              <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="">
+                <image src='../../images/tihuan_pinlun.png'></image>{{item.shareListUView.commentCount==undefined?'0':item.shareListUView.commentCount}}</view>
+              <view catchtap='dianzan' data-type="4" data-tid="{{item.shareListUView.shareId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+                <image src="{{item.shareListUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.shareListUView.praiseCount==undefined?'0':item.shareListUView.praiseCount}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--0000000000000000000000-->
+      <!--11111111111111111111111111111-->
+      <!--交流-->
+      <view wx:elif="{{item.shareListUView.type==1}}">
+        <view class='ms_t'>
+          <!-- <button catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">更多</button> -->
+          <view style="display:inline-block;height:70rpx;width:70rpx;float:right" wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}" catchtap='more_edit'>
+            <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+          </view>
+          <image catchtap='to_man' data-id="{{item.userUView.userId}}" src='{{item.userUView.photo}}'></image>
+          <view class='user_tit' catchtap='to_man' data-id="{{item.userUView.userId}}">
+            <!-- <text>{{item.userUView.nickname}}</text>
+          <text>{{item.userUView.company}} {{item.userUView.positon}}</text> -->
+            <view>
+              <text>{{item.userUView.nickname}}</text>
+              <image class="user_tit_id" src="{{item.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+            </view>
+            <view>{{item.userUView.company}} {{item.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='pl_con' catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="{{item.shareListUView.questionUView.userView.nickname}}">
+          <view class='con_c'>{{item.shareListUView.content}}
+            <!-- <text catchtap='to_man' data-id="{{item.shareListUView.questionUView.userView.userId}}" style='margin-left:0rpx;'>//@{{item.shareListUView.questionUView.userView.nickname}}</text> -->
+          </view>
+          <view class='ms_con' style="background:#f1f2f3;padding:20rpx;border:1rpx solid #eee;border-radius:3px;" catchtap='to_jlDetail' data-id="{{item.shareListUView.questionUView.questionId}}">
+            <!-- <text class='from_w' wx:if="{{item.type==0}}">来自{{item.newsUView.newsTypeView.typeName}}类型</text> -->
+            <!-- <image src='{{}}'></image>  -->
+            <!-- <text catchtap='to_man' data-id="{{item.shareListUView.questionUView.userView.userId}}" style='margin-left:0rpx;display:inline-block;'>@{{item.shareListUView.questionUView.userView.nickname}}</text> -->
+            <view class='ms_con_view' style="width:100%;">
+              <text>@{{item.shareListUView.questionUView.userView.nickname}}:{{item.shareListUView.questionUView.content}}</text>
+              <!-- <text>{{item.type===2?item.purchaseDetailUView.msg:item.type===0?item.newsUView.summary:item.questionUView.content }}</text> -->
+            </view>
+          </view>
+          <view class='ms_b'>
+            <text>{{item.createTime}}</text>
+            <view class="pic_box">
+              <!-- <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='zhuanfa' data-tit="" data-id="{{item.shareListUView.shareId}}" data-content_one="{{item.shareListUView.content}}" data-imgs="{{item.shareListUView.questionUView.images}}" data-msg="{{item.shareListUView.questionUView.content}}"
+                data-type="4"> -->
+                <!--3/6/晚-->
+                 <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.shareListUView.questionUView.questionId}}" data-summary="{{item.shareListUView.questionUView.content}}" data-imgs="{{item.shareListUView.questionUView.images}}" data-tit=""
+                data-type="1">  
+                <!-- <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.questionUView.questionId}}" data-summary="{{item.questionUView.content}}" data-imgs="{{item.questionUView.images}}" data-tit="" data-type="1"> -->
+                <!--3/6/晚-->
+                <image src='../../images/tihuan_xunhuan.png'></image>{{item.shareListUView.forwardCount==undefined?'0':item.shareListUView.forwardCount}}</view>
+              <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+                <image src='../../images/tihuan_pinlun.png'></image>{{item.shareListUView.commentCount==undefined?'0':item.shareListUView.commentCount}}</view>
+              <view catchtap='dianzan' data-type="4" data-tid="{{item.shareListUView.shareId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+                <image src="{{item.shareListUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.shareListUView.praiseCount==undefined?'0':item.shareListUView.praiseCount}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!--111111111111-->
+      <!--2222222222222-->
+      <!--采购-->
+      <view wx:elif="{{item.shareListUView.type==2}}">
+        <view class='ms_t'>
+          <!-- <button catchtap='more_edit' wx:if="{{selfInfo.userId!=item.userUView.userId}}" data-id="{{item.userUView.userId}}">更多</button> -->
+          <view style="display:inline-block;height:70rpx;width:70rpx;float:right" wx:if="{{selfInfo.userId!=item.shareListUView.userUView.userId}}" data-id="{{item.shareListUView.userUView.userId}}" catchtap='more_edit'>
+            <image class="gengduo" src="../../images/gengduo.png" style="width:32rpx;height:28rpx;position:absolute;right:0rpx;top:0rpx;margin-right:0;"></image>
+          </view>
+          <image catchtap='to_man' data-id="{{item.userUView.userId}}" src='{{item.userUView.photo}}'></image>
+          <view class='user_tit' catchtap='to_man' data-id="{{item.userUView.userId}}">
+            <!-- <text>{{item.userUView.nickname}}</text>
+          <text>{{item.userUView.company}} {{item.userUView.positon}}</text> -->
+            <view>
+              <text>{{item.userUView.nickname}}</text>
+              <image class="user_tit_id" src="{{item.userUView.verifyYn?'../../images/authentication.png':''}}"></image>
+            </view>
+            <view>{{item.userUView.company}} {{item.userUView.position}}
+              <view style='display:inline-block;width:12px;height:12px;margin-bottom:0;margin-left:10rpx;' wx:if="{{item.userUView.positionVerifyYn}}">
+                <image src='../../images/v_ico.png' style="display:inline-block;width:100%;height:100%;border-radius:0"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='pl_con' catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="{{item.shareListUView.purchaseDetailUView.userUView.nickname}}">
+          <view class='con_c'>{{item.shareListUView.content}}
+            <!-- <text catchtap='to_man' data-id="{{item.shareListUView.purchaseDetailUView.userUView.userId}}" style='margin-left:0rpx;'>//@{{item.shareListUView.purchaseDetailUView.userUView.nickname}}</text> -->
+          </view>
+          <view class='ms_con' catchtap='to_cgDetail' data-id="{{item.shareListUView.purchaseDetailUView.purchaseId}}" style="background:#f1f2f3;padding:20rpx;border:1rpx solid #eee;border-radius:3px;">
+
+            <!-- <image src='{{item.type===2?item.purchaseDetailUView.images:item.type===0?item.newsUView.images:item.questionUView.images }}'></image> -->
+            <!-- <text catchtap='to_man' data-id="{{item.shareListUView.purchaseDetailUView.userView.userId}}" style='margin-left:0rpx;display:inline-block;'>@{{item.shareListUView.purchaseDetailUView.userUView.nickname}}</text> -->
+            <view class='ms_con_view' style="width:100%;">
+              <text>@{{item.shareListUView.purchaseDetailUView.userUView.nickname}}：[采购信息] {{item.shareListUView.purchaseDetailUView.msg}}</text>
+              <!-- <view><text catchtap='to_man' data-id="{{item.shareListUView.purchaseDetailUView.userUView.userId}}" style='display:inline-blcok;margin-left:0rpx;'>@{{item.shareListUView.purchaseDetailUView.userUView.nickname}}：</text> {{item.shareListUView.purchaseDetailUView.msg}}</view> -->
+              <!-- <text>{{item.type===2?item.purchaseDetailUView.msg:item.type===0?item.newsUView.summary:item.questionUView.content }}</text> -->
+            </view>
+          </view>
+          <view class='ms_b'>
+            <text>{{item.createTime}}</text>
+            <view class="pic_box">
+              <!-- <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='zhuanfa' data-id="{{item.shareListUView.shareId}}" data-content_one="{{item.shareListUView.content}}" data-imgs="{{item.shareListUView.purchaseDetailUView.images}}" data-msg="{{item.shareListUView.purchaseDetailUView.msg}}"
+                data-type='4'> -->
+                <!--3/6晚-->
+                 <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.shareListUView.purchaseDetailUView.purchaseId}}" data-content_one="{{item.shareListUView.content}}" data-imgs="{{item.shareListUView.purchaseDetailUView.images}}" data-summary="{{item.shareListUView.purchaseDetailUView.msg}}"
+                data-type='2'> 
+                <!-- <view style="display:inline-blcok;float:left;margin-left:42rpx;" catchtap='f_x' data-id="{{item.purchaseDetailUView.purchaseId}}" data-summary="{{item.purchaseDetailUView.msg}}" data-imgs="{{item.purchaseDetailUView.images}}" data-tit="{{}}" data-type='2'> -->
+                <!--3/6晚-->
+                <image src='../../images/tihuan_xunhuan.png'></image>{{item.shareListUView.forwardCount==undefined?'0':item.shareListUView.forwardCount}}</view>
+              <view style="display:inline-blcok;float:left;margin-left:42rpx;">
+                <image src='../../images/tihuan_pinlun.png'></image>{{item.shareListUView.commentCount==undefined?'0':item.shareListUView.commentCount}}</view>
+              <view catchtap='dianzan' data-type="4" data-tid="{{item.shareListUView.shareId}}" style="display:inline-blcok;float:left;margin-left:42rpx;">
+                <image src="{{item.shareListUView.praiseYn?'../../images/tihuan_zan_h.png':'../../images/tihuan_zan.png'}}"></image>{{item.shareListUView.praiseCount==undefined?'0':item.shareListUView.praiseCount}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--222222222222222222-->
+      <!-- <view class='coment'>小肚圆：
+      <text>哟吼</text> </view>  -->
+      <!-- 评论  -->
+      <view wx:if="{{item.shareListUView.commentUViews.length!=0}}">
+        <view class='coment' wx:for="{{item.shareListUView.commentUViews}}" wx:if="{{index<2}}" wx:for-item="itemName">
+          <text>{{itemName.userUView.nickname}}：</text>
+          <text>{{itemName.content}}</text>
+        </view>
+        <text wx:if="{{item.shareListUView.purchaseDetailUView!=undefined}}" catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="{{item.shareListUView.purchaseDetailUView.userUView.nickname}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+        <text wx:if="{{item.shareListUView.questionUView!=undefined}}" catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="{{item.shareListUView.questionUView.userView.nickname}}" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+        <text wx:if="{{item.shareListUView.newsUView!=undefined}}" catchtap='to_fx_detail' data-con="{{item.shareListUView.content}}" data-id="{{item.shareListUView.shareId}}" data-nick="" style='color:#5176ad;font-size:24rpx;'>查看更多</text>
+      </view>
+    </view>
+    
+  </view>
+</view>
+
+
+
+<!-- 绑定信息 -->
+<view class="layer-bind-info" hidden="{{!showBindInfo}}">
+  <!-- <view class="layer-bind-info" >   -->
+
+  <view class="layer-dialog">
+    <view style='width:100%;height:{{resgit_bg}}px;position:absolute;top:0;left:0;' >
+      <image style='width:100%;height:100%;' src='../../images/regist_bg.png'></image>
+    </view>
+    <view class="layer-content" style='width:636rpx;display:block;background-color:#fff;height:370px;position:absolute;top:100px;left:8%;'>
+    <view style='width:150px;height:105px;margin:30px auto;'><image style='display:block;width:100%;height:100%;' src="../../images/regist_bg_s.png"></image></view>
+      <form catchsubmit="bindSubmit">
+      
+        <view class="section fs-16" style='color:#8b8b8b;padding:16rpx 30rpx 10rpx 30rpx;padding-right:10rpx;position:relative;'>
+          <text style='float:left;'>开启城市圈</text>
+          <picker bindchange="bindCountryChange" style='float:left;margin-left:36rpx;' class="gray-2" value="{{countryIndex}}" range-key="name" range="{{provinceList}}">
+            <view class="weui-select weui-select_in-select-after">{{provinceList[countryIndex].name?provinceList[countryIndex].name:'省份'}}</view>
+          </picker>
+          <picker bindchange="bindcityChange" style='float:left' class="gray-2" value="{{cityIndex}}" range-key="name" range="{{cityList}}">
+            <view class="weui-select weui-select_in-select-after">{{cityList[cityIndex].name?cityList[cityIndex].name:'城市'}}</view>
+          </picker>
+        </view>
+        <view class="section fs-16 " style='color:#8b8b8b;padding:16rpx 30rpx 10rpx 30rpx;padding-right:24rpx;position:relative;'>
+          <!-- <image style='position:absolute;top:21rpx;left:0;width:40rpx;height:40rpx;' src='../../images/r_2.png'></image> -->
+          开启行业圈
+          <picker bindchange="bindTradeChange" class="gray-2" value="{{tradeIndex}}" range-key="name" range="{{tradeList}}">
+            <view class="weui-select weui-select_in-select-after">{{tradeList[tradeIndex].name?tradeList[tradeIndex].name:'请选择'}}</view>
+          </picker>
+        </view>
+        
+
+        <button style='width:240px;margin:20px auto;' type="primary" class="btn-red weui-btn fs-18" formType="submit">确定</button>
+
+
+      </form>
+    </view>
+
+  </view>
+</view>
